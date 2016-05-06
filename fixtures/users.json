@@ -1,0 +1,18 @@
+[
+{
+  "model": "a2ausers.a2auser",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "facebook_id": ""
+  }
+},
+{
+  "model": "a2ausers.a2auser",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "facebook_id": ""
+  }
+}
+]
