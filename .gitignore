@@ -63,3 +63,6 @@ target/
 
 # Virtualenvs
 venv/
+
+# Database
+db.sqlite3
