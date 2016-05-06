@@ -1,0 +1,12 @@
+language: python
+cache: pip
+python:  
+  - "2.7"  
+# command to install dependencies
+install: 
+  - "pip install -r requirements.txt"
+before_script:
+  - sh init.sh
+script:
+  - "pep8 --exclude=*/migrations/,A2A ."
+  - python manage.py test
