@@ -16,5 +16,5 @@ deploy:
   strategy: git
   app: tech2016
   on:
-    repo: namnd95/tech2016
+    repo: proj5/tech2016
     branch: master
