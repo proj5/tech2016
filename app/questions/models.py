@@ -6,6 +6,10 @@ from topics.models import Topic
 from django.dispatch import receiver
 from django.db.models.signals import m2m_changed, pre_delete
 
+from django.utils.functional import wraps
+
+import inspect
+
 
 class Question(models.Model):
     question = models.CharField(max_length=400)
@@ -30,7 +34,18 @@ class Question(models.Model):
         return self.question
 
 
+def disable_for_loaddata(signal_handler):
+    @wraps(signal_handler)
+    def wrapper(*args, **kwargs):
+        for fr in inspect.stack():
+            if inspect.getmodulename(fr[1]) == 'loaddata':
+                return
+        signal_handler(*args, **kwargs)
+    return wrapper
+
+
 @receiver(m2m_changed, sender=Question.topics.through)
+@disable_for_loaddata
 def add_question(sender, action, instance, reverse, **kwargs):
     if not reverse:
         if action == 'post_add':
