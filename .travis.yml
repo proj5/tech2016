@@ -17,4 +17,4 @@ deploy:
   app: tech2016
   on:
     repo: proj5/tech2016
-    branch: master
+    branch: testing
