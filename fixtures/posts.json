@@ -22,10 +22,10 @@
     "parent": 1,
     "content": "This website follows the idea of Quora and this is our project for the Selected Topics on Technology course.",
     "created_date": "2016-06-02T12:23:49.283Z",
-    "last_updated": "2016-06-02T12:23:49.284Z",
+    "last_updated": "2016-06-02T13:35:18.308Z",
     "created_by": 1,
     "total_vote": 0,
-    "num_comments": 0,
+    "num_comments": 1,
     "followed_by": []
   }
 },
@@ -52,10 +52,10 @@
     "parent": 3,
     "content": "In this course, students are introduced about history of technology, mainly about web and some new technologies that are being used across the world.",
     "created_date": "2016-06-02T12:47:55.756Z",
-    "last_updated": "2016-06-02T12:47:55.756Z",
+    "last_updated": "2016-06-02T13:35:10.856Z",
     "created_by": 1,
     "total_vote": 0,
-    "num_comments": 0,
+    "num_comments": 2,
     "followed_by": []
   }
 }

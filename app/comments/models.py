@@ -37,24 +37,22 @@ class Comment(models.Model):
 @receiver(post_save, sender=Comment)
 def add_comment(sender, instance, created, raw, **kwargs):
     if created and not raw:
-        if instance.type() == "question":
-            try:
-                post = instance.parent
-            except:
-                post = None
-                raise Exception('Question does not exist')
-            if post is not None:
-                post.num_comments += 1
-                post.save()
-
-
-@receiver(pre_delete, sender=Comment)
-def delete_comment(sender, instance, **kwargs):
-    if instance.type() == "question":
         try:
             post = instance.parent
         except:
             post = None
-        if post is not None and post.num_comments > 0:
-            post.num_comments -= 1
+            raise Exception('Question does not exist')
+        if post is not None:
+            post.num_comments += 1
             post.save()
+
+
+@receiver(pre_delete, sender=Comment)
+def delete_comment(sender, instance, **kwargs):
+    try:
+        post = instance.parent
+    except:
+        post = None
+    if post is not None and post.num_comments > 0:
+        post.num_comments -= 1
+        post.save()
