@@ -14,8 +14,8 @@ python manage.py migrate
 python manage.py loaddata auth.json
 python manage.py loaddata users.json
 python manage.py loaddata topics.json
+python manage.py loaddata posts.json
 python manage.py loaddata questions.json
-python manage.py loaddata answers.json
 python manage.py loaddata comments.json
 
 # Force check pep8 when commit

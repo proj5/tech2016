@@ -33,7 +33,7 @@ Update user profile
 Parameters: user, password, email
 
 ---
-#### *GET api/v1/avatar/:username/*
+#### *GET api/v1/account/avatar/:username/*
 Get the avatar of a user
 
 JSON format:
@@ -41,6 +41,27 @@ JSON format:
 {
   "avatar": "static/img/default.jpg"
 }
+```
+
+---
+#### *POST api/v1/account/follow/*
+Follow a user
+
+JSON format:
+```
+{
+  "id": 1,
+  "username": "admin",
+  "facebook_id": "123456789"
+}
+```
+
+---
+#### *POST api/v1/account/unfollow/*
+Unfollow a user
+
+JSON format:
+```
 ```
 
 ---
@@ -61,14 +82,36 @@ Get 10 most related topic with the keyword provided
 Add new topic to server
 
 ---
+#### *POST api/v1/topic/?questionID=1*
+Add new topic for the question with id specified
+
+JSON format
+```
+{
+  "name": "Music"
+}
+```
+
+---
+#### *DELETE api/v1/topic/?questionID=1*
+Delete topic for the question with id specified
+
+JSON format
+```
+{
+  "name": "Music"
+}
+```
+
+---
 ## Question
 
 ---
-#### *GET api/v1/questions/?topicID=1*
-Get list of 10 newest questions belongs to the topic with id specified
+#### *GET api/v1/questions/?type=newest&topicID=1&start=1&end=10*
+Get list of newest questions from start to end which belongs to the topic with id specified
 
 ---
-#### *GET api/v1/questions/?keyword=test*
+#### *GET api/v1/questions/?type=related&keyword=test*
 Get 10 most related questions with the keyword provided
 
 ---
@@ -98,13 +141,17 @@ Post an answer for a question with id specified
 Update an answer with id specified
 
 ---
+#### *GET api/v1/answers/?questionID=1&start=1&end=10*
+Get all answers for a question with id specified, from start to end in newer order (sorted by created_date)
+
+---
 ## Comment
 ---
-#### *GET api/v1/comments/?type=question&id=1*
+#### *GET api/v1/comments/?id=1*
 Get all comments for a post (question or answer) with id specified
 
 ---
-#### *POST api/v1/comment/?type=question&id=1*
+#### *POST api/v1/comment/?id=1*
 Post new comment for a post (question or answer) with id specified
 
 ---

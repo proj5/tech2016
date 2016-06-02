@@ -1,0 +1,62 @@
+[
+{
+  "model": "posts.post",
+  "pk": 1,
+  "fields": {
+    "type": "question",
+    "parent": null,
+    "content": "As the question says, what is this website for and why they create it?",
+    "created_date": "2016-06-02T12:21:53.709Z",
+    "last_updated": "2016-06-02T12:21:53.710Z",
+    "created_by": 2,
+    "total_vote": 0,
+    "num_comments": 0,
+    "followed_by": []
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 2,
+  "fields": {
+    "type": "answer",
+    "parent": 1,
+    "content": "This website follows the idea of Quora and this is our project for the Selected Topics on Technology course.",
+    "created_date": "2016-06-02T12:23:49.283Z",
+    "last_updated": "2016-06-02T12:23:49.284Z",
+    "created_by": 1,
+    "total_vote": 0,
+    "num_comments": 0,
+    "followed_by": []
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 3,
+  "fields": {
+    "type": "question",
+    "parent": null,
+    "content": "I don't know what this course is mainly about? Can someone answer me?",
+    "created_date": "2016-06-02T12:30:43.836Z",
+    "last_updated": "2016-06-02T12:30:43.836Z",
+    "created_by": 2,
+    "total_vote": 0,
+    "num_comments": 0,
+    "followed_by": []
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 4,
+  "fields": {
+    "type": "answer",
+    "parent": 3,
+    "content": "In this course, students are introduced about history of technology, mainly about web and some new technologies that are being used across the world.",
+    "created_date": "2016-06-02T12:47:55.756Z",
+    "last_updated": "2016-06-02T12:47:55.756Z",
+    "created_by": 1,
+    "total_vote": 0,
+    "num_comments": 0,
+    "followed_by": []
+  }
+}
+]
