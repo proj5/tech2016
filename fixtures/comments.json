@@ -3,11 +3,30 @@
   "model": "comments.comment",
   "pk": 1,
   "fields": {
-    "type": "AN",
-    "parent_id": 1,
-    "content": "Nice (y)",
-    "created_date": "2016-05-06T07:58:53.576Z",
+    "parent": 2,
+    "content": "Nice answer",
+    "created_date": "2016-06-02T12:28:27.083Z",
     "created_by": 2
+  }
+},
+{
+  "model": "comments.comment",
+  "pk": 2,
+  "fields": {
+    "parent": 4,
+    "content": "Hmm, okay. Can you tell more about the technologies provided?",
+    "created_date": "2016-06-02T12:48:29.446Z",
+    "created_by": 2
+  }
+},
+{
+  "model": "comments.comment",
+  "pk": 3,
+  "fields": {
+    "parent": 4,
+    "content": "Teacher gave us information about the development of Internet, some frameworks and tools to develop a client-server web application such as HTML, CSS, JavaScript, Java, jQuery, ExpressJS, MongoDB, Spring Boot, Play Framework, Amazon Web Services, NodeJS, JUnit, Jasmine. Design patterns or coding convention are also taught in this course.",
+    "created_date": "2016-06-02T13:14:42.032Z",
+    "created_by": 1
   }
 }
 ]

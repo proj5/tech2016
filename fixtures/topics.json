@@ -4,7 +4,7 @@
   "pk": 1,
   "fields": {
     "name": "General",
-    "description": "A topic for general questions",
+    "description": "",
     "num_questions": 1,
     "followed_by": null
   }
@@ -14,7 +14,17 @@
   "pk": 2,
   "fields": {
     "name": "Technology",
-    "description": "A topic for technology-related questions",
+    "description": "",
+    "num_questions": 1,
+    "followed_by": null
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 3,
+  "fields": {
+    "name": "Machine Learning",
+    "description": "",
     "num_questions": 0,
     "followed_by": null
   }

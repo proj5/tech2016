@@ -3,16 +3,23 @@
   "model": "questions.question",
   "pk": 1,
   "fields": {
-    "question": "What is the purpose of A2A?",
-    "detail": "As above, I want to ask why the authors created this website. What is this mainly for?",
-    "posted_by": 2,
-    "created_date": "2016-05-06T07:56:09.465Z",
-    "last_updated": "2016-05-06T07:58:21.951Z",
+    "question": "What is A2A?",
+    "post": 1,
     "num_answers": 1,
-    "num_comments": 0,
-    "followed_by": [],
     "topics": [
       1
+    ]
+  }
+},
+{
+  "model": "questions.question",
+  "pk": 2,
+  "fields": {
+    "question": "What is the Selected Topics on Technology course?",
+    "post": 3,
+    "num_answers": 1,
+    "topics": [
+      2
     ]
   }
 }

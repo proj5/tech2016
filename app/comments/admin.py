@@ -6,9 +6,9 @@ from .models import Comment
 class CommentAdmin(admin.ModelAdmin):
     list_display = [
         'id',
-        'type',
-        'parent_id',
-        'content'
+        'parent',
+        'content',
+        'created_date'
     ]
 
 admin.site.register(Comment, CommentAdmin)

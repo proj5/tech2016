@@ -7,9 +7,7 @@ class QuestionAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'question',
-        'posted_by',
         'num_answers',
-        'num_comments',
         'get_topics'
     )
 

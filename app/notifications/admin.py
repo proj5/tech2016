@@ -7,9 +7,13 @@ class NotificationAdmin(admin.ModelAdmin):
     list_display = [
         'id',
         'type',
-        'parent_id',
+        'post',
         'content',
-        'user'
+        'list_user',
+        'created_by'
     ]
+
+    def list_user(self, obj):
+        return "\n".join([user.username for user in obj.users.all()])
 
 admin.site.register(Notification, NotificationAdmin)
