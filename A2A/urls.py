@@ -17,6 +17,16 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from a2ausers.views import UserListView, LoginView, LogoutView, UserDetailView
+from a2ausers.views import AvatarView
+
 urlpatterns = [
+    url(r'^api/v1/accounts/avatar/(?P<username>.+)/$', AvatarView.as_view()),
+    url(r'^api/v1/accounts/(?P<username>.+)/$', UserDetailView.as_view(),
+        name='detail'),
+    url(r'^api/v1/accounts/', UserListView.as_view(), name='list'),
+    url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),
+    url(r'^api/v1/auth/logout/$', LogoutView.as_view(), name='logout'),
+
     url(r'^admin/', admin.site.urls),
 ]
