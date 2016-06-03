@@ -62,12 +62,31 @@ Unfollow a user
 
 JSON format:
 ```
+{
+  "id": 2,
+  "username": "user",
+  "facebook_id": "987654321"
+}
 ```
 
 ---
 ## Topic
 #### *GET api/v1/topics/*
 Get all topics available
+
+JSON format
+{
+  {
+    "id": 1,
+    "name": "General"
+    "description": "test"
+  },
+  {
+    "id": 2,
+    "name": "Technology",
+    "description": "test"
+  }
+}
 
 ---
 #### *GET api/v1/topic/:topicID/*
@@ -76,6 +95,10 @@ Get the topic with id specified
 ---
 #### *GET api/v1/topics/?keyword=test*
 Get 10 most related topic with the keyword provided
+
+---
+#### *GET api/v1/topics/?questionID=1*
+Get all topics for the question with id specified
 
 ---
 #### *POST api/v1/topic/*
