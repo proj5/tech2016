@@ -27,6 +27,8 @@ class AuthenticationApiTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_register(self):
+        pre_num_user = A2AUser.objects.count()
+
         register_url = '/api/v1/accounts/'
 
         # Create user and then login
@@ -42,7 +44,7 @@ class AuthenticationApiTest(APITestCase):
         }
         response = self.client.post(register_url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(A2AUser.objects.count(), 3)
+        self.assertEqual(A2AUser.objects.count(), pre_num_user + 1)
 
         response = self.login('abc', 'abc12345')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -121,21 +123,25 @@ class UserAccountApiTest(APITestCase):
         self.assertEqual(user.user.first_name, 'Admin')
 
     def test_delete_user_success(self):
+        pre_num_user = A2AUser.objects.count()
+
         self.login('user', 'user1234')
         response = self.client.delete('/api/v1/accounts/user/')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-        self.assertEqual(A2AUser.objects.count(), 1)
+        self.assertEqual(A2AUser.objects.count(), pre_num_user - 1)
         self.assertFalse(
             A2AUser.objects.filter(
                 user__username='user').exists())
 
     def test_delete_user_success(self):
+        pre_num_user = A2AUser.objects.count()
+
         self.login('user', 'user1234')
         response = self.client.delete('/api/v1/accounts/admin/')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
-        self.assertEqual(A2AUser.objects.count(), 2)
+        self.assertEqual(A2AUser.objects.count(), pre_num_user)
         self.assertTrue(
             A2AUser.objects.filter(
                 user__username='admin').exists())

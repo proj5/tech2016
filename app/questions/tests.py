@@ -73,8 +73,9 @@ class QuestionTest(TestCase):
         self.check_num_questions()
 
     def test_remove_question(self):
+        pre_num_question = Question.objects.count()
         Question.objects.get(pk=1).delete()
-        self.assertEqual(Question.objects.count(), 1)
+        self.assertEqual(Question.objects.count(), pre_num_question - 1)
         self.check_num_answers()
         self.check_num_questions()
 
