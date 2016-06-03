@@ -71,6 +71,7 @@ JSON format:
 
 ---
 ## Topic
+---
 #### *GET api/v1/topics/*
 Get all topics available
 
@@ -97,15 +98,39 @@ Get the topic with id specified
 Get 10 most related topic with the keyword provided
 
 ---
-#### *GET api/v1/topics/?questionID=1*
-Get all topics for the question with id specified
-
----
 #### *POST api/v1/topic/*
 Add new topic to server
 
 ---
-#### *POST api/v1/topic/?questionID=1*
+#### *GET api/v1/topic/question/?topicID=1&startID=1&count=10*
+Get 'count' newest questions from startID downwards which belongs to the topic with id specified
+
+If startID equals 0, get from newest questions
+
+---
+## Question
+---
+#### *GET api/v1/questions/?keyword=test*
+Get 10 most related questions with the keyword provided
+
+---
+#### *GET api/v1/question/?questionID=1*
+Get the question with the id provided
+
+---
+#### *GET api/v1/question/topic/?questionID=1*
+Get all topics for the question with id specified
+
+---
+#### *POST api/v1/question/*
+Post new question to server
+
+---
+#### *PUT api/v1/question/?questionID=1*
+Update a question with id specified
+
+---
+#### *POST api/v1/question/topic/?questionID=1*
 Add new topic for the question with id specified
 
 JSON format
@@ -116,7 +141,7 @@ JSON format
 ```
 
 ---
-#### *DELETE api/v1/topic/?questionID=1*
+#### *DELETE api/v1/question/topic/?questionID=1*
 Delete topic for the question with id specified
 
 JSON format
@@ -125,29 +150,6 @@ JSON format
   "name": "Music"
 }
 ```
-
----
-## Question
-
----
-#### *GET api/v1/questions/?type=newest&topicID=1&start=1&end=10*
-Get list of newest questions from start to end which belongs to the topic with id specified
-
----
-#### *GET api/v1/questions/?type=related&keyword=test*
-Get 10 most related questions with the keyword provided
-
----
-#### *GET api/v1/question/?questionID=1*
-Get the question with the id provided
-
----
-#### *POST api/v1/question/*
-Post new question to server
-
----
-#### *PUT api/v1/question/?questionID=1*
-Update a question with id specified
 
 ---
 ## Answer
