@@ -24,3 +24,4 @@ echo set -e >>%filename%
 echo echo '---------------------------------' >>%filename%
 echo pep8 --exclude=*/migrations/,env,A2A . >>%filename%
 echo echo '---------------------------------' >>%filename%
+echo python manage.py test >>%filename%

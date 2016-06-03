@@ -86,6 +86,8 @@ class UserDetailView(views.APIView):
     # Handle PUT request to update user profile
     def put(self, request, username, format=None):
         serializer = A2AUserSerializer(data=request.data)
+        user = User.objects.get(username=username)
+        self.check_object_permissions(request, user)
 
         if serializer.is_valid() is False:
             return Response({
@@ -102,7 +104,6 @@ class UserDetailView(views.APIView):
                 'message': 'Password and confirm password don\'t match'
             }, status=status.HTTP_400_BAD_REQUEST)
 
-        user = User.objects.get(username=username)
         user_serializer = UserSerializer(user,
                                          data=data['user'])
 
@@ -124,8 +125,11 @@ class UserDetailView(views.APIView):
     # Handle DELETE request
     def delete(self, request, username, format=None):
         user_account = self.get_object(username)
-        user_account.delete()
         user = User.objects.get(username=username)
+
+        self.check_object_permissions(request, user)
+
+        user_account.delete()
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
