@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from topics.views import TopicView, TopicDetailView
 
 from a2ausers.views import UserListView, LoginView, LogoutView, UserDetailView
 from a2ausers.views import AvatarView
@@ -29,4 +30,7 @@ urlpatterns = [
     url(r'^api/v1/auth/logout/$', LogoutView.as_view(), name='logout'),
 
     url(r'^admin/', admin.site.urls),
+    url(r'^api/v1/topic/(?P<topic_id>.+)/$', TopicDetailView.as_view()),
+    url(r'^api/v1/topics/$', TopicView.as_view()),
+    url(r'^api/v1/topic/$', TopicDetailView.as_view())
 ]
