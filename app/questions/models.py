@@ -53,13 +53,16 @@ def add_question(sender, action, instance, reverse, **kwargs):
 @receiver(post_delete, sender=Question)
 def delete_posts_in_question(sender, instance, **kwargs):
     # delete all posts, all comments belongs to the question
-    post = instance.post
-    for child_post in post.child_posts.all():
-        for comment in child_post.comments.all():
-            comment.delete()
-        if child_post.type == "answer":
-            child_post.delete()
-    post.delete()
+    try:
+        post = instance.post
+        for child_post in post.child_posts.all():
+            for comment in child_post.comments.all():
+                comment.delete()
+            if child_post.type == "answer":
+                child_post.delete()
+        post.delete()
+    except Post.DoesNotExist:
+        pass
 
 
 @receiver(pre_delete, sender=Question)
