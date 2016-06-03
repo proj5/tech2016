@@ -43,7 +43,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,7 +89,7 @@ WSGI_APPLICATION = 'A2A.wsgi.application'
 
 if os.environ.get('HEROKU') == '1':
     import dj_database_url
-    
+
     DATABASES = {}
     DATABASES['default'] = dj_database_url.config(conn_max_age=500)
 else:
