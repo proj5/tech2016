@@ -2,7 +2,7 @@ from rest_framework import permissions, status, views
 from rest_framework.response import Response
 from topics.models import Topic
 from topics.serializers import TopicSerializer
-from questions.models import Question
+from questions.serializers import SimpleQuestionSerializer
 import difflib
 
 
@@ -14,27 +14,23 @@ class TopicView(views.APIView):
         return (permissions.IsAuthenticated(), )
 
     def get(self, request, format=None):
-        if request.GET.get('questionID') is not None:
-            questionID = request.GET.get('questionID')
-            question = Question.objects.get(pk=questionID)
-            serializer = TopicSerializer(question.topics.all(), many=True)
+        # Get all topics
+        if request.GET.get('keyword') is None:
+            topics = Topic.objects.all()
+            serializer = SimpleTopicSerializer(topics, many=True)
             return Response(serializer.data)
+        # Get all topics related to a keyword
         else:
-            if request.GET.get('keyword') is None:
-                topics = Topic.objects.all()
-                serializer = TopicSerializer(topics, many=True)
-                return Response(serializer.data)
-            else:
-                topics = [topic.name for topic in list(Topic.objects.all())]
-                related_topics = difflib.get_close_matches(
-                    request.GET.get('keyword'),
-                    topics,
-                    10,
-                    0.2
-                )
-                result = Topic.objects.all().filter(name__in=related_topics)
-                serializer = TopicSerializer(result, many=True)
-                return Response(serializer.data)
+            topics = [topic.name for topic in list(Topic.objects.all())]
+            related_topics = difflib.get_close_matches(
+                request.GET.get('keyword'),
+                topics,
+                10,
+                0.2
+            )
+            result = Topic.objects.all().filter(name__in=related_topics)
+            serializer = TopicSerializer(result, many=True)
+            return Response(serializer.data)
 
 
 class TopicDetailView(views.APIView):
@@ -45,6 +41,7 @@ class TopicDetailView(views.APIView):
         return (permissions.IsAuthenticated(), )
 
     def get(self, request, topic_id, format=None):
+        # Get specific topic with id
         topic = Topic.objects.get(pk=topic_id)
         serializer = TopicSerializer(topic)
         return Response(serializer.data)
@@ -56,6 +53,7 @@ class TopicDetailView(views.APIView):
         return False
 
     def post(self, request, format=None):
+        # Add new topic
         if request.GET.get('questionID') is None:
             if self.exist(request.data):
                 return Response({
@@ -66,29 +64,34 @@ class TopicDetailView(views.APIView):
                 description=request.data.get('description')
             )
             topic.save()
-        else:
-            new_topic = Topic.objects.get(pk=request.data.get('id'))
-            question = Question.objects.get(pk=request.GET.get('questionID'))
-            topics = [topic.id for topic in question.topics.all()]
-            if new_topic.id in topics:
-                return Response({
-                    'message': 'Topic existed in question'
-                }, status=status.HTTP_400_BAD_REQUEST)
-            question.topics.add(topic)
-            question.save()
         return Response(status=status.HTTP_200_OK)
 
-    def delete(self, request, format=None):
-        if request.GET.get('questionID') is not None:
-            delete_topic = Topic.objects.get(pk=request.data.get('id'))
-            question = Question.objects.get(
-                pk=request.GET.get('questionID')
-            )
-            topics = [topic.id for topic in question.topics.all()]
-            if delete_topic.id not in topics:
-                return Response({
-                    'message': 'Topic not available in question'
-                }, status=status.HTTP_400_BAD_REQUEST)
-            question.topics.remove(topic)
-            question.save()
-        return Response(status=status.HTTP_200_OK)
+
+class TopicQuestionView(views.APIView):
+
+    def get_permissions(self):
+        if self.request.method in 'GET':
+            return (permissions.AllowAny(),)
+        return (permissions.IsAuthenticated(), )
+
+    def get(self, request, format=None):
+        # Get newest questions from topic
+        topicID = request.GET.get('topicID')
+        startID = request.GET.get('startID')
+        count = request.GET.get('count')
+        try:
+            topic = Topic.objects.get(pk=topicID)
+        except:
+            return Response({
+                'message': 'Topic with topicID not exists'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        questions = topic.questions.all().order_by('-id')
+        result = []
+        for question in questions:
+            if count == 0:
+                break
+            if (startID != 0 and question.id < startID) or startID == 0:
+                result.add(question)
+                count -= 1
+        serializer = SimpleQuestionSerializer(result, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

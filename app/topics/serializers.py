@@ -8,3 +8,10 @@ class TopicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Topic
         fields = ('id', 'name', 'description')
+
+
+class SimpleTopicSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Topic
+        fields = ('id', 'name')

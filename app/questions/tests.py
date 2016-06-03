@@ -1,6 +1,7 @@
 import unittest
 from django.test import TestCase
 from rest_framework.test import APITestCase
+from rest_framework import status
 
 from posts.models import Post
 from questions.models import Question
@@ -81,4 +82,47 @@ class QuestionTest(TestCase):
 
 
 class QuestionApiTest(APITestCase):
-    pass
+
+    fixtures = [
+        'auth', 'users', 'topics', 'posts', 'questions'
+    ]
+
+    def test_get_all_topics_of_question(self):
+        url = '/api/v1/question/topic/?questionID=1'
+        response = self.client.get(url)
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0].get('name'), 'General')
+
+    def test_add_topic_to_question(self):
+        url = '/api/v1/auth/login/'
+        data = {'username': 'admin', 'password': 'admin123'}
+        response = self.client.post(url, data, format='json')
+
+        url = '/api/v1/question/topic/?questionID=1'
+        response = self.client.post(url, {
+            "id": "2",
+            "name": "Technology",
+            "description": ""
+        })
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_remove_topic_from_question(self):
+        url = '/api/v1/auth/login/'
+        data = {'username': 'admin', 'password': 'admin123'}
+        response = self.client.post(url, data, format='json')
+
+        url = '/api/v1/question/topic/?questionID=2'
+        response = self.client.delete(url, {
+            "id": "1",
+            "name": "General",
+            "description": ""
+        })
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        url = '/api/v1/question/topic/?questionID=1'
+        response = self.client.delete(url, {
+            "id": "1",
+            "name": "General",
+            "description": ""
+        })
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
