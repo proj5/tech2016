@@ -5,6 +5,7 @@ from topics.serializers import SimpleTopicSerializer
 from questions.models import Question
 from questions.serializers import QuestionSerializer, SimpleQuestionSerializer
 from posts.models import Post
+from posts.serializers import SimplePostSerializer, PostSerializer
 import difflib
 
 
@@ -45,6 +46,7 @@ class QuestionDetailView(views.APIView):
     def post(self, request, format=None):
         # Post new question
         post = Post.objects.create(
+            type='question',
             content=request.data.get('content'),
             created_by=request.user.a2ausers
         )
@@ -82,7 +84,7 @@ class QuestionTopicView(views.APIView):
     def get(self, request, format=None):
         # Get all topics for question with id specified
         if request.GET.get('questionID') is not None:
-            questionID = request.GET.get('questionID')
+            questionID = int(request.GET.get('questionID'))
             question = Question.objects.get(pk=questionID)
             serializer = SimpleTopicSerializer(
                 question.topics.all(),
@@ -133,8 +135,8 @@ class TopicQuestionView(views.APIView):
 
     def get(self, request, format=None):
         # Get newest questions from topic
-        topicID = request.GET.get('topicID')
-        startID = request.GET.get('startID')
+        topicID = int(request.GET.get('topicID'))
+        startID = int(request.GET.get('startID'))
         count = int(request.GET.get('count'))
         try:
             topic = Topic.objects.get(pk=topicID)
@@ -152,3 +154,73 @@ class TopicQuestionView(views.APIView):
                 count -= 1
         serializer = SimpleQuestionSerializer(result, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class AnswerView(views.APIView):
+
+    def get_permissions(self):
+        if self.request.method in 'GET':
+            return (permissions.AllowAny(),)
+        return (permissions.IsAuthenticated(), )
+
+    def get(self, request, format=None):
+        if request.GET.get('startID') is None:
+            # Get all answers for a question
+            questionID = int(request.GET.get('questionID'))
+            question = Question.objects.get(pk=questionID)
+            post = question.post
+            answers = SimplePostSerializer(post.child_posts.all(), many=True)
+            return Response(answers.data)
+        else:
+            # Get 'count' answers of question from startID
+            questionID = int(request.GET.get('questionID'))
+            startID = int(request.GET.get('startID'))
+            count = int(request.GET.get('count'))
+            try:
+                question = Question.objects.get(pk=questionID)
+            except:
+                return Response({
+                    'message': 'Question not exists'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            answers = question.post.child_posts.all().order_by('-id')
+            result = []
+            for answer in answers:
+                if count <= 0:
+                    break
+                if (startID != 0 and answer.id < startID) or (startID == 0):
+                    result.append(answer)
+                    count -= 1
+            serializer = PostSerializer(result, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class AnswerDetailView(views.APIView):
+
+    def get_permissions(self):
+        if self.request.method in 'GET':
+            return (permissions.AllowAny(),)
+        return (permissions.IsAuthenticated(), )
+
+    def post(self, request, format=None):
+        # Post new answer
+        questionID = int(request.GET.get('questionID'))
+        if request.data.get('content') is None:
+            return Response({
+                'message': 'Content not found'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        question = Question.objects.get(pk=questionID)
+        post = question.post
+        answer = Post.objects.create(
+            type='answer',
+            parent=post,
+            content=request.data.get('content'),
+            created_by=request.user.a2ausers
+        )
+        answer.save()
+        return Response(status=status.HTTP_200_OK)
+
+    def put(self, request, format=None):
+        # Update an answer
+        post = Post.objects.get(pk=request.data.get('id'))
+        post.content = request.data.get('content')
+        return Response(status=status.HTTP_200_OK)

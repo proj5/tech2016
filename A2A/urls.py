@@ -19,6 +19,7 @@ from django.contrib import admin
 from topics.views import TopicView, TopicDetailView
 from questions.views import QuestionView, QuestionDetailView
 from questions.views import QuestionTopicView, TopicQuestionView
+from questions.views import AnswerView, AnswerDetailView
 from a2ausers.views import UserListView, LoginView, LogoutView, UserDetailView
 from a2ausers.views import AvatarView
 
@@ -37,5 +38,7 @@ urlpatterns = [
     url(r'^api/v1/topic/$', TopicDetailView.as_view()),
     url(r'^api/v1/question/topic/$', QuestionTopicView.as_view()),
     url(r'^api/v1/questions/$', QuestionView.as_view()),
-    url(r'^api/v1/question/$', QuestionDetailView.as_view())
+    url(r'^api/v1/question/$', QuestionDetailView.as_view()),
+    url(r'^api/v1/answers/$', AnswerView.as_view()),
+    url(r'^api/v1/answer/$', AnswerDetailView.as_view())
 ]
