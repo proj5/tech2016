@@ -100,8 +100,6 @@ class CommentApiTest(APITestCase):
 
         pre_num_cmt = Comment.objects.count()
 
-        post = Post.objects.get(id=4)
-        pre_num_cmt_post = post.num_comments
         # Create comment data
         data = {
             'conten': 'This is a test comment'
