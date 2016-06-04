@@ -4,3 +4,15 @@
 .noti-left-menu {}
 .noti-main {}
 .noti-right-menu {}
+.noti-container {}
+.notification-container {
+    font-size: 15px;
+}
+.notification-content {}
+.notification-user {
+    color: black;
+}
+.notification-question {}
+.notification-date {
+    margin-top: 0.3em;
+}
