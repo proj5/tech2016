@@ -58,4 +58,119 @@ class CommentApiTest(APITestCase):
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(pre_num_cmt + 1, Comment.objects.count())
+
+        post = Post.objects.get(id=4)
         self.assertEqual(pre_num_cmt_post + 1, post.num_comments)
+
+    def test_post_comment_not_found(self):
+        url = '/api/v1/comment/id=123654/'
+
+        pre_num_cmt = Comment.objects.count()
+
+        # Create comment data
+        data = {
+            'content': 'This is a test comment'
+        }
+
+        # Login
+        response = self.login('user', 'user1234')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(pre_num_cmt, Comment.objects.count())
+
+    def test_post_comment_unauthorized(self):
+        url = '/api/v1/comment/id=123654/'
+
+        pre_num_cmt = Comment.objects.count()
+
+        # Create comment data
+        data = {
+            'content': 'This is a test comment'
+        }
+
+        # Login
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(pre_num_cmt, Comment.objects.count())
+
+    def test_post_comment_fail(self):
+        url = '/api/v1/comment/id=4/'
+
+        pre_num_cmt = Comment.objects.count()
+
+        post = Post.objects.get(id=4)
+        pre_num_cmt_post = post.num_comments
+        # Create comment data
+        data = {
+            'conten': 'This is a test comment'
+        }
+
+        # Login
+        response = self.login('user', 'user1234')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(pre_num_cmt, Comment.objects.count())
+
+    def test_put_comment_success(self):
+        url = '/api/v1/comment/commentID=2/'
+
+        pre_num_cmt = Comment.objects.count()
+
+        # Create comment data
+        data = {
+            'content': 'Abcd'
+        }
+
+        # Login
+        response = self.login('user', 'user1234')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        response = self.client.put(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(pre_num_cmt, Comment.objects.count())
+        comment = Comment.objects.get(id=2)
+        self.assertEqual(comment.content, 'Abcd')
+
+    def test_put_comment_fail(self):
+        url = '/api/v1/comment/commentID=3/'
+
+        pre_num_cmt = Comment.objects.count()
+
+        comment = Comment.objects.get(id=3)
+        pre_content = comment.content
+        # Create comment data
+        data = {
+            'content': 'Abcd'
+        }
+
+        # Login
+        response = self.login('user', 'user1234')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        response = self.client.put(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(pre_num_cmt, Comment.objects.count())
+        comment = Comment.objects.get(id=3)
+        self.assertEqual(comment.content, pre_content)
+
+    def test_put_comment_not_found(self):
+        url = '/api/v1/comment/commentID=1234501/'
+
+        pre_num_cmt = Comment.objects.count()
+
+        # Create comment data
+        data = {
+            'content': 'Abcd'
+        }
+
+        # Login
+        response = self.login('user', 'user1234')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        response = self.client.put(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(pre_num_cmt, Comment.objects.count())
