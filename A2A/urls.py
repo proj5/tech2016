@@ -22,6 +22,7 @@ from questions.views import QuestionTopicView, TopicQuestionView
 from questions.views import AnswerView, AnswerDetailView
 from a2ausers.views import UserListView, LoginView, LogoutView, UserDetailView
 from a2ausers.views import AvatarView
+from comments.views import CommentView, CommentsForPostView
 
 urlpatterns = [
     url(r'^api/v1/accounts/avatar/(?P<username>.+)/$', AvatarView.as_view()),
@@ -30,6 +31,11 @@ urlpatterns = [
     url(r'^api/v1/accounts/', UserListView.as_view(), name='list'),
     url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),
     url(r'^api/v1/auth/logout/$', LogoutView.as_view(), name='logout'),
+
+    url(r'^api/v1/comments/(?P<id>.+)/$', CommentsForPostView.as_view(),
+        name='list_comments'),
+    url(r'^api/v1/comment/(?P<id>.+)/$', CommentView.as_view(),
+        name='create_edit_comment'),
 
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1/topic/question/$', TopicQuestionView.as_view()),
