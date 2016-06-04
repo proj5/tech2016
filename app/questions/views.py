@@ -18,13 +18,13 @@ class QuestionView(views.APIView):
         # Get questions related to keyword provided
         if request.GET.get('keyword') is not None:
             questions = [elem.question for elem in Question.objects.all()]
-            question_names = difflib.get_close_matches(
+            question_list = difflib.get_close_matches(
                 request.GET.get('keyword'),
                 questions,
                 10,
                 0.2
             )
-            result = Question.objects.all().filter(name__in=question_names)
+            result = Question.objects.all().filter(question__in=question_list)
             serializer = SimpleQuestionSerializer(result, many=True)
             return Response(serializer.data)
 
@@ -52,14 +52,14 @@ class QuestionDetailView(views.APIView):
             question=request.data.get('question'),
             post=post
         )
-        serializer = SimpleTopicSerializer(
-            request.data.get('topics'),
-            many=True
-        )
-        for elem in serializer.data:
-            topic = Topic.objects.get(elem.id)
-            question.add(topic)
+        topics = str(request.data.get('topics')).split('|')
+        for elem in topics:
+            topic = Topic.objects.get(pk=int(elem))
+            question.topics.add(topic)
+            topic.num_questions += 1
+            topic.save()
         question.save()
+        return Response(status=status.HTTP_200_OK)
 
     def put(self, request, format=None):
         # Update a question
@@ -99,8 +99,10 @@ class QuestionTopicView(views.APIView):
             return Response({
                 'message': 'Topic existed in question'
             }, status=status.HTTP_400_BAD_REQUEST)
-        question.topics.add(topic)
+        question.topics.add(new_topic)
         question.save()
+        new_topic.num_questions += 1
+        new_topic.save()
         return Response(status=status.HTTP_200_OK)
 
     def delete(self, request, format=None):
@@ -116,5 +118,37 @@ class QuestionTopicView(views.APIView):
                     'message': 'Topic not available in question'
                 }, status=status.HTTP_400_BAD_REQUEST)
             question.topics.remove(topic)
+            topic.num_questions -= 1
+            topic.save()
             question.save()
         return Response(status=status.HTTP_200_OK)
+
+
+class TopicQuestionView(views.APIView):
+
+    def get_permissions(self):
+        if self.request.method in 'GET':
+            return (permissions.AllowAny(),)
+        return (permissions.IsAuthenticated(), )
+
+    def get(self, request, format=None):
+        # Get newest questions from topic
+        topicID = request.GET.get('topicID')
+        startID = request.GET.get('startID')
+        count = int(request.GET.get('count'))
+        try:
+            topic = Topic.objects.get(pk=topicID)
+        except:
+            return Response({
+                'message': 'Topic with topicID not exists'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        questions = topic.questions.all().order_by('-id')
+        result = []
+        for question in questions:
+            if count <= 0:
+                break
+            if (startID != 0 and question.id < startID) or startID == 0:
+                result.append(question)
+                count -= 1
+        serializer = SimpleQuestionSerializer(result, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

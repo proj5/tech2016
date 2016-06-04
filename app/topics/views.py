@@ -1,8 +1,7 @@
 from rest_framework import permissions, status, views
 from rest_framework.response import Response
 from topics.models import Topic
-from topics.serializers import TopicSerializer
-from questions.serializers import SimpleQuestionSerializer
+from topics.serializers import TopicSerializer, SimpleTopicSerializer
 import difflib
 
 
@@ -65,33 +64,3 @@ class TopicDetailView(views.APIView):
             )
             topic.save()
         return Response(status=status.HTTP_200_OK)
-
-
-class TopicQuestionView(views.APIView):
-
-    def get_permissions(self):
-        if self.request.method in 'GET':
-            return (permissions.AllowAny(),)
-        return (permissions.IsAuthenticated(), )
-
-    def get(self, request, format=None):
-        # Get newest questions from topic
-        topicID = request.GET.get('topicID')
-        startID = request.GET.get('startID')
-        count = request.GET.get('count')
-        try:
-            topic = Topic.objects.get(pk=topicID)
-        except:
-            return Response({
-                'message': 'Topic with topicID not exists'
-            }, status=status.HTTP_400_BAD_REQUEST)
-        questions = topic.questions.all().order_by('-id')
-        result = []
-        for question in questions:
-            if count == 0:
-                break
-            if (startID != 0 and question.id < startID) or startID == 0:
-                result.add(question)
-                count -= 1
-        serializer = SimpleQuestionSerializer(result, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)

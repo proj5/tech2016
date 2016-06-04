@@ -13,3 +13,14 @@ class PostSerializer(serializers.ModelSerializer):
             'created_date',
             'total_vote'
         )
+
+
+class SimplePostSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Post
+        fields = (
+            'id',
+            'type',
+            'content'
+        )
