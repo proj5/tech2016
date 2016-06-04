@@ -2,6 +2,7 @@ from rest_framework import permissions, status, views
 from rest_framework.response import Response
 
 from comments.models import Comment
+from comments.permissions import IsCommentOwner
 from comments.serializers import CommentSerializer
 
 from posts.models import Post
@@ -34,7 +35,7 @@ class CommentsForPostView(views.APIView):
 class CommentView(views.APIView):
 
     def get_permissions(self):
-        return (permissions.IsAuthenticated(), )
+        return (permissions.IsAuthenticated(), IsCommentOwner())
 
     # Post new comment for a post (question or answer) with id specified
     def post(self, request, id, format=None):
