@@ -36,7 +36,7 @@ Parameters: user, password, email
 #### *GET api/v1/account/avatar/:username/*
 Get the avatar of a user
 
-JSON format:
+JSON format
 ```
 {
   "avatar": "static/img/default.jpg"
@@ -47,7 +47,7 @@ JSON format:
 #### *POST api/v1/account/follow/*
 Follow a user
 
-JSON format:
+JSON format
 ```
 {
   "id": 1,
@@ -60,7 +60,7 @@ JSON format:
 #### *POST api/v1/account/unfollow/*
 Unfollow a user
 
-JSON format:
+JSON format
 ```
 {
   "id": 2,
@@ -76,6 +76,7 @@ JSON format:
 Get all topics available
 
 JSON format
+```
 {
   {
     "id": 1,
@@ -88,18 +89,68 @@ JSON format
     "description": "test"
   }
 }
+```
 
 ---
 #### *GET api/v1/topic/:topicID/*
 Get the topic with id specified
 
+JSON format
+```
+{
+  "id": 1,
+  "name": "General",
+  "description": ""
+}
+```
 ---
 #### *GET api/v1/topics/?keyword=test*
-Get 10 most related topic with the keyword provided
+Get 10 most related topics with the keyword provided
 
 ---
 #### *POST api/v1/topic/*
 Add new topic to server
+
+JSON format
+```
+{
+  "name": "Test",
+  "description": "Test"
+}
+```
+---
+## Question
+---
+#### *GET api/v1/questions/?keyword=test*
+Get 10 most related questions with the keyword provided
+ 
+JSON format
+```
+{
+  {
+    "id": 1,
+	"question": "Test"
+  },
+  {
+	"id": 2,
+	"question": "Sample"
+  }
+}
+```
+---
+#### *GET api/v1/question/?questionID=1*
+Get the question with the id provided
+
+JSON format
+```
+{
+  "id": 1,
+  "question": "Test"
+}
+```
+---
+#### *GET api/v1/question/topic/?questionID=1*
+Get all topics for the question with id specified
 
 ---
 #### *GET api/v1/topic/question/?topicID=1&startID=1&count=10*
@@ -108,26 +159,17 @@ Get 'count' newest questions from startID downwards which belongs to the topic w
 If startID equals 0, get from newest questions
 
 ---
-## Question
----
-#### *GET api/v1/questions/?keyword=test*
-Get 10 most related questions with the keyword provided
-
----
-#### *GET api/v1/question/?questionID=1*
-Get the question with the id provided
-
----
-#### *GET api/v1/question/topic/?questionID=1*
-Get all topics for the question with id specified
-
----
 #### *POST api/v1/question/*
 Post new question to server
 
----
-#### *PUT api/v1/question/?questionID=1*
-Update a question with id specified
+JSON format
+```
+{
+  "question": "Test",
+  "content": "Test",
+  "topics": "1|2|3"
+}
+```
 
 ---
 #### *POST api/v1/question/topic/?questionID=1*
@@ -136,7 +178,21 @@ Add new topic for the question with id specified
 JSON format
 ```
 {
-  "name": "Music"
+  "id": 4,
+  "name": "Music",
+  "description": ""
+}
+```
+
+---
+#### *PUT api/v1/question/?questionID=1*
+Update a question with id specified
+
+JSON format
+```
+{
+  "question": "Test",
+  "content": "Test"
 }
 ```
 
@@ -147,7 +203,9 @@ Delete topic for the question with id specified
 JSON format
 ```
 {
-  "name": "Music"
+  "id": 1,
+  "name": "General",
+  "description": ""
 }
 ```
 
@@ -158,16 +216,30 @@ JSON format
 Get all answer of a question with id specified
 
 ---
+#### *GET api/v1/answers/?questionID=1&startID=1&count=10*
+Get 'count' answers for a question with id specified, from startID (sorted by created_date)
+
+---
 #### *POST api/v1/answer/?questionID=1*
 Post an answer for a question with id specified
+
+JSON format
+```
+{
+  "content": "Test"
+}
+```
 
 ---
 #### *PUT api/v1/answer/?answerID=1*
 Update an answer with id specified
 
----
-#### *GET api/v1/answers/?questionID=1&start=1&end=10*
-Get all answers for a question with id specified, from start to end in newer order (sorted by created_date)
+JSON format
+```
+{  
+  "content": "Test"
+}
+```
 
 ---
 ## Comment
