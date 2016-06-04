@@ -4,3 +4,21 @@
 .nf-left-menu {}
 .nf-main {}
 .nf-right-menu {}
+
+.post-title {}
+.post-title>a {
+    color: black;
+}
+.post-author {}
+.post-content {}
+.post-footer {
+    margin-top: 1em;
+}
+.post-other-buttons {
+    color: black;
+    margin-left: 0.5em;
+}
+.post-datetime {
+    margin-top: 0.4em;
+    text-align: right;
+}
