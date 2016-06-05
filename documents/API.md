@@ -172,14 +172,27 @@ Get all answers for a question with id specified, from start to end in newer ord
 ---
 ## Comment
 ---
-#### *GET api/v1/comments/?id=1*
+#### *GET api/v1/comments/id=1*
 Get all comments for a post (question or answer) with id specified
 
 ---
-#### *POST api/v1/comment/?id=1*
+#### *POST api/v1/comment/id=1*
 Post new comment for a post (question or answer) with id specified
 
 ---
-#### *PUT api/v1/comment/?commentID=1*
+#### *PUT api/v1/comment/commentID=1*
 Update a comment with id specified
+
+---
+### *GET api/v1/vote/?postID=1*
+Get vote status of the requester on a post
+1 : upvoted
+0 : nothing
+-1 : downvoted
+
+---
+### *POST api/v1/vote/?postID=1*
+Do/undo upvote/downvote
+if data has score = 1 => do/undo upvote, else downvote
+if currently upvoted => undo upvote, similar to downvote
 

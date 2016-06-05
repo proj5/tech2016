@@ -1,4 +1,4 @@
-from posts.models import Post
+from posts.models import Post, Vote
 from rest_framework import serializers
 
 
@@ -24,3 +24,10 @@ class SimplePostSerializer(serializers.ModelSerializer):
             'type',
             'content'
         )
+
+
+class VoteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Vote
+        fields = ('id', 'score')
