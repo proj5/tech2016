@@ -42,8 +42,6 @@ class A2AUserSerializer(serializers.ModelSerializer):
             # 'facebook_id', 'avatar',
         )
 
-        read_only_fields = ('created_at', 'updated_at',)
-
 
 class AvatarSerializer(serializers.ModelSerializer):
 

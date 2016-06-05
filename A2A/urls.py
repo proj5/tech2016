@@ -16,9 +16,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-
+from topics.views import TopicView, TopicDetailView
+from questions.views import QuestionView, QuestionDetailView
+from questions.views import QuestionTopicView, TopicQuestionView
+from questions.views import AnswerView, AnswerDetailView
 from a2ausers.views import UserListView, LoginView, LogoutView, UserDetailView
 from a2ausers.views import AvatarView
+from comments.views import CommentView, CommentsForPostView
 
 urlpatterns = [
     url(r'^api/v1/accounts/avatar/(?P<username>.+)/$', AvatarView.as_view()),
@@ -28,5 +32,19 @@ urlpatterns = [
     url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),
     url(r'^api/v1/auth/logout/$', LogoutView.as_view(), name='logout'),
 
+    url(r'^api/v1/comments/(?P<id>.+)/$', CommentsForPostView.as_view(),
+        name='list_comments'),
+    url(r'^api/v1/comment/(?P<id>.+)/$', CommentView.as_view(),
+        name='create_edit_comment'),
+
     url(r'^admin/', admin.site.urls),
+    url(r'^api/v1/topic/question/$', TopicQuestionView.as_view()),
+    url(r'^api/v1/topic/(?P<topic_id>.+)/$', TopicDetailView.as_view()),
+    url(r'^api/v1/topics/$', TopicView.as_view()),
+    url(r'^api/v1/topic/$', TopicDetailView.as_view()),
+    url(r'^api/v1/question/topic/$', QuestionTopicView.as_view()),
+    url(r'^api/v1/questions/$', QuestionView.as_view()),
+    url(r'^api/v1/question/$', QuestionDetailView.as_view()),
+    url(r'^api/v1/answers/$', AnswerView.as_view()),
+    url(r'^api/v1/answer/$', AnswerDetailView.as_view())
 ]
