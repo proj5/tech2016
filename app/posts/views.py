@@ -31,7 +31,8 @@ class VoteView(views.APIView):
                 downvote = Vote.objects.filter(
                     post__id=id, score=-1,
                     user__user__username=request.user.username).first()
-                if downvote is not None:  # Need to undo upvote before upvoting
+                # Need to undo downvote before upvoting
+                if downvote is not None:
                     return Response(
                         'You need to undo your downvote before downvoting',
                         status=status.HTTP_400_BAD_REQUEST)
@@ -59,7 +60,8 @@ class VoteView(views.APIView):
                 upvote = Vote.objects.filter(
                     post__id=id, score=1,
                     user__user__username=request.user.username).first()
-                if upvote is not None:  # Need to undo upvote before downvoting
+                # Need to undo upvote before downvoting
+                if upvote is not None:
                     return Response(
                         'You need to undo your upvote before downvoting',
                         status=status.HTTP_400_BAD_REQUEST)
