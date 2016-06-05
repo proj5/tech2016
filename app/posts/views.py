@@ -28,6 +28,14 @@ class VoteView(views.APIView):
         if serializer.is_valid():
             score = serializer.validated_data.get('score')
             if score == 1:  # upvote / undo upvote
+                downvote = Vote.objects.filter(
+                    post__id=id, score=-1,
+                    user__user__username=request.user.username).first()
+                if downvote is not None:  # Need to undo upvote before upvoting
+                    return Response(
+                        'You need to undo your downvote before downvoting',
+                        status=status.HTTP_400_BAD_REQUEST)
+
                 vote = Vote.objects.filter(
                     post__id=id, score=1,
                     user__user__username=request.user.username).first()
