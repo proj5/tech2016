@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.dispatch import receiver
-from django.db.models.signals import post_save, post_delete, pre_delete
+from django.db.models.signals import post_save, pre_delete
 from a2ausers.models import A2AUser
 from posts.models import Post
 
