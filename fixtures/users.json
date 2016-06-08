@@ -14,5 +14,13 @@
     "user": 2,
     "facebook_id": ""
   }
+},
+{
+  "model": "a2ausers.a2auser",
+  "pk": 3,
+  "fields": {
+    "user": 3,
+    "facebook_id": ""
+  }
 }
 ]

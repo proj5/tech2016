@@ -18,12 +18,23 @@ class CommentTest(TestCase):
             )
 
     def test_add_comment_to_post(self):
-        comment = Comment(
-            parent=Post.objects.get(pk=1),
+        post = Post(
+            type='question',
+            content='Ok',
             created_by=A2AUser.objects.get(pk=1)
+        )
+        post.save()
+
+        comment = Comment(
+            parent=post,
+            created_by=A2AUser.objects.get(pk=2)
         )
         comment.save()
         self.check_num_comments()
+        self.assertEqual(
+            set(post.followed_by.all()),
+            set([post.created_by, comment.created_by])
+        )
 
     def test_delete_comment_of_post(self):
         Comment.objects.get(pk=2).delete()

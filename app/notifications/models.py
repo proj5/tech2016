@@ -4,7 +4,8 @@ from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from a2ausers.models import A2AUser
-from posts.models import Post
+from posts.models import Post, Vote
+from comments.models import Comment
 
 
 class Notification(models.Model):
@@ -34,8 +35,73 @@ class Read(models.Model):
     read = models.BooleanField(default=False)
 
 
-@receiver(post_save, sender=Notification)
-def add_noti(sender, instance, created, raw, **kwargs):
+# save answer
+@receiver(post_save, sender=Post)
+def add_answer(sender, instance, created, raw, **kwargs):
     if created and not raw:
-        if instance.user.id == instance.created_by.id:
-            raise Exception('user and created_by must be different')
+        if instance.type == 'answer':
+            notification = Notification(
+                type='02',
+                post=instance,
+                created_by=instance.created_by,
+                content=''
+            )
+            notification.save()
+            for user in instance.parent.followed_by.all():
+                if user != instance.created_by:
+                    read = Read(
+                        notification=notification,
+                        user=user,
+                    )
+                    read.save()
+
+
+@receiver(post_save, sender=Comment)
+def add_comment(sender, instance, created, raw, **kwargs):
+    if created and not raw:
+        try:
+            post = instance.parent
+        except:
+            post = None
+            raise Exception('Post does not exist')
+        if post is not None:
+            notification = Notification(
+                type='01',
+                post=post,
+                created_by=instance.created_by,
+                content=''
+            )
+            notification.save()
+
+            for user in instance.parent.followed_by.all():
+                if user != instance.created_by:
+                    read = Read(
+                        notification=notification,
+                        user=user,
+                    )
+                    read.save()
+
+
+@receiver(post_save, sender=Vote)
+def add_vote(sender, instance, created, raw, **kwargs):
+    if created and not raw:
+        try:
+            post = instance.post
+        except:
+            post = None
+            raise Exception('Post does not exist')
+        if post is not None:
+            notification = Notification(
+                type='03',
+                post=post,
+                created_by=instance.user,
+                content=''
+            )
+            notification.save()
+
+            if instance.user != post.created_by:
+                read = Read(
+                    notification=notification,
+                    user=post.created_by
+                )
+                read.save()

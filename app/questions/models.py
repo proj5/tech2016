@@ -4,7 +4,7 @@ from django.db import models
 from topics.models import Topic
 from posts.models import Post
 from django.dispatch import receiver
-from django.db.models.signals import pre_delete, post_delete
+from django.db.models.signals import pre_delete, post_delete, post_save
 
 # from django.utils.functional import wraps
 

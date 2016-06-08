@@ -134,7 +134,7 @@ class UserAccountApiTest(APITestCase):
             A2AUser.objects.filter(
                 user__username='user').exists())
 
-    def test_delete_user_success(self):
+    def test_delete_user_fail(self):
         pre_num_user = A2AUser.objects.count()
 
         self.login('user', 'user1234')

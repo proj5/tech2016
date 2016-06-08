@@ -1,0 +1,111 @@
+[
+{
+  "model": "notifications.notification",
+  "pk": 1,
+  "fields": {
+    "type": "02",
+    "post": 2,
+    "created_date": "2016-06-08T11:04:20.888Z",
+    "content": "",
+    "created_by": 1
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 2,
+  "fields": {
+    "type": "02",
+    "post": 4,
+    "created_date": "2016-06-08T11:04:20.913Z",
+    "content": "",
+    "created_by": 1
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 3,
+  "fields": {
+    "type": "01",
+    "post": 2,
+    "created_date": "2016-06-08T11:04:23.544Z",
+    "content": "",
+    "created_by": 2
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 4,
+  "fields": {
+    "type": "01",
+    "post": 4,
+    "created_date": "2016-06-08T11:04:23.555Z",
+    "content": "",
+    "created_by": 2
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 5,
+  "fields": {
+    "type": "01",
+    "post": 4,
+    "created_date": "2016-06-08T11:04:23.565Z",
+    "content": "",
+    "created_by": 1
+  }
+},
+{
+  "model": "notifications.read",
+  "pk": 1,
+  "fields": {
+    "notification": 1,
+    "user": 2,
+    "read": false
+  }
+},
+{
+  "model": "notifications.read",
+  "pk": 2,
+  "fields": {
+    "notification": 1,
+    "user": 3,
+    "read": false
+  }
+},
+{
+  "model": "notifications.read",
+  "pk": 3,
+  "fields": {
+    "notification": 2,
+    "user": 2,
+    "read": false
+  }
+},
+{
+  "model": "notifications.read",
+  "pk": 4,
+  "fields": {
+    "notification": 3,
+    "user": 1,
+    "read": false
+  }
+},
+{
+  "model": "notifications.read",
+  "pk": 5,
+  "fields": {
+    "notification": 4,
+    "user": 1,
+    "read": false
+  }
+},
+{
+  "model": "notifications.read",
+  "pk": 6,
+  "fields": {
+    "notification": 5,
+    "user": 2,
+    "read": false
+  }
+}
+]

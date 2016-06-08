@@ -40,6 +40,10 @@ class QuestionTest(TestCase):
             post=post
         )
         question.save()
+        self.assertEqual(
+            set(post.followed_by.all()),
+            set([post.created_by])
+        )
 
         question.topics.add(Topic.objects.get(pk=1))
         topic = Topic.objects.get(pk=1)
