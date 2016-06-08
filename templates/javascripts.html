@@ -1,0 +1,19 @@
+{% load compress %}
+{% load staticfiles %}
+
+{% compress js %}
+
+<script type="text/javascript" src="{% static 'static/bower_components/angular/angular.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'static/bower_components/angular-cookies/angular-cookies.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'static/bower_components/angular-ui-router/release/angular-ui-router.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'javascripts/tech2016.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/tech2016.config.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/tech2016.routes.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'javascripts/users/users.module.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/users/services/users.service.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/users/controllers/register.controller.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/users/controllers/login.controller.js' %}"></script>
+
+{% endcompress %}
