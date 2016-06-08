@@ -10,6 +10,7 @@ python manage.py migrate
 :: username:password
 :: admin:admin123
 :: user:user1234
+:: quang:admin123
 python manage.py loaddata auth.json 
 python manage.py loaddata users.json
 python manage.py loaddata topics.json
