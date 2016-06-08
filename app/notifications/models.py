@@ -51,7 +51,7 @@ def add_answer(sender, instance, created, raw, **kwargs):
                 if user != instance.created_by:
                     read = Read(
                         notification=notification,
-                        user=instance.parent.created_by,
+                        user=user,
                     )
                     read.save()
 
