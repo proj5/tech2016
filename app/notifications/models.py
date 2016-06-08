@@ -38,7 +38,7 @@ class Read(models.Model):
 # save answer
 @receiver(post_save, sender=Post)
 def add_answer(sender, instance, created, raw, **kwargs):
-    if created:  # and not raw:
+    if created and not raw:
         if instance.type == 'answer':
             notification = Notification(
                 type='02',
@@ -48,7 +48,7 @@ def add_answer(sender, instance, created, raw, **kwargs):
             )
             notification.save()
             for user in instance.parent.followed_by.all():
-                if user != instance.parent.created_by:
+                if user != instance.created_by:
                     read = Read(
                         notification=notification,
                         user=instance.parent.created_by,
@@ -58,7 +58,7 @@ def add_answer(sender, instance, created, raw, **kwargs):
 
 @receiver(post_save, sender=Comment)
 def add_comment(sender, instance, created, raw, **kwargs):
-    if created:  # and not raw:
+    if created and not raw:
         try:
             post = instance.parent
         except:
@@ -83,7 +83,7 @@ def add_comment(sender, instance, created, raw, **kwargs):
 
 @receiver(post_save, sender=Vote)
 def add_vote(sender, instance, created, raw, **kwargs):
-    if created:  # and not raw:
+    if created and not raw:
         try:
             post = instance.post
         except:
