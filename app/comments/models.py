@@ -44,6 +44,7 @@ def add_comment(sender, instance, created, raw, **kwargs):
             raise Exception('Question does not exist')
         if post is not None:
             post.num_comments += 1
+            post.followed_by.add(instance.created_by)
             post.save()
 
 
