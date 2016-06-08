@@ -2,12 +2,39 @@ from django.test import TestCase
 from rest_framework.test import APITestCase
 from rest_framework import status
 
+from a2ausers.models import A2AUser
 from posts.models import Post, Vote
 from questions.models import Question
 
 
 class PostTest(TestCase):
-    pass
+    fixtures = ['auth', 'users', 'topics', 'posts', 'questions']
+
+    def test_add_post(self):
+        post = Post(
+            type='answer',
+            parent=Post.objects.get(pk=1),
+            content='Ok',
+            created_by=A2AUser.objects.get(pk=1)
+        )
+        post.save()
+
+        self.assertEqual(
+            set(post.followed_by.all()),
+            set([A2AUser.objects.get(pk=1)])
+        )
+
+        post = Post(
+            type='question',
+            content='Ok',
+            created_by=A2AUser.objects.get(pk=2)
+        )
+        post.save()
+
+        self.assertEqual(
+            set(post.followed_by.all()),
+            set([A2AUser.objects.get(pk=2)])
+        )
 
 
 class PostApiTest(APITestCase):

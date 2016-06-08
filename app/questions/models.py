@@ -49,12 +49,6 @@ class Question(models.Model):
 #                 topic.num_questions += 1
 #                 topic.save()
 
-@receiver(post_save, sender=Question)
-def add_question(sender, instance, created, raw, **kwargs):
-    # delete all posts, all comments belongs to the question
-    if created and not raw:
-        instance.post.followed_by.add(instance.post.created_by)
-
 
 @receiver(post_delete, sender=Question)
 def delete_posts_in_question(sender, instance, **kwargs):

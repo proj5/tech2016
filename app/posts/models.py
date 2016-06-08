@@ -51,6 +51,7 @@ def add_answer(sender, instance, created, raw, **kwargs):
         if instance.type == 'answer':
             instance.parent.question.num_answers += 1
             instance.parent.question.save()
+        instance.followed_by.add(instance.created_by)
 
 
 @receiver(post_delete, sender=Post)
