@@ -32,11 +32,11 @@ class NotificationTest(TestCase):
         self.notifications_per_user = self.get_notifications_per_user()
         self.users_per_notification = self.get_users_per_notification()
 
-    def check_notifications_per_user(self, change_user=[]):
+    def check_notifications_per_user(self, change_user=[], created_by=None):
         notifications = self.get_notifications_per_user()
         for user, num_noti in self.notifications_per_user.iteritems():
             change_value = 0
-            if user in change_user:
+            if user in change_user and user != created_by:
                 change_value = 1
             self.assertEqual(num_noti + change_value, notifications[user])
 
@@ -56,6 +56,7 @@ class NotificationTest(TestCase):
         self.assertEqual(notification.content, content)
 
         users = set(users)
+        users.discard(notification.created_by)
         noti_users = set(notification.users.all())
         self.assertEqual(noti_users, users)
 
@@ -70,13 +71,16 @@ class NotificationTest(TestCase):
         comment.save()
 
         self.assertEqual(pre_num_read + 1, self.user.notifications.count())
-        self.check_notifications_per_user([self.user])
+        self.check_notifications_per_user(
+            post.followed_by.all(),
+            comment.created_by,
+        )
         self.check_users_per_notification()
         self.check_notification(
             Notification.objects.latest('created_date'),
             type='01',
             content='',
-            users=[self.user]
+            users=post.followed_by.all()
         )
 
     def test_add_notification_when_add_comment_same_user(self):
@@ -90,13 +94,16 @@ class NotificationTest(TestCase):
         comment.save()
 
         self.assertEqual(pre_num_read, self.user.notifications.count())
-        self.check_notifications_per_user()
+        self.check_notifications_per_user(
+            post.followed_by.all(),
+            comment.created_by
+        )
         self.check_users_per_notification()
         self.check_notification(
             Notification.objects.latest('created_date'),
             type='01',
             content='',
-            users=[]
+            users=post.followed_by.all()
         )
 
     def test_add_notification_when_add_answer(self):
@@ -108,7 +115,10 @@ class NotificationTest(TestCase):
         )
         post.save()
 
-        self.check_notifications_per_user(post.parent.followed_by.all())
+        self.check_notifications_per_user(
+            post.parent.followed_by.all(),
+            post.created_by
+        )
         self.check_users_per_notification()
         self.check_notification(
             Notification.objects.latest('created_date'),

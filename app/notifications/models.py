@@ -73,12 +73,13 @@ def add_comment(sender, instance, created, raw, **kwargs):
             )
             notification.save()
 
-            if instance.created_by != post.created_by:
-                read = Read(
-                    notification=notification,
-                    user=instance.parent.created_by,
-                )
-                read.save()
+            for user in instance.parent.followed_by.all():
+                if user != instance.created_by:
+                    read = Read(
+                        notification=notification,
+                        user=user,
+                    )
+                    read.save()
 
 
 @receiver(post_save, sender=Vote)
