@@ -4,7 +4,7 @@ from django.db import models
 from topics.models import Topic
 from posts.models import Post
 from django.dispatch import receiver
-from django.db.models.signals import pre_delete, post_delete
+from django.db.models.signals import pre_delete, post_delete, post_save
 
 # from django.utils.functional import wraps
 
@@ -48,6 +48,12 @@ class Question(models.Model):
 #             for topic in instance.topics.all():
 #                 topic.num_questions += 1
 #                 topic.save()
+
+@receiver(post_save, sender=Question)
+def add_question(sender, instance, created, raw, **kwargs):
+    # delete all posts, all comments belongs to the question
+    if created and not raw:
+        instance.post.followed_by.add(instance.post.created_by)
 
 
 @receiver(post_delete, sender=Question)

@@ -11,7 +11,9 @@
     "created_by": 2,
     "total_vote": 0,
     "num_comments": 0,
-    "followed_by": []
+    "followed_by": [
+      2
+    ]
   }
 },
 {
@@ -41,7 +43,9 @@
     "created_by": 2,
     "total_vote": 0,
     "num_comments": 0,
-    "followed_by": []
+    "followed_by": [
+      2
+    ]
   }
 },
 {
