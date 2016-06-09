@@ -24,7 +24,7 @@ from a2ausers.views import UserListView, LoginView, LogoutView, UserDetailView
 from a2ausers.views import AvatarView
 from comments.views import CommentView, CommentsForPostView
 from posts.views import VoteView
-from posts.views import PostDetailView
+from posts.views import PostDetailView, FollowPostView
 from A2A.views import IndexView
 
 urlpatterns = [
@@ -44,6 +44,9 @@ urlpatterns = [
 
     # Vote views
     url(r'^api/v1/vote/$', VoteView.as_view(), name='vote'),
+
+    # Follow views
+    url(r'^api/v1/follow/$', FollowPostView.as_view(), name='follow_post'),
 
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1/topic/question/$', TopicQuestionView.as_view()),
