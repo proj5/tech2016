@@ -276,8 +276,16 @@ if currently upvoted => undo upvote, similar to downvote
 
 ---
 ### *POST api/v1/follow/?postID=1*
-Follow/unfollow a post
-if the user didn't follow the post => follow it
-if the user followed the post => unfollow it
+
+No data needed
+
+Follow/unfollow a post 
+if the requester didn't follow the post => follow it
+if the requester followed the post => unfollow it
+
+---
+### *GET api/v1/follow/?postID=1*
+Get follow status of the requester on a post
+Return 1 if followed, 0 otherwise
 
 
