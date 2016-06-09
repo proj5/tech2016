@@ -4,6 +4,7 @@ from topics.models import Topic
 from topics.serializers import SimpleTopicSerializer
 from questions.models import Question
 from questions.serializers import QuestionSerializer, SimpleQuestionSerializer
+from questions.serializers import QuestionWithTopAnswerSerializer
 from posts.models import Post
 from posts.serializers import SimplePostSerializer, PostSerializer
 import difflib
@@ -28,6 +29,27 @@ class QuestionView(views.APIView):
             result = Question.objects.all().filter(question__in=question_list)
             serializer = SimpleQuestionSerializer(result, many=True)
             return Response(serializer.data)
+        else:
+            # Get 'count' newest questions from startID
+            startID = int(request.GET.get('startID'))
+            count = int(request.GET.get('count'))
+            if startID != 0:
+                questions = Question.objects.all().filter(
+                    id__lt=startID
+                ).order_by('-id')
+            else:
+                questions = Question.objects.all().order_by('-id')
+            result = []
+            for question in questions:
+                if count <= 0:
+                    break
+                result.append(question)
+                count -= 1
+            question_serializer = QuestionWithTopAnswerSerializer(
+                result,
+                many=True
+            )
+            return Response(question_serializer.data)
 
 
 class QuestionDetailView(views.APIView):

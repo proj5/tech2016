@@ -51,6 +51,7 @@ urlpatterns = [
     url(r'^api/v1/topics/$', TopicView.as_view()),
     url(r'^api/v1/topic/$', TopicDetailView.as_view()),
     url(r'^api/v1/question/topic/$', QuestionTopicView.as_view()),
+    url(r'^api/v1/questions/newest/$', QuestionView.as_view()),
     url(r'^api/v1/questions/$', QuestionView.as_view()),
     url(r'^api/v1/question/$', QuestionDetailView.as_view()),
     url(r'^api/v1/answers/$', AnswerView.as_view()),
