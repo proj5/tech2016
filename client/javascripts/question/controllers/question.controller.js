@@ -12,9 +12,41 @@
       vm.questionID = $stateParams.questionID;
       vm.totalUpvote = 0;
       vm.totalComment = 0;
+      vm.isDisplayAnswerBox = false;
       getQuestion();
       getTopics();
       getAnswers();
+
+      vm.displayAnswerBox = function() {
+        vm.isDisplayAnswerBox = !vm.isDisplayAnswerBox;
+      }
+
+      vm.submitAnswer = function() {
+        //console.log(vm.answerContent);
+        var postAnswerURL = "api/v1/answer/?questionID=" + vm.questionID;
+        $http.post(postAnswerURL, {
+          "content": vm.answerContent
+        })
+        .then(function successCallback(response) {
+          $state.reload();
+        },
+        function errorCallback(response) {
+          console.log("Error when submit answer");
+        });
+      }
+
+      vm.upvotePost = function(postID) {
+        var upvoteURL = "api/v1/vote/?postID=" + postID;
+        $http.post(upvoteURL, {
+          "score" : 1
+        })
+        .then(function successCallback(response) {
+          $state.reload();
+        },
+        function errorCallback(response) {
+          console.log("Error when upvote a post");
+        });
+      }
 
       function getQuestion() {
         //http://localhost:8000/api/v1/question/?questionID=1
@@ -28,6 +60,12 @@
             $http.get(commentsURL)
             .then(function successCallback(response){
               vm.question.comments = response.data;
+              var voteStatusURL = "/api/v1/vote/?postID=" + vm.questionID;
+              $http.get(voteStatusURL)
+              .then(function successCallback(response) {
+                vm.question.myScore = response.data;
+              },
+              function errorCallback(response) {});
               vm.totalComment += vm.question.comments.length;
             }, function errorCallback(response) {
               console.log("Error get comments for question");
@@ -61,6 +99,12 @@
               $http.get(commentsURL)
               .then(function successCallback(commentResponse){
                 answer.comments = commentResponse.data;
+                var voteStatusURL = "/api/v1/vote/?postID=" + answer.id;
+                $http.get(voteStatusURL)
+                .then(function successCallback(response) {
+                  answer.myScore = response.data;
+                },
+                function errorCallback(response) {});
                 vm.totalComment += answer.comments.length;
               }, function errorCallback(response) {
                 console.log("Error get comments for answer");

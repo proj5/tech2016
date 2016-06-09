@@ -47,13 +47,24 @@
           </div>
           <div class="post-footer row">
             <div class="col-md-12 post-buttons-container">
-              <a href="#" class="btn btn-primary btn-info">Answer</a>
-              <a href="#" class="btn btn-primary btn-success">Upvote | <b>{{vm.question.post.total_vote}}</b></a> <!-- Number of upvote -->
-              <a href="#" class = "post-other-buttons">Downvote</a>
+              <button class="btn btn-primary btn-info" ng-click="vm.displayAnswerBox()">Answer</button>
+              <button class="btn btn-primary btn-success" ng-click="vm.upvotePost(vm.question.post.id)" ng-if="vm.question.myScore===0">Upvote | <b>{{vm.question.post.total_vote}}</b></button>
+              <button class="btn btn-faded" ng-click="vm.upvotePost(vm.question.post.id)" ng-if="vm.question.myScore>0">Upvoted | <b>{{vm.question.post.total_vote}}</b></button>
+              <!-- <a href="#" class = "post-other-buttons">Downvote</a> -->
               <a href="#" class = "post-other-buttons">Follow</a>
               <a href="#" class = "post-other-buttons">Comments</a>
             </div>
           </div>
+
+          <div class = "well post-answer-box" ng-if="vm.isDisplayAnswerBox">
+            <form>
+              Answer:<br>
+              <input type="text" name="answerContent" ng-model="vm.answerContent">
+              <button type="submit" class="btn btn-primary" ng-click = "vm.submitAnswer()">Submit</button>
+            </form>
+
+          </div>
+
           <div class = "well post-comments-container" ng-if = "vm.question.comments.length > 0">
             <div ng-repeat = "comment in vm.question.comments">
               <div class = "row">
@@ -84,8 +95,9 @@
             </div>
             <div class="post-footer row">
               <div class="col-md-12 post-buttons-container">
-                <a href="#" class="btn btn-primary btn-success">Upvote | <b>{{answer.total_vote}}</b></a> <!-- Number of upvote -->
-                <a href="#" class = "post-other-buttons">Downvote</a>
+                <button class="btn btn-primary btn-success" ng-click="vm.upvotePost(answer.id)" ng-if="answer.myScore===0">Upvote | <b>{{answer.total_vote}}</b></button>
+              <button class="btn btn-faded" ng-click="vm.upvotePost(answer.id)" ng-if="answer.myScore>0">Upvoted | <b>{{answer.total_vote}}</b></button>
+                <!-- <a href="#" class = "post-other-buttons">Downvote</a> -->
                 <a href="#" class = "post-other-buttons">Comments</a>
               </div>
             </div>
