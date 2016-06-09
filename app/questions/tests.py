@@ -34,6 +34,12 @@ class QuestionTest(TestCase):
                 Post.objects.filter(parent=question.post).count()
             )
 
+        for user in A2AUser.objects.all():
+            self.assertEqual(
+                user.num_answers,
+                user.post_created.filter(type='answer').count()
+            )
+
     def test_create_question(self):
         post = Post(
             content='Testing',

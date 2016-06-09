@@ -51,6 +51,9 @@ def add_answer(sender, instance, created, raw, **kwargs):
         if instance.type == 'answer':
             instance.parent.question.num_answers += 1
             instance.parent.question.save()
+
+            instance.created_by.num_answers += 1
+            instance.created_by.save()
         instance.followed_by.add(instance.created_by)
 
 
@@ -61,3 +64,7 @@ def delete_answer(sender, **kwargs):
             if kwargs['instance'].parent.question.num_answers > 0:
                 kwargs['instance'].parent.question.num_answers -= 1
                 kwargs['instance'].parent.question.save()
+
+            instance = kwargs['instance']
+            instance.created_by.num_answers -= 1
+            instance.created_by.save()
