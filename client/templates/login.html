@@ -1,0 +1,23 @@
+<div class="col-md-6 col-md-offset-3">
+  <h1>Login</h1>
+  <div class="well">
+    <form role="form" ng-submit="vm.login()">
+      <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+        <label for="login__username">Username</label>
+        <input type="text" name="username" class="form-control" id="login__username" ng-model="vm.username" required />
+        <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+      </div>
+
+      <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+        <label for="login__password">Password</label>
+        <input type="password" name="password" class="form-control" id="login__password" ng-model="vm.password" required />
+        <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Login</button>
+        <a ui-sref="home.register" ng-click="vm.resetField()">Register</a>
+      </div>
+    </form>
+  </div>
+</div>

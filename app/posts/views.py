@@ -2,7 +2,7 @@ from rest_framework import permissions, status, views
 from rest_framework.response import Response
 
 from posts.models import Post, Vote
-from posts.serializers import VoteSerializer
+from posts.serializers import PostSerializer, VoteSerializer
 
 from a2ausers.models import User
 
@@ -102,3 +102,17 @@ class VoteView(views.APIView):
             return Response(0, status=status.HTTP_200_OK)
         else:
             return Response(vote.score, status=status.HTTP_200_OK)
+
+
+class PostDetailView(views.APIView):
+
+    def get_permissions(self):
+        if self.request.method in 'GET':
+            return (permissions.AllowAny(),)
+        return (permissions.IsAuthenticated(), )
+
+    def get(self, request, id, format=None):
+        # Get single post
+        post = Post.objects.get(pk=id)
+        serializer = PostSerializer(post)
+        return Response(serializer.data)

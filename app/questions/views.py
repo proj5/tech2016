@@ -39,7 +39,8 @@ class QuestionDetailView(views.APIView):
     def get(self, request, format=None):
         # Get a specific question
         if request.GET.get('questionID') is not None:
-            question = Question.objects.get(pk=request.GET.get('questionID'))
+            questionID = int(request.GET.get('questionID'))
+            question = Question.objects.get(pk=questionID)
             serializer = QuestionSerializer(question)
             return Response(serializer.data)
 
@@ -54,9 +55,10 @@ class QuestionDetailView(views.APIView):
             question=request.data.get('question'),
             post=post
         )
-        topics = str(request.data.get('topics')).split('|')
-        for elem in topics:
-            topic = Topic.objects.get(pk=int(elem))
+        send_topics = [int(elem)
+                       for elem in str(request.data.get('topics')).split('|')]
+        topics = Topic.objects.all().filter(pk__in=send_topics)
+        for topic in topics:
             question.topics.add(topic)
             topic.num_questions += 1
             topic.save()
@@ -94,8 +96,9 @@ class QuestionTopicView(views.APIView):
 
     def post(self, request, format=None):
         # Add new topic to question with id specified
+        questionID = request.GET.get('questionID')
         new_topic = Topic.objects.get(pk=request.data.get('id'))
-        question = Question.objects.get(pk=request.GET.get('questionID'))
+        question = Question.objects.get(pk=questionID)
         topics = [topic.id for topic in question.topics.all()]
         if new_topic.id in topics:
             return Response({
@@ -110,10 +113,9 @@ class QuestionTopicView(views.APIView):
     def delete(self, request, format=None):
         # Remove a topic from question with id specified
         if request.GET.get('questionID') is not None:
+            questionID = request.GET.get('questionID')
             delete_topic = Topic.objects.get(pk=request.data.get('id'))
-            question = Question.objects.get(
-                pk=request.GET.get('questionID')
-            )
+            question = Question.objects.get(pk=questionID)
             topics = [topic.id for topic in question.topics.all()]
             if delete_topic.id not in topics:
                 return Response({
@@ -169,7 +171,7 @@ class AnswerView(views.APIView):
             questionID = int(request.GET.get('questionID'))
             question = Question.objects.get(pk=questionID)
             post = question.post
-            answers = SimplePostSerializer(post.child_posts.all(), many=True)
+            answers = PostSerializer(post.child_posts.all(), many=True)
             return Response(answers.data)
         else:
             # Get 'count' answers of question from startID
@@ -221,6 +223,7 @@ class AnswerDetailView(views.APIView):
 
     def put(self, request, format=None):
         # Update an answer
-        post = Post.objects.get(pk=request.data.get('id'))
+        answerID = int(request.GET.get('answerID'))
+        post = Post.objects.get(pk=answerID)
         post.content = request.data.get('content')
         return Response(status=status.HTTP_200_OK)

@@ -5,9 +5,9 @@ from posts.serializers import PostSerializer
 
 class QuestionSerializer(serializers.ModelSerializer):
 
-    class Meta:
+    post = PostSerializer()
 
-        post = PostSerializer()
+    class Meta:
 
         model = Question
         fields = ('id', 'question', 'post')
