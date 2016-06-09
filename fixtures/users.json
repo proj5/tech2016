@@ -4,7 +4,12 @@
   "pk": 1,
   "fields": {
     "user": 1,
-    "facebook_id": ""
+    "facebook_id": "",
+    "num_questions": 0,
+    "num_answers": 2,
+    "num_comments": 1,
+    "num_upvotes": 0,
+    "num_unread_notis": 2
   }
 },
 {
@@ -12,7 +17,12 @@
   "pk": 2,
   "fields": {
     "user": 2,
-    "facebook_id": ""
+    "facebook_id": "",
+    "num_questions": 2,
+    "num_answers": 0,
+    "num_comments": 2,
+    "num_upvotes": 0,
+    "num_unread_notis": 3
   }
 },
 {
@@ -20,7 +30,12 @@
   "pk": 3,
   "fields": {
     "user": 3,
-    "facebook_id": ""
+    "facebook_id": "",
+    "num_questions": 0,
+    "num_answers": 0,
+    "num_comments": 0,
+    "num_upvotes": 0,
+    "num_unread_notis": 1
   }
 }
 ]

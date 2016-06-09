@@ -32,6 +32,11 @@ class A2AUser(models.Model):
 
     user = models.OneToOneField(User, related_name='a2ausers')
     facebook_id = models.CharField(max_length=200, null=True, blank=True)
+    num_questions = models.IntegerField(default=0)
+    num_answers = models.IntegerField(default=0)
+    num_comments = models.IntegerField(default=0)
+    num_upvotes = models.IntegerField(default=0)
+    num_unread_notis = models.IntegerField(default=0)
 
     @property
     def user__username(self):
