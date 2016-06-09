@@ -7,7 +7,7 @@
       'tech2016.routes',
       'tech2016.users',
       'tech2016.main',
-      'tech2016.questions'
+      'tech2016.question'
   ]);
 
   angular
