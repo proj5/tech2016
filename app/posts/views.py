@@ -155,4 +155,5 @@ class FollowPostView(views.APIView):
             post.followed_by.remove(follower)
         else:
             post.followed_by.add(follower)
+        post.save()
         return Response(status=status.HTTP_200_OK)
