@@ -6,7 +6,8 @@
       'tech2016.config',
       'tech2016.routes',
       'tech2016.users',
-      'tech2016.main'
+      'tech2016.main',
+      'tech2016.questions'
   ]);
 
   angular
