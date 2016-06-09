@@ -1,10 +1,12 @@
+import json
 from django.test import TestCase
 from rest_framework.test import APITestCase
+from rest_framework import status
 
 from posts.models import Post, Vote
 from a2ausers.models import A2AUser
 from comments.models import Comment
-from notifications.models import Notification
+from notifications.models import Notification, Read
 # Create your tests here.
 
 
@@ -160,5 +162,44 @@ class NotificationTest(TestCase):
         self.check_users_per_notification()
 
 
-class NotificationApiTest(TestCase):
-    pass
+class NotificationApiTest(APITestCase):
+
+    fixtures = [
+        'auth',
+        'users',
+        'topics',
+        'posts',
+        'questions',
+        'comments',
+        'notifications']
+
+    def login(self, username, password):
+        url = '/api/v1/auth/login/'
+        data = {'username': username, 'password': password}
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        return response
+
+    def test_get_notifications(self):
+        self.login('admin', 'admin123')
+        url = '/api/v1/notifications/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            len(response.data),
+            min(5, Read.objects.filter(user__id=1).count())
+        )
+
+        for read in json.loads(response.content):
+            id = read['id']
+            self.assertEqual(Read.objects.get(pk=id).user.id, 1)
+
+    def test_put_notification(self):
+        self.login('admin', 'admin123')
+        url = '/api/v1/notifications/?readID=4'
+        response = self.client.put(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue(Read.objects.get(pk=4).read)
+
+        response = self.client.put(url)
+        self.assertEqual(response.status_code, status.HTTP_304_NOT_MODIFIED)

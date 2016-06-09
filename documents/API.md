@@ -118,8 +118,23 @@ JSON format
   "description": "Test"
 }
 ```
+
 ---
 ## Question
+---
+#### *GET api/v1/questions/newest/?startID=1&count=2*
+Get 'count' newest questions from startID and their top voted answers
+
+JSON format
+```
+{
+  "id": 1,
+  "question": "Test",
+  "post": { },
+  "answer": { }
+}
+```
+
 ---
 #### *GET api/v1/questions/?keyword=test*
 Get 10 most related questions with the keyword provided
@@ -137,6 +152,7 @@ JSON format
   }
 }
 ```
+
 ---
 #### *GET api/v1/question/?questionID=1*
 Get the question with the id provided
@@ -148,6 +164,7 @@ JSON format
   "question": "Test"
 }
 ```
+
 ---
 #### *GET api/v1/question/topic/?questionID=1*
 Get all topics for the question with id specified
@@ -267,4 +284,14 @@ Get vote status of the requester on a post
 Do/undo upvote/downvote
 if data has score = 1 => do/undo upvote, else downvote
 if currently upvoted => undo upvote, similar to downvote
+
+---
+## Notifications
+---
+### *GET api/v1/notifications/?startID=1&count=5
+Get 'count' answers for a read record with id specified, from startID (sorted by -id). count default=5, startID default=9999
+
+---
+### *PUT api/v1/notifications/?readID=1
+Change read model with readID, field read from False to True
 
