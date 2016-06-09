@@ -36,6 +36,9 @@ class ReadView(views.APIView):
 
         readID = int(request.GET.get('readID'))
         read = Read.objects.get(pk=readID)
-        read.read = True
-        read.save()
-        return Response(status=status.HTTP_200_OK)
+        if not read.read:
+            read.read = True
+            read.save()
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_304_NOT_MODIFIED)

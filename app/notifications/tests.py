@@ -199,5 +199,7 @@ class NotificationApiTest(APITestCase):
         url = '/api/v1/notifications/?readID=4'
         response = self.client.put(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
         self.assertTrue(Read.objects.get(pk=4).read)
+
+        response = self.client.put(url)
+        self.assertEqual(response.status_code, status.HTTP_304_NOT_MODIFIED)
