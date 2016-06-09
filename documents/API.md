@@ -118,8 +118,23 @@ JSON format
   "description": "Test"
 }
 ```
+
 ---
 ## Question
+---
+#### *GET api/v1/questions/newest/?startID=1&count=2*
+Get 'count' newest questions from startID and their top voted answers
+
+JSON format
+```
+{
+  "id": 1,
+  "question": "Test",
+  "post": { },
+  "answer": { }
+}
+```
+
 ---
 #### *GET api/v1/questions/?keyword=test*
 Get 10 most related questions with the keyword provided
@@ -137,6 +152,7 @@ JSON format
   }
 }
 ```
+
 ---
 #### *GET api/v1/question/?questionID=1*
 Get the question with the id provided
@@ -148,6 +164,7 @@ JSON format
   "question": "Test"
 }
 ```
+
 ---
 #### *GET api/v1/question/topic/?questionID=1*
 Get all topics for the question with id specified
