@@ -24,4 +24,4 @@ class ReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Read
-        fields = ('notification', 'read')
+        fields = ('id', 'notification', 'read')

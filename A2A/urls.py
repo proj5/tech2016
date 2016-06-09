@@ -24,6 +24,7 @@ from a2ausers.views import UserListView, LoginView, LogoutView, UserDetailView
 from a2ausers.views import AvatarView
 from comments.views import CommentView, CommentsForPostView
 from posts.views import VoteView
+from notifications.views import ReadView
 
 urlpatterns = [
     # User views
@@ -52,5 +53,8 @@ urlpatterns = [
     url(r'^api/v1/questions/$', QuestionView.as_view()),
     url(r'^api/v1/question/$', QuestionDetailView.as_view()),
     url(r'^api/v1/answers/$', AnswerView.as_view()),
-    url(r'^api/v1/answer/$', AnswerDetailView.as_view())
+    url(r'^api/v1/answer/$', AnswerDetailView.as_view()),
+    
+    # Notification views
+    url(r'^api/v1/notifications/$', ReadView.as_view())
 ]
