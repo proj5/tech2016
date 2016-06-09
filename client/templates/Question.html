@@ -73,7 +73,7 @@
             </div>
             <div class = "row">
               <form>
-                Add comment: <input type="text" name="commentContent" ng-model="vm.commentContent">
+                Add comment: <input type="text" name="commentContent" ng-model="vm.commentContent[vm.question.post.id]">
                 <button type="submit" class="" ng-click = "vm.submitComment(vm.question.post.id)">Submit</button>
               </form>
             </div>
@@ -116,7 +116,7 @@
             </div>
             <div class = "row">
               <form>
-                Add comment: <input type="text" name="commentContent" ng-model="vm.commentContent">
+                Add comment: <input type="text" name="commentContent" ng-model="vm.commentContent[answer.id]">
                 <button type="submit" class="" ng-click = "vm.submitComment(answer.id)">Submit</button>
               </form>
             </div>

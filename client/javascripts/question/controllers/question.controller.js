@@ -38,7 +38,7 @@
       vm.submitComment = function(postID) {
         var postAnswerURL = "api/v1/comment/id=" + postID + '/';
         $http.post(postAnswerURL, {
-          "content": vm.commentContent
+          "content": vm.commentContent[postID]
         })
         .then(function successCallback(response) {
           $state.reload();
