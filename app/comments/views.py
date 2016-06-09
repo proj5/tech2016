@@ -3,7 +3,7 @@ from rest_framework.response import Response
 
 from comments.models import Comment
 from comments.permissions import IsCommentOwner
-from comments.serializers import CommentSerializer
+from comments.serializers import CommentSerializer, ExtraCommentSerializer
 
 from posts.models import Post
 
@@ -27,7 +27,7 @@ class CommentsForPostView(views.APIView):
                 {'No post with that id exists.'},
                 status=status.HTTP_404_NOT_FOUND)
         comments = post.comments.all()
-        serializer = CommentSerializer(comments, many=True)
+        serializer = ExtraCommentSerializer(comments, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
