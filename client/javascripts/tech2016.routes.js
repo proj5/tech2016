@@ -31,6 +31,13 @@
     .state('newsfeed', {
       url: '/newsfeed',
       templateUrl: 'client/templates/NewsFeed.html'
-    });
+    })
+    .state('question', {
+      url: '/question/:id',
+      templateUrl: 'client/templates/Question.html',
+      controller: 'QuestionController',
+      controllerAs: 'vm'
+    })
+    ;
   }
 })();
