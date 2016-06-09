@@ -6,7 +6,7 @@
     "name": "General",
     "description": "",
     "num_questions": 1,
-    "followed_by": null
+    "followed_by": []
   }
 },
 {
@@ -16,7 +16,7 @@
     "name": "Technology",
     "description": "",
     "num_questions": 1,
-    "followed_by": null
+    "followed_by": []
   }
 },
 {
@@ -26,7 +26,7 @@
     "name": "Machine Learning",
     "description": "",
     "num_questions": 0,
-    "followed_by": null
+    "followed_by": []
   }
 }
 ]
