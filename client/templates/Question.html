@@ -5,8 +5,8 @@
   <base href="/"/>
   <link rel="stylesheet" type="text/css" href="client/static/bower_components/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="client/static/css/NewsFeed.css">
-  <link rel="stylesheet" type="text/css" href="client/static/css/Question.css">
   <link rel="stylesheet" type="text/css" href="client/static/css/NavBar.css">
+  <link rel="stylesheet" type="text/css" href="client/static/css/Question.css">
   <script src="client/static/bower_components/jquery/jquery-2.2.4.min.js"></script>
   <script src="client/static/bower_components/bootstrap/js/bootstrap.js"></script>
 </head>
@@ -21,36 +21,37 @@
         <div class="row post-container">
           <div class="post-title">
             <div class="post-topics">
-              <ul class="nav nav-pills">
-                <li class="presentation"><a class="label label-default"href="">Quang</a></li>
-                <li class="presentation"><a class="label label-default"href="">Duc</a></li>
-                <li class="presentation"><a class="label label-default"href="">Nam</a></li>
-                <li class="presentation"><a class="label label-default"href="">Nhat</a></li>
-                <li class="presentation"><a class="label label-default"href="">+</a></li>
+              <ul class="nav nav-pills" ng-repeat = "topic in vm.topics">
+                <li class="presentation">
+                  <a class="label label-default" href="">
+                    {{topic.name}}
+                  </a>
+                </li>
               </ul>
             </div>
-            =<h3><b>{{vm.question.question}}</b></h3>
+            <h3><b>{{vm.question.question}}</b></h3>
           </div>
           <div class="post-author row">
             <div class="col-md-2 post-avatar">AVATAR HERE</div>
-            <div class="col-md-8">
-              <div class="row">Quang Le Hong</div>
-              <div class="row">Total upvote: xxx</div>
+            <div class="col-md-6">
+              <!-- Add link to user profile -->
+              <div class="row">{{vm.question.post.created_by.user.username}}</div>
+              <div class="row">{{vm.question.post.created_by.user.first_name}} {{vm.question.post.created_by.user.last_name}}</div>
+            </div>
+            <div class = "col-md-4 post-datetime">
+              {{vm.question.post.created_date | date:'medium'}}
             </div>
           </div>
           <div class="post-content">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quam fugiat cum iure delectus labore soluta sed repellat! Libero, sint eveniet quas earum consequuntur nulla tempore pariatur iste, veniam quis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente vitae perspiciatis quaerat dolor enim tempore inventore iusto fuga, temporibus ullam blanditiis amet repellat quia cupiditate quas magnam doloribus excepturi! Rerum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla unde deserunt labore obcaecati, porro, minus! Placeat quibusdam dignissimos voluptatum, ullam aperiam non eveniet neque, molestiae cum animi iste saepe corrupti. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae eveniet quos magnam earum maiores dolore nisi vero reprehenderit! Illo fuga enim deserunt, accusantium voluptates odit incidunt aliquam quasi dolores qui?
+            {{vm.question.post.content}}
           </div>
           <div class="post-footer row">
-            <div class="col-md-8 post-buttons-container">
+            <div class="col-md-12 post-buttons-container">
               <a href="#" class="btn btn-primary btn-info">Answer</a>
-              <a href="#" class="btn btn-primary btn-success">Upvote | <b>15</b></a> <!-- Number of upvote -->
+              <a href="#" class="btn btn-primary btn-success">Upvote | <b>{{vm.question.post.total_vote}}</b></a> <!-- Number of upvote -->
               <a href="#" class = "post-other-buttons">Downvote</a>
               <a href="#" class = "post-other-buttons">Follow</a>
               <a href="#" class = "post-other-buttons">Comments</a>
-            </div>
-            <div class="col-md-4 post-datetime">
-              Last Updated: 15/08/2015
             </div>
           </div>
           <hr>
@@ -58,57 +59,34 @@
 
         <div class="row answer-container">
           <div class="row">
-            <h4><b>2 Answers</b></h4>
+            <h4><b>{{vm.answers.length}} Answers</b></h4>
           </div>
-          <div class="row">
+          <div class="row" ng-repeat = "answer in vm.answers">
             <div class="post-author row">
               <div class="col-md-2 post-avatar">AVATAR HERE</div>
-              <div class="col-md-8">
-                <div class="row">Quang Le Hong</div>
-                <div class="row">Total upvote: xxx</div>
+              <div class="col-md-6">
+                <div class="row">{{answer.created_by.user.username}}</div>
+                <div class="row">{{answer.created_by.user.first_name}} {{answer.created_by.user.last_name}}</div>
               </div>
+              <div class = "col-md-4 post-datetime">
+              {{answer.created_date | date:'medium'}}
+            </div>
             </div>
             <div class="post-content">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio hic itaque ratione, repellat animi nulla fugiat nemo ad sapiente! Facilis alias rem dignissimos illum accusamus blanditiis iure omnis odit! Expedita?
+              {{answer.content}}
             </div>
             <div class="post-footer row">
-              <div class="col-md-8 post-buttons-container">
-                <a href="#" class="btn btn-primary btn-success">Upvote | <b>15</b></a> <!-- Number of upvote -->
+              <div class="col-md-12 post-buttons-container">
+                <a href="#" class="btn btn-primary btn-success">Upvote | <b>{{answer.total_vote}}</b></a> <!-- Number of upvote -->
                 <a href="#" class = "post-other-buttons">Downvote</a>
                 <a href="#" class = "post-other-buttons">Comments</a>
-              </div>
-              <div class="col-md-4 post-datetime">
-                Last Updated: 15/08/2015
-              </div>
-            </div>
-            <hr>
-          </div>
-
-          <div class="row">
-            <div class="post-author row">
-              <div class="col-md-2 post-avatar">AVATAR HERE</div>
-              <div class="col-md-8">
-                <div class="row">Quang Le Hong</div>
-                <div class="row">Total upvote: xxx</div>
-              </div>
-            </div>
-            <div class="post-content">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio hic itaque ratione, repellat animi nulla fugiat nemo ad sapiente! Facilis alias rem dignissimos illum accusamus blanditiis iure omnis odit! Expedita?
-            </div>
-            <div class="post-footer row">
-              <div class="col-md-8 post-buttons-container">
-                <a href="#" class="btn btn-primary btn-success">Upvote | <b>15</b></a> <!-- Number of upvote -->
-                <a href="#" class = "post-other-buttons">Downvote</a>
-                <a href="#" class = "post-other-buttons">Comments</a>
-              </div>
-              <div class="col-md-4 post-datetime">
-                Last Updated: 15/08/2015
               </div>
             </div>
             <hr>
           </div>
         </div>
       </div>
+
       <div class="col-md-4 question-right-menu">
         <div class="question-right-menu-content-container">
           <div class="row">

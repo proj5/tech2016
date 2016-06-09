@@ -19,3 +19,7 @@
 .question-stats {
     margin-top: 2em;
 }
+.question-topic {
+    height: 5em;
+    color: red;
+}
