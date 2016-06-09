@@ -35,6 +35,19 @@
         });
       }
 
+      vm.submitComment = function(postID) {
+        var postAnswerURL = "api/v1/comment/id=" + postID + '/';
+        $http.post(postAnswerURL, {
+          "content": vm.commentContent
+        })
+        .then(function successCallback(response) {
+          $state.reload();
+        },
+        function errorCallback(response) {
+          console.log("Error when submit comment");
+        });
+      }
+
       vm.upvotePost = function(postID) {
         var upvoteURL = "api/v1/vote/?postID=" + postID;
         $http.post(upvoteURL, {

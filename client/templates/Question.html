@@ -52,7 +52,7 @@
               <button class="btn btn-faded" ng-click="vm.upvotePost(vm.question.post.id)" ng-if="vm.question.myScore>0">Upvoted | <b>{{vm.question.post.total_vote}}</b></button>
               <!-- <a href="#" class = "post-other-buttons">Downvote</a> -->
               <a href="#" class = "post-other-buttons">Follow</a>
-              <a href="#" class = "post-other-buttons">Comments</a>
+              <!-- <a href="#" class = "post-other-buttons">Comments</a> -->
             </div>
           </div>
 
@@ -65,11 +65,17 @@
 
           </div>
 
-          <div class = "well post-comments-container" ng-if = "vm.question.comments.length > 0">
+          <div class = "well post-comments-container">
             <div ng-repeat = "comment in vm.question.comments">
               <div class = "row">
                 <b>{{comment.created_by.user.username}}</b> {{comment.content}} <i>{{comment.created_date | date:'short'}}</i>
               </div>
+            </div>
+            <div class = "row">
+              <form>
+                Add comment: <input type="text" name="commentContent" ng-model="vm.commentContent">
+                <button type="submit" class="" ng-click = "vm.submitComment(vm.question.post.id)">Submit</button>
+              </form>
             </div>
           </div>
           <hr>
@@ -98,15 +104,21 @@
                 <button class="btn btn-primary btn-success" ng-click="vm.upvotePost(answer.id)" ng-if="answer.myScore===0">Upvote | <b>{{answer.total_vote}}</b></button>
               <button class="btn btn-faded" ng-click="vm.upvotePost(answer.id)" ng-if="answer.myScore>0">Upvoted | <b>{{answer.total_vote}}</b></button>
                 <!-- <a href="#" class = "post-other-buttons">Downvote</a> -->
-                <a href="#" class = "post-other-buttons">Comments</a>
+                <!-- <a href="#" class = "post-other-buttons">Comments</a> -->
               </div>
             </div>
 
-            <div class = "well post-comments-container" ng-if = "answer.comments.length > 0">
+            <div class = "well post-comments-container">
             <div ng-repeat = "comment in answer.comments">
               <div class = "row">
                 <b>{{comment.created_by.user.username}}</b> {{comment.content}} <i>{{comment.created_date | date:'short'}}</i>
               </div>
+            </div>
+            <div class = "row">
+              <form>
+                Add comment: <input type="text" name="commentContent" ng-model="vm.commentContent">
+                <button type="submit" class="" ng-click = "vm.submitComment(answer.id)">Submit</button>
+              </form>
             </div>
           </div>
 
