@@ -13,9 +13,8 @@
     .state('home', {
       url: '/',
       templateUrl: '/templates/index.html',
-      controller: function($scope, $state) {
-        $state.go('home.login')
-      }
+      controller: 'MainController',
+      controllerAs: 'vm'
     })
     .state('home.login', {
       url: '',

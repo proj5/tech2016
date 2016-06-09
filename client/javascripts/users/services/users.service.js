@@ -103,7 +103,6 @@
      * @name logout
      * @desc Try to log the user out
      * @returns {Promise}
-     * @memberOf se2015.authentication.services.Authentication
      */
     function logout() {
       return $http.post('/api/v1/auth/logout/')
@@ -128,15 +127,15 @@
     }
 
     function getAuthenticatedAccount() {
-      if (!$cookies.authenticatedAccount) {
+      if (!$cookies.get('authenticatedAccount')) {
         return;
       }
 
-      return JSON.parse($cookies.authenticatedAccount);
+      return JSON.parse($cookies.get('authenticatedAccount'));
     }
 
     function isAuthenticated() {
-      return !!$cookies.authenticatedAccount;
+      return $cookies.get('authenticatedAccount');
     }
 
     /**
@@ -144,20 +143,18 @@
      * @desc Stringify the account object and store it in a cookie
      * @param {Object} user The account object to be stored
      * @returns {undefined}
-     * @memberOf se2015.authentication.services.Authentication
      */
     function setAuthenticatedAccount(account) {
-      $cookies.authenticatedAccount = JSON.stringify(account);
+      $cookies.put('authenticatedAccount', JSON.stringify(account));
     }
 
     /**
      * @name unauthenticate
      * @desc Delete the cookie where the user object is stored
      * @returns {undefined}
-     * @memberOf se2015.authentication.services.Authentication
      */
     function unauthenticate() {
-      delete $cookies.authenticatedAccount;
+      $cookies.remove('authenticatedAccount');
     }
 
   }

@@ -5,7 +5,8 @@
     .module('tech2016', [
       'tech2016.config',
       'tech2016.routes',
-      'tech2016.users'
+      'tech2016.users',
+      'tech2016.main'
   ]);
 
   angular

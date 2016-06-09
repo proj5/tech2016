@@ -25,7 +25,7 @@
     function activate() {
       // If the user is authenticated, they should not be here.
       if (Authentication.isAuthenticated()) {
-        $location.url('/newsfeed');
+        $state.go('newsfeed');
       }
     }
 
@@ -34,7 +34,6 @@
     * @desc Log the user in
     */
     function login() {
-      console.log("In login");
       Authentication.login(vm.username, vm.password);
     }
 
