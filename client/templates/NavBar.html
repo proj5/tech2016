@@ -8,21 +8,24 @@
         </div>
         <div class="collapse navbar-collapse navbar-menubuilder">
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Ask a Question</a>
+              <li>
+                <input type="text" class="navbar-search-bar" ng-model="vm.search_bar">
               </li>
-              <li class="active"><a href="#">Homepage</a>
+              <li id="navbar-ask-question"><a href="#">Ask a Question</a>
               </li>
-              <li><a href="#">Notification <span class="badge">3</span></a> <!-- Current remain notifications -->
+              <li id="navbar-homepage"><a href="#">Homepage</a>
+              </li>
+              <li><a href="#">Notification <span class="badge">3</span></a>
               </li>
               <li>
                 <a href="#" class="dropdown-toggle"  id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  Admin
+                  {{vm.username}}
                   <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                   <li><a href="#">Profile</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="#">Log out</a></li>
+                  <li><a href="/home.login">Log out</a></li>
                 </ul>
               </li>
           </ul>

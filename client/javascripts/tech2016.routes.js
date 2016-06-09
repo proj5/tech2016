@@ -30,14 +30,34 @@
     })
     .state('newsfeed', {
       url: '/newsfeed',
-      templateUrl: 'client/templates/NewsFeed.html'
+      views: {
+        '': {
+          templateUrl: 'client/templates/NewsFeed.html',
+          controller: 'NewsFeedController',
+          controllerAs: 'vm'
+        },
+        'nav-bar@newsfeed': {
+          templateUrl: 'client/templates/NavBar.html',
+          controller: 'NavBarController',
+          controllerAs: 'vm'
+        }
+      }
     })
     .state('question', {
       url: '/question/:questionID',
-      templateUrl: 'client/templates/Question.html',
-      controller: 'QuestionController',
-      controllerAs: 'vm'
-    })
-    ;
+      views: {
+        '': {
+          templateUrl: 'client/templates/Question.html',
+          controller: 'QuestionController',
+          controllerAs: 'vm'
+        },
+        'nav-bar@question': {
+          templateUrl: 'client/templates/NavBar.html',
+          controller: 'NavBarController',
+          controllerAs: 'vm'
+        }
+      }
+
+    });
   }
 })();

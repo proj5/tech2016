@@ -7,8 +7,9 @@
       'tech2016.routes',
       'tech2016.users',
       'tech2016.main',
-      'tech2016.question'
-  ]);
+      'tech2016.question',
+      'tech2016.controllers'
+    ]);
 
   angular
     .module('tech2016')
@@ -32,4 +33,7 @@
 
   angular
     .module('tech2016.config', []);
+
+  angular
+    .module('tech2016.controllers', []);
 })();
