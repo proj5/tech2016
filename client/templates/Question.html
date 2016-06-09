@@ -54,6 +54,13 @@
               <a href="#" class = "post-other-buttons">Comments</a>
             </div>
           </div>
+          <div class = "well post-comments-container" ng-if = "vm.question.comments.length > 0">
+            <div ng-repeat = "comment in vm.question.comments">
+              <div class = "row">
+                <b>{{comment.created_by.user.username}}</b> {{comment.content}} <i>{{comment.created_date | date:'short'}}</i>
+              </div>
+            </div>
+          </div>
           <hr>
         </div>
 
@@ -82,6 +89,15 @@
                 <a href="#" class = "post-other-buttons">Comments</a>
               </div>
             </div>
+
+            <div class = "well post-comments-container" ng-if = "answer.comments.length > 0">
+            <div ng-repeat = "comment in answer.comments">
+              <div class = "row">
+                <b>{{comment.created_by.user.username}}</b> {{comment.content}} <i>{{comment.created_date | date:'short'}}</i>
+              </div>
+            </div>
+          </div>
+
             <hr>
           </div>
         </div>
@@ -93,28 +109,18 @@
             <h4>Related questions:</h4>
             <hr>
           </div>
-          <div class="row question-related-question">
-            <a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit?</a>
-          </div>
-          <div class="row question-related-question">
-            <a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit?</a>
-          </div>
-          <div class="row question-related-question">
-            <a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit?</a>
-          </div>
-          <div class="row question-related-question">
-            <a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit?</a>
-          </div>
-          <div class="row question-related-question">
-            <a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit?</a>
+          <div ng-repeat = "realtedQuestion in vm.relatedQuestions">
+            <div class="row question-related-question">
+              <a href="#">{{realtedQuestion.question}}</a>
+            </div>
           </div>
 
           <div class="row question-stats">
             <h4>Question stats:</h4>
             <hr>
-            <p>Answers: 2</p>
-            <p>Total upvotes: 45</p>
-            <p>Total Comments: 0</p>
+            <p>Answers: {{vm.answers.length}}</p>
+            <p>Total upvotes: {{vm.totalUpvote}}</p>
+            <p>Total Comments: {{vm.totalComment}}</p>
           </div>
         </div>
       </div>
