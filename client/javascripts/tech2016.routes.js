@@ -34,7 +34,9 @@
     })
     .state('question', {
       url: '/question/:id',
-      templateUrl: 'client/templates/Question.html'
+      templateUrl: 'client/templates/Question.html',
+      controller: 'QuestionController',
+      controllerAs: 'vm'
     })
     ;
   }
