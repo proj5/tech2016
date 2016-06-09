@@ -23,7 +23,7 @@ class QuestionView(views.APIView):
                 request.GET.get('keyword'),
                 questions,
                 10,
-                0.2
+                0.1
             )
             result = Question.objects.all().filter(question__in=question_list)
             serializer = SimpleQuestionSerializer(result, many=True)
