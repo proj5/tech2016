@@ -190,10 +190,11 @@ class AvatarView(views.APIView):
 
     def post(self, request, username):
         # Upload new avatar
-        user = request.user.a2ausers
+        user = A2AUser.objects.get(user__username=username)
         serializer = AvatarSerializer(user, data=request.data)
         if serializer.is_valid():
-            user.avatar = serializer.validated_data['avatar']
+            avatar = serializer.validated_data['avatar']
+            user.avatar = avatar
             user.save()
             return Response(True)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

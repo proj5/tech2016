@@ -3,24 +3,41 @@
 <head>
   <title></title>
   <base href="/"/>
-  <link rel="stylesheet" type="text/css" href="client/static/bower_components/bootstrap/css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="client/static/css/Profile.css">
-  <link rel="stylesheet" type="text/css" href="client/static/css/NavBar.css">
 </head>
 <body>
   <div ui-view='nav-bar'></div>
   <div class="col-md-2"></div>
   <div class="col-md-8 profile-main">
     <div class="col-md-8">
-      <div class="col-md-3 " >
-        <img class = "profile-avatar" src="{{vm.avatar.avatar}}"/>
+      <div class="container">
+        <div class="col-md-3 profile-avatar-area">
+          <img class="profile-avatar" src="{{vm.avatar.avatar}}"/>
+          <button class="btn btn-primary" id="profile-change-button" ng-click="vm.changeAvatar = !vm.changeAvatar">Change avatar</button>
+          <div ng-if="vm.changeAvatar">
+            <input type="file" file-model="vm.newAvatar" id="profile-choose-file"/>
+            <button class="btn btn-default" id="profile-upload-button" ng-click="vm.changeAvatar = !vm.changeAvatar; vm.uploadAvatar()">Upload</button>
+          </div>
+        </div>
+        <div class="col-md-9 profile-name">
+          {{vm.user.user.first_name + " " + vm.user.user.last_name}}
+        </div>
       </div>
-      <div class="col-md-5">
-        {{vm.user.first_name + " " + vm.user.last_name}}
+      <br>
+      <div class="container">
+        <div class="list-group col-md-4">
+          <a href="#" class="profile-item list-group-item disabled">Feeds</a>
+          <a href='#' class="profile-item list-group-item">Questions: {{vm.user.num_questions}}</a>
+          <a href="#" class="profile-item list-group-item">Answers: {{vm.user.num_answers}}</a>
+          <a href="#" class="profile-item list-group-item">Comments: {{vm.user.num_comments}}</a>
+        </div>
+        <div class="col-md-8">
+          <br>
+        </div>
       </div>
     </div>
+
     <div class="col-md-4">
-      <h>About {{vm.user.last_name}}</h>
+      <h>About {{vm.user.user.last_name}}</h>
     </div>
   </div>
   <div class="col-md-2"></div>
