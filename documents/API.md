@@ -281,11 +281,30 @@ Get vote status of the requester on a post
 
 ---
 ### *POST api/v1/vote/?postID=1*
+
+data format
+{
+  "score": 1 or -1
+}
+
 Do/undo upvote/downvote
 if data has score = 1 => do/undo upvote, else downvote
 if currently upvoted => undo upvote, similar to downvote
 
 ---
+### *POST api/v1/follow/?postID=1*
+
+No data needed
+
+Follow/unfollow a post 
+if the requester didn't follow the post => follow it
+if the requester followed the post => unfollow it
+
+---
+### *GET api/v1/follow/?postID=1*
+Get follow status of the requester on a post
+Return 1 if followed, 0 otherwise
+
 ## Notifications
 ---
 ### *GET api/v1/notifications/?startID=1&count=5

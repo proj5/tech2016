@@ -248,3 +248,80 @@ class VoteApiTest(APITestCase):
         self.login('user', 'user1234')
         status = self.get_vote_status(3)
         self.assertEqual(status, 0)
+
+
+class FollowPostApiTest(APITestCase):
+    fixtures = ['auth', 'users', 'posts']
+
+    def login(self, username, password):
+        url = '/api/v1/auth/login/'
+        data = {'username': username, 'password': password}
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        return response
+
+    def follow(self, post_id, sucessful):
+        url = '/api/v1/follow/?postID=' + str(post_id)
+
+        pre_followed_num = Post.objects.get(id=post_id).followed_by.count()
+        response = self.client.post(url)
+
+        if sucessful:
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            self.assertEqual(pre_followed_num + 1,
+                             Post.objects.get(id=post_id).followed_by.count())
+        else:
+            self.assertNotEqual(response.status_code, status.HTTP_200_OK)
+            self.assertEqual(pre_followed_num,
+                             Post.objects.get(id=post_id).followed_by.count())
+
+    def unfollow(self, post_id, sucessful):
+        url = '/api/v1/follow/?postID=' + str(post_id)
+
+        pre_followed_num = Post.objects.get(id=post_id).followed_by.count()
+        response = self.client.post(url)
+
+        if sucessful:
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            self.assertEqual(pre_followed_num - 1,
+                             Post.objects.get(id=post_id).followed_by.count())
+        else:
+            self.assertNotEqual(response.status_code, status.HTTP_200_OK)
+            self.assertEqual(pre_followed_num,
+                             Post.objects.get(id=post_id).followed_by.count())
+
+    def get_follow_status(self, post_id):
+        url = '/api/v1/follow/?postID=' + str(post_id)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        return response.data
+
+    def test_follow_success(self):
+        self.login('admin', 'admin123')
+
+        self.follow(1, True)
+
+    def test_unfollow_success(self):
+        response = self.login('user', 'user1234')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.unfollow(4, True)
+
+    def test_unfollow_then_unfollow_sucess(self):
+        self.login('admin', 'admin123')
+
+        self.follow(1, True)
+        self.unfollow(1, True)
+
+    def test_get_followed_status(self):
+        self.login('admin', 'admin123')
+
+        status = self.get_follow_status(4)
+        self.assertEqual(status, 1)
+
+        status = self.get_follow_status(1)
+        self.assertEqual(status, 0)
+
+        self.follow(1, True)
+        status = self.get_follow_status(1)
+        self.assertEqual(status, 1)
