@@ -16,9 +16,6 @@ class NotificationTest(TestCase):
         'questions', 'comments', 'notifications'
     ]
 
-    admin = A2AUser.objects.get(pk=1)
-    user = A2AUser.objects.get(pk=2)
-
     def get_notifications_per_user(self):
         result = {}
         for user in A2AUser.objects.all():
@@ -34,6 +31,9 @@ class NotificationTest(TestCase):
     def setUp(self):
         self.notifications_per_user = self.get_notifications_per_user()
         self.users_per_notification = self.get_users_per_notification()
+
+        self.admin = A2AUser.objects.get(pk=1)
+        self.user = A2AUser.objects.get(pk=2)
 
     def check_unread_notifications(self):
         for user in A2AUser.objects.all():
