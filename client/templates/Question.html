@@ -4,6 +4,7 @@
   <title>Question</title>
   <base href="/"/>
   <link rel="stylesheet" type="text/css" href="client/static/bower_components/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="client/static/bower_components/font-awesome/css/font-awesome.css">
   <link rel="stylesheet" type="text/css" href="client/static/css/NewsFeed.css">
   <link rel="stylesheet" type="text/css" href="client/static/css/NavBar.css">
   <link rel="stylesheet" type="text/css" href="client/static/css/Question.css">
@@ -21,8 +22,8 @@
         <div class="row post-container">
           <div class="post-title">
             <div class="post-topics">
-              <ul class="nav nav-pills" ng-repeat = "topic in vm.topics">
-                <li class="presentation">
+              <ul class="nav nav-pills">
+                <li class="presentation" ng-repeat = "topic in vm.topics">
                   <a class="label label-default" href="">
                     {{topic.name}}
                   </a>
@@ -32,7 +33,7 @@
             <h3><b>{{vm.question.question}}</b></h3>
           </div>
           <div class="post-author row">
-            <div class="col-md-2 post-avatar">
+            <div class="col-md-2">
               <img class = "post-avatar" height = "42" width = "42" margin = "center" src="{{vm.question.post.created_by.avatar}}">
             </div>
             <div class="col-md-6">
@@ -70,7 +71,8 @@
           <div class = "well post-comments-container">
             <div ng-repeat = "comment in vm.question.comments">
               <div class = "row">
-                <b>{{comment.created_by.user.username}}</b> {{comment.content}} <i>{{comment.created_date | date:'short'}}</i>
+                <i class="fa fa-circle icon-resize-small" aria-hidden="true"></i>
+                <b>{{comment.created_by.user.username}}</b> {{comment.content}} <br> <i>{{comment.created_date | date:'short'}}</i>
               </div>
             </div>
             <div class = "row">
@@ -89,7 +91,7 @@
           </div>
           <div class="row" ng-repeat = "answer in vm.answers">
             <div class="post-author row">
-              <div class="col-md-2 post-avatar">
+              <div class="col-md-2">
                 <img class = "post-avatar" height = "42" width = "42" margin = "center" src="{{answer.created_by.avatar}}">
               </div>
 
@@ -116,7 +118,8 @@
             <div class = "well post-comments-container">
             <div ng-repeat = "comment in answer.comments">
               <div class = "row">
-                <b>{{comment.created_by.user.username}}</b> {{comment.content}} <i>{{comment.created_date | date:'short'}}</i>
+                <i class="fa fa-circle icon-resize-small" aria-hidden="true"></i>
+                <b>{{comment.created_by.user.username}}</b> {{comment.content}} <br> <i>{{comment.created_date | date:'short'}}</i>
               </div>
             </div>
             <div class = "row">
