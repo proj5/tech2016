@@ -183,12 +183,14 @@ class AvatarView(views.APIView):
         return (permissions.IsAuthenticated(),)
 
     def get(self, request, username, format=None):
+        # Get user's avatar
         user = A2AUser.objects.get(user__username=username)
         serializer = AvatarSerializer(user)
         return Response(serializer.data)
 
     def post(self, request, username):
-        user = A2AUser.objects.get(user__username=username)
+        # Upload new avatar
+        user = request.user.a2ausers
         serializer = AvatarSerializer(user, data=request.data)
         if serializer.is_valid():
             user.avatar = serializer.validated_data['avatar']

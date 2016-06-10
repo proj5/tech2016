@@ -2,27 +2,27 @@
   <div id="nav-bar" class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
       <div class="nb-content-container">
-        <div class="navbar-header"><a class="navbar-brand" href="#">A2A</a>
+        <div class="navbar-header"><a class="navbar-brand" ui-sref="newsfeed">A2A</a>
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
           </button>
         </div>
         <div class="collapse navbar-collapse navbar-menubuilder">
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Ask a Question</a>
+              <li id="navbar-ask-question"><a href="#">Ask a Question</a>
               </li>
-              <li class="active"><a href="#">Homepage</a>
+              <li id="navbar-homepage"><a ui-sref="newsfeed">Homepage</a>
               </li>
-              <li><a href="#">Notification <span class="badge">3</span></a> <!-- Current remain notifications -->
+              <li><a href="#">Notification <span class="badge">3</span></a>
               </li>
               <li>
                 <a href="#" class="dropdown-toggle"  id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  Admin
+                  {{vm.username}}
                   <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li><a href="#">Profile</a></li>
+                  <li><a ui-sref="profile">Profile</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="#">Log out</a></li>
+                  <li><a ng-click="vm.logout()">Log out</a></li>
                 </ul>
               </li>
           </ul>

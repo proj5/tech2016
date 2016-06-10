@@ -8,7 +8,9 @@
       'tech2016.users',
       'tech2016.main',
       'tech2016.question',
-      'tech2016.notification'
+      'tech2016.controllers',
+      'tech2016.notification',
+      'tech2016.profile'
   ]);
 
   angular
@@ -33,4 +35,7 @@
 
   angular
     .module('tech2016.config', []);
+
+  angular
+    .module('tech2016.controllers', []);
 })();

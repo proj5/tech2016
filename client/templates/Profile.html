@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <base href="/"/>
+  <link rel="stylesheet" type="text/css" href="client/static/bower_components/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="client/static/css/Profile.css">
+  <link rel="stylesheet" type="text/css" href="client/static/css/NavBar.css">
+</head>
+<body>
+  <div ui-view='nav-bar'></div>
+  <div class="col-md-2"></div>
+  <div class="col-md-8 profile-main">
+    <div class="col-md-8">
+      <div class="col-md-3 profile-avtar" >
+        <img src="{{vm.avatar.avatar}}"/>
+      </div>
+      <div class="col-md-5">
+        {{vm.user.first_name + vm.user.last_name}}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h>About {{vm.user.last_name}}</h>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</body>
+</html>

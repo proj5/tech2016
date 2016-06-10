@@ -1,6 +1,7 @@
 from questions.models import Question
 from rest_framework import serializers
 from posts.serializers import PostSerializer
+from topics.serializers import TopicSerializer
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -16,11 +17,12 @@ class QuestionSerializer(serializers.ModelSerializer):
 class QuestionWithTopAnswerSerializer(serializers.ModelSerializer):
 
     post = PostSerializer()
+    topics = TopicSerializer(many=True)
     answer = serializers.SerializerMethodField('get_top_answer')
 
     class Meta:
         model = Question
-        fields = ('id', 'question', 'post', 'answer')
+        fields = ('id', 'question', 'topics', 'post', 'answer')
 
     def get_top_answer(self, obj):
         post = obj.post
