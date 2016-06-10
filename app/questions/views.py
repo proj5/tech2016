@@ -77,6 +77,10 @@ class QuestionDetailView(views.APIView):
             question=request.data.get('question'),
             post=post
         )
+        if request.data.get("topics") == "":
+            question.save()
+            return Response(question.id, status=status.HTTP_200_OK)
+
         send_topics = [int(elem)
                        for elem in str(request.data.get('topics')).split('|')]
         topics = Topic.objects.all().filter(pk__in=send_topics)

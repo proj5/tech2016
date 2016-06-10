@@ -24,7 +24,6 @@
     }
 
     function openQuestionForm() {
-      console.log("Open dialog");
       ngDialog.open({
         template: 'client/templates/AddQuestion.html',
         className: 'ngdialog-theme-default',
@@ -34,22 +33,17 @@
     }
 
     function submitQuestion() {
-      console.log('Title:', vm.questionTitle);
-      console.log('Content', vm.questionContent);
       var postQuestionURL = "api/v1/question/";
       $http.post(postQuestionURL, {
         "question": vm.questionTitle,
         "content": vm.questionContent,
-        "topics": "1|2"
+        "topics": ""
       })
       .then(function createQuestionSuccessFn(data, status, headers, config) {
-        console.log("Question submitted successfully.");
         var url = '/question/' + parseInt(data.data);
-        console.log(url);
         $window.location.href = url;
       }, 
       function createQuestionErrorFn(response) {
-        console.log("Error when submit question.");
       });
     }
   }
