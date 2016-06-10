@@ -8,7 +8,7 @@
       'tech2016.users',
       'tech2016.main',
       'tech2016.question',
-      'tech2016.controllers'
+      'tech2016.controllers',
       'tech2016.notification'
   ]);
 
