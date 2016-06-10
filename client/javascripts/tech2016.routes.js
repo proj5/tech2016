@@ -60,9 +60,18 @@
     })
     .state('notification', {
       url: '/notification',
-      templateUrl: 'client/templates/Notifications.html',
-      controller: 'NotificationController',
-      controllerAs: 'vm'
+      views: {
+        '': {
+          templateUrl: 'client/templates/Notifications.html',
+          controller: 'NotificationController',
+          controllerAs: 'vm'
+        },
+        'nav-bar@notification': {
+          templateUrl: 'client/templates/NavBar.html',
+          controller: 'NavBarController',
+          controllerAs: 'vm'
+        }
+      }
     })
     .state('profile', {
       url: '/profile',

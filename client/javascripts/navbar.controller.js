@@ -8,6 +8,7 @@
   NavBarController.$inject = ['$scope', 'Authentication', '$window', '$http', 'ngDialog'];
 
   function NavBarController($scope, Authentication, $window, $http, ngDialog) {
+
     var vm = this;
 
     vm.openQuestionForm = openQuestionForm;
@@ -17,6 +18,15 @@
 
     function init() {
       vm.username = Authentication.getAuthenticatedAccount().username;
+      // http://localhost:8000/api/v1/accounts/admin/
+      var userURL = "api/v1/accounts/" + vm.username + "/";
+      $http.get(userURL)
+      .then(function successCallback(response) {
+          vm.user = response.data;
+        },
+        function errorCallback(response) {
+          console.log("Error when get User")
+        });
     }
 
     vm.logout = function() {
