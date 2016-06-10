@@ -29,27 +29,20 @@
       ajax.push($http.get(url)
         .then(function successCallback(response) {
           vm.questions = response.data;
-          length = vm.questions.length;
-          for (var i = 0; i < length; i++) {
+          vm.questions.forEach(function(question) {
             promises.push(
-              $http.get("api/v1/vote/?postID=" + vm.questions[i].answer.id)
+              $http.get("api/v1/vote/?postID=" + question.answer.id)
                 .then(function successCallback(response) {
-                  votes.push(response.data);
+                  question.answer.my_vote = response.data;
                 }, function errorCallback(response) {
+                  question.answer.my_vote = 0;
                 })
             )
-          }
+          })
         }, function errorCallback(response) {
           console.error("Failed to get questions");
         })
       );
-      $q.all(ajax).then(function() {
-        $q.all(promises).then(function() {
-          for (var i = 0; i < vm.questions.length; i++) {
-            vm.questions[i].answer.my_vote = votes[i];
-          }
-        })
-      });
     }
 
     vm.upvote = function(answer) {
