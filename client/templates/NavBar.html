@@ -8,11 +8,24 @@
         </div>
         <div class="collapse navbar-collapse navbar-menubuilder">
           <ul class="nav navbar-nav navbar-right">
-              <li id="navbar-ask-question"><a href="#">Ask a Question</a>
+              <li id="navbar-ask-question">
+                <a href="#">
+                  <i class="fa fa-question" aria-hidden="true"></i>
+                  Ask a Question
+                </a>
               </li>
-              <li id="navbar-homepage"><a ui-sref="newsfeed">Homepage</a>
+              <li id="navbar-homepage">
+                <a ui-sref="newsfeed">
+                  <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                  Homepage
+                </a>
               </li>
-              <li><a href="#" ui-sref="notification">Notification <span class="badge">3</span></a>
+              <li>
+                <a href="#" ui-sref="notification">
+                  <i class="fa fa-bell-o" aria-hidden="true"></i>
+                  Notification
+                  <span class="badge">{{vm.user.num_unread_notis}}</span>
+                </a>
               </li>
               <li>
                 <a href="#" class="dropdown-toggle"  id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
