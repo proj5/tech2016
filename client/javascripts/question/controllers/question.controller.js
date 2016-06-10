@@ -5,14 +5,15 @@
     .module('tech2016.question.controllers')
     .controller('QuestionController', QuestionController);
 
-    QuestionController.$inject = ['$scope', '$state', '$http', '$stateParams'];
+    QuestionController.$inject = ['$scope', '$state', '$http', '$stateParams', 'ngDialog'];
 
-    function QuestionController($scope, $state, $http, $stateParams) {
+    function QuestionController($scope, $state, $http, $stateParams, ngDialog) {
       var vm = this;
       vm.questionID = $stateParams.questionID;
       vm.totalUpvote = 0;
       vm.totalComment = 0;
       vm.isDisplayAnswerBox = false;
+      vm.showEditBox = false;
       getQuestion();
       getTopics();
       getAnswers();
@@ -58,6 +59,57 @@
         },
         function errorCallback(response) {
           console.log("Error when upvote a post");
+        });
+      }
+	  
+      vm.toggleEditBox = function() {
+        vm.showEditBox = !vm.showEditBox;
+      }
+      
+      vm.getRelatedTopic = function(){
+        var url = "api/v1/topics/?keyword=" + vm.topicName;
+        $http.get(url).
+          then(
+            function successCallback(response){
+              vm.relatedTopics = response.data;
+            }, 
+            function errorCallback(response) {
+              console.log(response.data)
+            }
+          );
+      }
+      
+      vm.submitTopic = function(){
+        var url = "api/v1/question/topic/?questionID=" + vm.questionID;
+        var createUrl = "api/v1/topic/"
+        $http.post(url,  vm.topicName
+        )
+        .then(function addTopicSuccessFn(data, status, headers, config) {
+          vm.topics.push(vm.topicName);
+          vm.toggleEditBox();
+        }, 
+        function createQuestionErrorFn(response) {
+          if (response.data.detail){
+            console.log("abc");
+            var obj = {
+              "name": vm.topicName,
+              "description": ""
+            }
+            $http.post(createUrl, obj).then(
+              function addTopicSuccess(data, status, headers, config){
+                obj.id = data.data.id;
+                $http.post(url,  obj).then(function succ(response){
+                  vm.topics.push(obj);
+                  vm.toggleEditBox();
+                }, function fail(response) {
+                  
+                });
+              },
+              function addTopicError(response) {
+                
+              }
+            );
+          }
         });
       }
 

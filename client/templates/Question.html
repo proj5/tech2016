@@ -21,7 +21,18 @@
                     {{topic.name}}
                   </a>
                 </li>
+                <li class="presentation">
+                  <a class="label label-default" ng-click="vm.toggleEditBox()">+</a>
+                </li>
               </ul>
+              <div class = "well post-answer-box" ng-if="vm.showEditBox">
+                <form>
+                  Add topic:<br>
+                  <input type="text" ng-model="vm.topicName" uib-typeahead="topic as topic.name for topic in vm.relatedTopics" class="form-control" typeahead-show-hint="true" typeahead-min-length="0" ng-keyup="vm.getRelatedTopic()">
+                  <!-- <input type="text" name="topicName" ng-model="vm.topicName" ng-keyup="vm.getRelatedTopic()"> -->
+                  <button type="submit" class="btn btn-primary" ng-click = "vm.submitTopic()">Submit</button>
+                </form>
+              </div>
             </div>
             <h3><b>{{vm.question.question}}</b></h3>
           </div>
