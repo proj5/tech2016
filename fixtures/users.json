@@ -10,7 +10,7 @@
     "num_comments": 1,
     "num_upvotes": 0,
     "num_unread_notis": 2,
-    "avatar": "static/img/default.jpg",
+    "avatar": "client/static/img/default.jpg",
     "followed_users": []
   }
 },
@@ -25,7 +25,7 @@
     "num_comments": 2,
     "num_upvotes": 0,
     "num_unread_notis": 3,
-    "avatar": "static/img/default.jpg",
+    "avatar": "client/static/img/default.jpg",
     "followed_users": []
   }
 },
@@ -40,7 +40,7 @@
     "num_comments": 0,
     "num_upvotes": 0,
     "num_unread_notis": 1,
-    "avatar": "static/img/default.jpg",
+    "avatar": "client/static/img/default.jpg",
     "followed_users": []
   }
 }
