@@ -13,6 +13,10 @@
       vm.numofNoti = 20;
       getNotifications();
 
+      vm.redirectToQuestion = function(questionID) {
+        $state.go('question', {'questionID': questionID});
+      }
+
       function getNotifications() {
         // http://localhost:8000/api/v1/notifications/?count=2
         var url = "api/v1/notifications/?count=" + vm.numofNoti;
@@ -21,7 +25,6 @@
           vm.notis = response.data;
           vm.notis.forEach(function(noti) {
             noti.content = getContent(noti.notification);
-            console.log(noti);
           });
         },
         function errorCallback(response) {

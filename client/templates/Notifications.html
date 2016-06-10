@@ -43,7 +43,9 @@
                 <div class="notification-content">
                   <a class = "notification-user" href="#LinkToUserProfile"><b>{{noti.notification.created_by.user.username}}</b></a>
                   {{noti.content}}
-                  <a class = "notification-question" href="#LinkToQuesion"><b>{{noti.notification.question.question}}</b></a>
+                  <a class = "notification-question" ng-click = "vm.redirectToQuestion(noti.notification.question.id)">
+                    <b>{{noti.notification.question.question}}</b>
+                  </a>
                   <!-- <div class="notification-date">25/5</div> -->
                 </div>
               </div>
