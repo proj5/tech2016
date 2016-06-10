@@ -41,7 +41,9 @@
               <a ui-sref="question({questionID: {{question.id}} })"><h3><b>{{question.question}}</b></h3></a>
             </div>
             <div class="post-author row">
-              <div class="col-md-2 post-avatar">AVATAR HERE</div>
+              <div class="col-md-2 post-avatar">
+              <img class = "post-avatar" height = "42" width = "42" margin = "center" src="{{question.answer.created_by.avatar}}">
+              </div>
               <div class="col-md-8">
                 <div class="row">{{question.answer.created_by.user.first_name + " " + question.answer.created_by.user.last_name}} </div>
               </div>
