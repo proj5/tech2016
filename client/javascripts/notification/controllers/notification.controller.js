@@ -13,7 +13,13 @@
       vm.numofNoti = 20;
       getNotifications();
 
-      vm.redirectToQuestion = function(questionID) {
+      vm.redirectToQuestion = function(questionID, readID) {
+        // Seen notification
+        // api/v1/notifications/?readID=1
+        var seenNotiUrl = "api/v1/notifications/?readID=" + readID;
+        $http.put(seenNotiUrl)
+        .then(function successCallback(response) {},
+        function errorCallback(response) {});
         $state.go('question', {'questionID': questionID});
       }
 
