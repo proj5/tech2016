@@ -4,6 +4,7 @@
   <title>Notification</title>
   <base href="/"/>
   <link rel="stylesheet" type="text/css" href="client/static/bower_components/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="client/static/bower_components/font-awesome/css/font-awesome.css">
   <link rel="stylesheet" type="text/css" href="client/static/css/NewsFeed.css">
   <link rel="stylesheet" type="text/css" href="client/static/css/NavBar.css">
   <link rel="stylesheet" type="text/css" href="client/static/css/Question.css">
@@ -36,14 +37,21 @@
 
           <div ng-repeat = "noti in vm.notis">
             <div  class="row notification-container">
+              <div class = "col-md-1">
+                <div ng-if = "noti.read === false">
+                  <i class="fa fa-circle" aria-hidden="true" style="color:#2b6dad"></i>
+                </div>
+              </div>
               <div class="col-md-2">
                 AVATAR HERE
               </div>
-              <div class="col-md-10">
+              <div class="col-md-9">
                 <div class="notification-content">
                   <a class = "notification-user" href="#LinkToUserProfile"><b>{{noti.notification.created_by.user.username}}</b></a>
                   {{noti.content}}
-                  <a class = "notification-question" href="#LinkToQuesion"><b>{{noti.notification.question.question}}</b></a>
+                  <a class = "notification-question" ng-click = "vm.redirectToQuestion(noti.notification.question.id, noti.id)">
+                    <b>{{noti.notification.question.question}}</b>
+                  </a>
                   <!-- <div class="notification-date">25/5</div> -->
                 </div>
               </div>
