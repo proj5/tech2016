@@ -182,9 +182,9 @@ class AvatarView(views.APIView):
 
         return (permissions.IsAuthenticated(),)
 
-    def get(self, request, format=None):
+    def get(self, request, username, format=None):
         # Get user's avatar
-        user = request.user.a2ausers
+        user = A2AUser.objects.get(user__username=username)
         serializer = AvatarSerializer(user)
         return Response(serializer.data)
 

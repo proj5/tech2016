@@ -17,10 +17,9 @@
     }
 
     function getAvatar() {
-      var url = "api/v1/account/avatar/";
+      var url = "api/v1/account/avatar/" + vm.user.username + "/";
       $http.get(url)
         .then(function successCallback(response) {
-          console.log(response.data);
           vm.avatar = response.data;
         }, function errorCallback(response) {
           console.error("Failed to get avatar");
