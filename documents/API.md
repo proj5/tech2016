@@ -292,7 +292,6 @@ if data has score = 1 => do/undo upvote, else downvote
 if currently upvoted => undo upvote, similar to downvote
 
 ---
-<<<<<<< HEAD
 ### *POST api/v1/follow/?postID=1*
 
 No data needed
@@ -306,7 +305,6 @@ if the requester followed the post => unfollow it
 Get follow status of the requester on a post
 Return 1 if followed, 0 otherwise
 
-=======
 ## Notifications
 ---
 ### *GET api/v1/notifications/?startID=1&count=5
@@ -315,5 +313,4 @@ Get 'count' answers for a read record with id specified, from startID (sorted by
 ---
 ### *PUT api/v1/notifications/?readID=1
 Change read model with readID, field read from False to True
->>>>>>> 8f73b94dc0021139fed61c4fafa32704071f556a
 
