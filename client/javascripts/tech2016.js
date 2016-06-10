@@ -38,6 +38,7 @@
 
   angular
     .module('tech2016.controllers', [
-      'ngDialog'
+      'ngDialog',
+      'ui.bootstrap'
     ]);
 })();

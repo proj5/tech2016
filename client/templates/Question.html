@@ -10,6 +10,7 @@
   <link rel="stylesheet" type="text/css" href="client/static/css/Question.css">
   <script src="client/static/bower_components/jquery/jquery-2.2.4.min.js"></script>
   <script src="client/static/bower_components/bootstrap/js/bootstrap.js"></script>
+  <script src="client/static/bower_components/bootstrap3-typeahead/bootstrap3-typeahead.min.js"></script>  
 </head>
 
 
@@ -28,7 +29,19 @@
                     {{topic.name}}
                   </a>
                 </li>
+                <li>
+                  <button ng-click="vm.toggleEditBox()">Add</button>
+                </li>
               </ul>
+              <div class = "well post-answer-box" ng-if="vm.showEditBox">
+                <form>
+                  Add topic:<br>
+                  <input type="text" ng-model="vm.topicName" uib-typeahead="topic as topic.name for topic in vm.relatedTopics" class="form-control" typeahead-show-hint="true" typeahead-min-length="0" ng-keyup="vm.getRelatedTopic()">
+                  <!-- <input type="text" name="topicName" ng-model="vm.topicName" ng-keyup="vm.getRelatedTopic()"> -->                  
+                  <button type="submit" class="btn btn-primary" ng-click = "vm.submitTopic()">Submit</button>
+                </form>
+              </div>
+            </div>
             </div>
             <h3><b>{{vm.question.question}}</b></h3>
           </div>
