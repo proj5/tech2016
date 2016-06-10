@@ -16,6 +16,12 @@ class QuestionTest(TestCase):
         for topic in Topic.objects.all():
             self.assertEqual(topic.num_questions, topic.questions.count())
 
+        for user in A2AUser.objects.all():
+            self.assertEqual(
+                user.num_questions,
+                user.post_created.filter(type='question').count()
+            )
+
         self.assertEqual(
             Question.objects.count(),
             Post.objects.filter(parent__isnull=True).count()
@@ -26,6 +32,12 @@ class QuestionTest(TestCase):
             self.assertEqual(
                 question.num_answers,
                 Post.objects.filter(parent=question.post).count()
+            )
+
+        for user in A2AUser.objects.all():
+            self.assertEqual(
+                user.num_answers,
+                user.post_created.filter(type='answer').count()
             )
 
     def test_create_question(self):

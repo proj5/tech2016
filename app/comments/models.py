@@ -47,6 +47,9 @@ def add_comment(sender, instance, created, raw, **kwargs):
             post.followed_by.add(instance.created_by)
             post.save()
 
+        instance.created_by.num_comments += 1
+        instance.created_by.save()
+
 
 @receiver(pre_delete, sender=Comment)
 def delete_comment(sender, instance, **kwargs):
@@ -57,3 +60,6 @@ def delete_comment(sender, instance, **kwargs):
     if post is not None and post.num_comments > 0:
         post.num_comments -= 1
         post.save()
+
+    instance.created_by.num_comments -= 1
+    instance.created_by.save()

@@ -12,7 +12,8 @@ from notifications.models import Notification, Read
 
 class NotificationTest(TestCase):
     fixtures = [
-        'auth', 'users', 'topics', 'posts', 'questions', 'comments'
+        'auth', 'users', 'topics', 'posts',
+        'questions', 'comments', 'notifications'
     ]
 
     admin = A2AUser.objects.get(pk=1)
@@ -33,6 +34,13 @@ class NotificationTest(TestCase):
     def setUp(self):
         self.notifications_per_user = self.get_notifications_per_user()
         self.users_per_notification = self.get_users_per_notification()
+
+    def check_unread_notifications(self):
+        for user in A2AUser.objects.all():
+            self.assertEqual(
+                user.num_unread_notis,
+                Read.objects.filter(user=user, read=False).count()
+            )
 
     def check_notifications_per_user(self, change_user=[], created_by=None):
         notifications = self.get_notifications_per_user()
@@ -73,6 +81,7 @@ class NotificationTest(TestCase):
         comment.save()
 
         self.assertEqual(pre_num_read + 1, self.user.notifications.count())
+        self.check_unread_notifications()
         self.check_notifications_per_user(
             post.followed_by.all(),
             comment.created_by,
@@ -96,6 +105,7 @@ class NotificationTest(TestCase):
         comment.save()
 
         self.assertEqual(pre_num_read, self.user.notifications.count())
+        self.check_unread_notifications()
         self.check_notifications_per_user(
             post.followed_by.all(),
             comment.created_by
@@ -117,6 +127,7 @@ class NotificationTest(TestCase):
         )
         post.save()
 
+        self.check_unread_notifications()
         self.check_notifications_per_user(
             post.parent.followed_by.all(),
             post.created_by
@@ -139,6 +150,7 @@ class NotificationTest(TestCase):
         vote.save()
 
         self.assertEqual(pre_num_read + 1, self.admin.notifications.count())
+        self.check_unread_notifications()
         self.check_notifications_per_user([self.admin])
         self.check_users_per_notification()
         self.check_notification(
@@ -157,6 +169,7 @@ class NotificationTest(TestCase):
         )
         vote.save()
 
+        self.check_unread_notifications()
         self.assertEqual(pre_num_read, self.admin.notifications.count())
         self.check_notifications_per_user()
         self.check_users_per_notification()
