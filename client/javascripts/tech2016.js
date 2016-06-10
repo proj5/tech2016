@@ -36,7 +36,5 @@
     .module('tech2016.config', []);
 
   angular
-    .module('tech2016.controllers', [
-      'ngDialog'
-    ]);
+    .module('tech2016.controllers', []);
 })();
