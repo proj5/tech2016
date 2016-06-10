@@ -17,6 +17,12 @@ class CommentTest(TestCase):
                 Comment.objects.filter(parent=post).count()
             )
 
+        for user in A2AUser.objects.all():
+            self.assertEqual(
+                user.num_comments,
+                user.comments.all().count()
+            )
+
     def test_add_comment_to_post(self):
         post = Post(
             type='question',

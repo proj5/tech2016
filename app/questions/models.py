@@ -49,6 +49,14 @@ class Question(models.Model):
 #                 topic.num_questions += 1
 #                 topic.save()
 
+@receiver(post_save, sender=Question)
+def add_question(sender, instance, created, raw, **kwargs):
+    # delete all posts, all comments belongs to the question
+    if created and not raw:
+        user = instance.post.created_by
+        user.num_questions += 1
+        user.save()
+
 
 @receiver(post_delete, sender=Question)
 def delete_posts_in_question(sender, instance, **kwargs):
@@ -66,8 +74,12 @@ def delete_posts_in_question(sender, instance, **kwargs):
 
 
 @receiver(pre_delete, sender=Question)
-def decrease_num_questions_in_topic(sender, instance, **kwargs):
+def decrease_num_questions(sender, instance, **kwargs):
     for topic in instance.topics.all():
         if topic.num_questions > 0:
             topic.num_questions -= 1
             topic.save()
+
+    user = instance.post.created_by
+    user.num_questions -= 1
+    user.save()
