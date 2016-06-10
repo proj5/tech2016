@@ -21,7 +21,10 @@ class NotificationSerializer(serializers.ModelSerializer):
         return obj.get_type_display()
 
     def get_question(self, obj):
-        post = obj.post.parent
+        if obj.post.type == 'answer':
+            post = obj.post.parent
+        else:
+            post = obj.post
         question = post.question
         serializer = SimpleQuestionSerializer(question)
         return serializer.data
