@@ -44,7 +44,6 @@
 
     function submitQuestion() {
       var postQuestionURL = "api/v1/question/";
-      console.log('Here', vm.questionContent);
       $http.post(postQuestionURL, {
         "question": vm.questionTitle,
         "content": vm.questionContent,
