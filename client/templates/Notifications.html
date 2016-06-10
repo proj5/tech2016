@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Notification</title>
+  <base href="/"/>
+  <link rel="stylesheet" type="text/css" href="client/static/bower_components/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="client/static/css/NewsFeed.css">
+  <link rel="stylesheet" type="text/css" href="client/static/css/NavBar.css">
+  <link rel="stylesheet" type="text/css" href="client/static/css/Question.css">
+  <link rel="stylesheet" type="text/css" href="client/static/css/Notification.css">
+  <script src="client/static/bower_components/jquery/jquery-2.2.4.min.js"></script>
+  <script src="client/static/bower_components/bootstrap/js/bootstrap.js"></script>
+</head>
+
+
+<body>
+
+<div class="nf-body-container">
+  <!-- NavBar -->
+  <!--NewsFeed -->
+  <div class="noti-content-container">
+    <div class="row">
+      <div class="col-md-2 noti-left-menu">
+        <div class="list-group">
+          <a href="#" class="list-group-item disabled">
+            Notifications:
+          </a>
+          <a href="#" class="list-group-item">All</a>
+          <!-- <a href="#" class="list-group-item">Comments</a>
+          <a href="#" class="list-group-item">Answers</a>
+          <a href="#" class="list-group-item">Upvotes</a> -->
+        </div>
+      </div>
+      <div class="col-md-8 noti-main">
+        <div class="noti-container">
+
+          <div ng-repeat = "noti in vm.notis">
+            <div  class="row notification-container">
+              <div class="col-md-2">
+                AVATAR HERE
+              </div>
+              <div class="col-md-10">
+                <div class="notification-content">
+                  <a class = "notification-user" href="#LinkToUserProfile"><b>{{noti.notification.created_by.user.username}}</b></a>
+                  {{noti.content}}
+                  <a class = "notification-question" href="#LinkToQuesion"><b>{{noti.notification.question.question}}</b></a>
+                  <!-- <div class="notification-date">25/5</div> -->
+                </div>
+              </div>
+            </div>
+            <hr>
+          </div>
+
+
+        </div>
+      </div>
+      <div class="col-md-2 nf-right-menu">
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>

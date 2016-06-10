@@ -58,6 +58,12 @@
         }
       }
 
+    })
+    .state('notification', {
+      url: '/notification',
+      templateUrl: 'client/templates/Notifications.html',
+      controller: 'NotificationController',
+      controllerAs: 'vm'
     });
   }
 })();

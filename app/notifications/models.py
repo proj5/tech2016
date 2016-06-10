@@ -105,3 +105,16 @@ def add_vote(sender, instance, created, raw, **kwargs):
                     user=post.created_by
                 )
                 read.save()
+
+# calling save when not create is only when change read to true
+
+
+@receiver(post_save, sender=Read)
+def save_read(sender, instance, created, raw, **kwargs):
+    if not raw:
+        if created:
+            instance.user.num_unread_notis += 1
+            instance.user.save()
+        else:
+            instance.user.num_unread_notis -= 1
+            instance.user.save()
