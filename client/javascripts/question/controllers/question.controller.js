@@ -73,7 +73,7 @@
             $http.get(commentsURL)
             .then(function successCallback(response){
               vm.question.comments = response.data;
-              var voteStatusURL = "/api/v1/vote/?postID=" + vm.questionID;
+              var voteStatusURL = "/api/v1/vote/?postID=" + vm.question.post.id;
               $http.get(voteStatusURL)
               .then(function successCallback(response) {
                 vm.question.myScore = response.data;
