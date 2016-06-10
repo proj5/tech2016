@@ -42,7 +42,7 @@
         var result = "";
         if (obj.type === "USER comments on your QUESTION/ANSWER") {
           result = " commented on your " + obj.post.type + " to: ";
-        } else if (obj.type === "USER upvotes/downvotes ANSWER  ") {
+        } else if (obj.type === "USER upvotes/downvotes ANSWER ") {
           result = " upvoted your " + obj.post.type + " to: ";
         } else if (obj.type === "USER answers followed QUESTION") {
           result = "  answered followed question: "
