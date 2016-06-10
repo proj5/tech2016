@@ -5,10 +5,9 @@
     .module('tech2016.controllers')
     .controller('NavBarController', NavBarController);
 
-  NavBarController.$inject = ['$scope', 'Authentication', '$window', '$http', 'ngDialog'];
+  NavBarController.$inject = ['$scope', '$state', 'Authentication', '$window', '$http', 'ngDialog'];
 
-  function NavBarController($scope, Authentication, $window, $http, ngDialog) {
-
+  function NavBarController($scope, $state, Authentication, $window, $http, ngDialog) {
     var vm = this;
 
     vm.openQuestionForm = openQuestionForm;
@@ -17,6 +16,12 @@
     init();
 
     function init() {
+      name = $state.current.name;
+      if (name == "newsfeed") {
+        document.getElementById("navbar-homepage").className = "active";
+      } else if (name == "notification") {
+        document.getElementById("navbar-notification").className = "active";
+      }
       vm.username = Authentication.getAuthenticatedAccount().username;
       // http://localhost:8000/api/v1/accounts/admin/
       var userURL = "api/v1/accounts/" + vm.username + "/";
@@ -52,7 +57,7 @@
       .then(function createQuestionSuccessFn(data, status, headers, config) {
         var url = '/question/' + parseInt(data.data);
         $window.location.href = url;
-      }, 
+      },
       function createQuestionErrorFn(response) {
       });
     }

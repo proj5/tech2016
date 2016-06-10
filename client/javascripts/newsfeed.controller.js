@@ -15,11 +15,9 @@
 
 
     function init() {
-      /* Not work
       window.onload = function() {
         document.getElementById("navbar-homepage").setClass('active');
       }
-      */
       //vm.username = Authentication.getAuthenticatedAccount().username;
     }
 
