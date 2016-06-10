@@ -1,4 +1,27 @@
 .profile-avatar{
   max-width: 80px;
   max-height: 80px;
+  margin-bottom: 10px;
+}
+.container {
+  float: top;
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+.profile-item {
+  width: 120px;
+  text-align: left;
+}
+.profile-name {
+  font-size: 20px;
+  font-style: bold;
+}
+.profile-avatar-area {
+  text-align: center;
+}
+#profile-change-button {
+  margin-bottom: 2px;
+}
+#profile-choose-file {
+  margin-bottom: 2px;
 }
