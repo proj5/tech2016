@@ -57,13 +57,27 @@
           controllerAs: 'vm'
         }
       }
-
     })
     .state('notification', {
       url: '/notification',
       templateUrl: 'client/templates/Notifications.html',
       controller: 'NotificationController',
       controllerAs: 'vm'
+    })
+    .state('profile', {
+      url: '/profile',
+      views: {
+        '': {
+          templateUrl: 'client/templates/Profile.html',
+          controller: 'ProfileController',
+          controllerAs: 'vm'
+        },
+        'nav-bar@profile': {
+          templateUrl: 'client/templates/NavBar.html',
+          controller: 'NavBarController',
+          controllerAs: 'vm'
+        }
+      }
     });
   }
 })();
