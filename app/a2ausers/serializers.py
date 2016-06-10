@@ -37,7 +37,13 @@ class A2AUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = A2AUser
         fields = (
-            'id', 'user', 'avatar'
+            'id', 'user', 'avatar',
+            'num_questions',
+            'num_answers',
+            'num_comments',
+            'num_unread_notis',
+            'num_comments',
+            'num_upvotes',
             # enable this line when client update this
             # 'facebook_id', 'avatar',
         )
