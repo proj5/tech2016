@@ -19,3 +19,14 @@
 .question-stats {
     margin-top: 2em;
 }
+.question-topic {
+    height: 5em;
+    color: red;
+}
+.post-comments-container {
+  margin-left : 1em;
+  margin-top : 1em;
+}
+.btn-faded {
+  background-color: #f6f6f6;
+}

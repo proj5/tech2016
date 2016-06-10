@@ -132,9 +132,12 @@ class QuestionApiTest(APITestCase):
     def test_get_questions_related_keyword(self):
         url = '/api/v1/questions/?keyword=what`'
         response = self.client.get(url)
-        self.assertEqual(len(response.data), 1)
+        self.assertEqual(len(response.data), 2)
         self.assertEqual(response.data[0].get('id'), 1)
         self.assertEqual(response.data[0].get('question'), 'What is A2A?')
+        self.assertEqual(response.data[1].get('id'), 2)
+        self.assertEqual(response.data[1].get('question'),
+                         'What is the Selected Topics on Technology course?')
 
     def test_get_all_topics_of_question(self):
         url = '/api/v1/question/topic/?questionID=1'

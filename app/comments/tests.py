@@ -189,3 +189,8 @@ class CommentApiTest(APITestCase):
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
         self.assertEqual(pre_num_cmt, Comment.objects.count())
+
+    def tet_get_comments_from_post(self):
+        url = '/api/v1/comments/id=1/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

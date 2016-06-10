@@ -116,3 +116,44 @@ class PostDetailView(views.APIView):
         post = Post.objects.get(pk=id)
         serializer = PostSerializer(post)
         return Response(serializer.data)
+
+
+class FollowPostView(views.APIView):
+
+    def get_permissions(self):
+        return (permissions.IsAuthenticated(), )
+
+    # Get follow status
+    # Return 1 if followed, 0 otherwise
+    def get(self, request, format=None):
+        post_id = request.GET.get('postID')
+        if post_id is None:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        post = Post.objects.filter(id=post_id).first()
+        if post is None:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        if post.followed_by.filter(user__id=request.user.id).exists():
+            return Response(1, status=status.HTTP_200_OK)
+        else:
+            return Response(0, status=status.HTTP_200_OK)
+
+    # Follow, unfollow a post
+    # If followed, the user now will unfollow the post
+    # If not followed, the user will follow the post
+    def post(self, request, format=None):
+        post_id = request.GET.get('postID')
+        if post_id is None:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        post = Post.objects.filter(id=post_id).first()
+        if post is None:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        follower = User.objects.get(id=request.user.id).a2ausers
+
+        if post.followed_by.filter(user__id=request.user.id).exists():
+            post.followed_by.remove(follower)
+        else:
+            post.followed_by.add(follower)
+        post.save()
+        return Response(status=status.HTTP_200_OK)

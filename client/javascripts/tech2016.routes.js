@@ -33,9 +33,15 @@
       templateUrl: 'client/templates/NewsFeed.html'
     })
     .state('question', {
-      url: '/question/:id',
+      url: '/question/:questionID',
       templateUrl: 'client/templates/Question.html',
       controller: 'QuestionController',
+      controllerAs: 'vm'
+    })
+    .state('notification', {
+      url: '/notification',
+      templateUrl: 'client/templates/Notifications.html',
+      controller: 'NotificationController',
       controllerAs: 'vm'
     })
     ;
