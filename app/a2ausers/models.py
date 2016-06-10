@@ -37,6 +37,10 @@ class A2AUser(models.Model):
     num_comments = models.IntegerField(default=0)
     num_upvotes = models.IntegerField(default=0)
     num_unread_notis = models.IntegerField(default=0)
+    avatar = models.ImageField(
+        upload_to='static/img/',
+        default='static/img/default.jpg'
+    )
     followed_users = models.ManyToManyField(
         'self',
         related_name="followed_by",
