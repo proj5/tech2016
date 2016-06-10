@@ -32,7 +32,9 @@
             <h3><b>{{vm.question.question}}</b></h3>
           </div>
           <div class="post-author row">
-            <div class="col-md-2 post-avatar">AVATAR HERE</div>
+            <div class="col-md-2 post-avatar">
+              <img class = "post-avatar" height = "42" width = "42" margin = "center" src="{{vm.question.post.created_by.avatar}}">
+            </div>
             <div class="col-md-6">
               <!-- Add link to user profile -->
               <div class="row">{{vm.question.post.created_by.user.username}}</div>
@@ -87,7 +89,10 @@
           </div>
           <div class="row" ng-repeat = "answer in vm.answers">
             <div class="post-author row">
-              <div class="col-md-2 post-avatar">AVATAR HERE</div>
+              <div class="col-md-2 post-avatar">
+                <img class = "post-avatar" height = "42" width = "42" margin = "center" src="{{answer.created_by.avatar}}">
+              </div>
+
               <div class="col-md-6">
                 <div class="row">{{answer.created_by.user.username}}</div>
                 <div class="row">{{answer.created_by.user.first_name}} {{answer.created_by.user.last_name}}</div>
