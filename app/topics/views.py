@@ -63,4 +63,6 @@ class TopicDetailView(views.APIView):
                 description=request.data.get('description')
             )
             topic.save()
-        return Response(status=status.HTTP_200_OK)
+        return Response({
+            'id': topic.id
+        }, status=status.HTTP_200_OK)

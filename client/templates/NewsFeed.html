@@ -41,7 +41,7 @@
 
             <div ng-if = "question.answer.type !== null">
               <div class="post-author row">
-                <div class="col-md-2 post-avatar">
+                <div class="col-md-2">
                 <img class = "post-avatar" height = "42" width = "42" margin = "center" src="{{question.answer.created_by.avatar}}">
                 </div>
                 <div class="col-md-8">
@@ -58,7 +58,7 @@
                   <div class="wrapper">
                     <button ng-show="question.answer.my_vote === 0" class="btn btn-success" ng-click="vm.upvote(question.answer)">Upvote | <b>{{question.answer.total_vote}}</b></button>
                     <button ng-show="question.answer.my_vote > 0" class="btn btn-faded" ng-click="vm.upvote(question.answer)">Upvoted | <b>{{question.answer.total_vote}}</b></button>
-                    <a href="#" class = "post-other-buttons">Follow</a>
+                    <!-- <a href="#" class = "post-other-buttons">Follow</a> -->
                   </div>
                   <!-- <a href="#" class = "post-other-buttons">Downvote</a> -->
 
@@ -72,7 +72,7 @@
 
             <div ng-if = "question.answer.type === null">
               <div class = "row">
-                <div class="col-md-2 post-avatar">
+                <div class="col-md-2">
                   Asked by:
                 </div>
                 <div class="col-md-8">
