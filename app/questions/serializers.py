@@ -26,7 +26,10 @@ class QuestionWithTopAnswerSerializer(serializers.ModelSerializer):
 
     def get_top_answer(self, obj):
         post = obj.post
-        answer = post.child_posts.all().order_by('-total_vote')[0]
+        try:
+            answer = post.child_posts.all().order_by('-total_vote')[0]
+        except:
+            answer = None
         serializer = PostSerializer(answer)
         return serializer.data
 

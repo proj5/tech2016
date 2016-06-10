@@ -8,11 +8,10 @@
         </div>
         <div class="collapse navbar-collapse navbar-menubuilder">
           <ul class="nav navbar-nav navbar-right">
-              <li id="navbar-ask-question">
-                <a href="#">
-                  <i class="fa fa-question" aria-hidden="true"></i>
-                  Ask a Question
-                </a>
+              <li id="navbar-ask-question"><a href="#" ng-click=vm.openQuestionForm()>
+                <i class="fa fa-question" aria-hidden="true"></i>
+                Ask a Question
+              </a>
               </li>
               <li id="navbar-homepage">
                 <a ui-sref="newsfeed">
