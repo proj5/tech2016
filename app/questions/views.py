@@ -11,6 +11,7 @@ import difflib
 
 
 class QuestionView(views.APIView):
+
     def get_permissions(self):
         if self.request.method in 'GET':
             return (permissions.AllowAny(),)
@@ -53,6 +54,7 @@ class QuestionView(views.APIView):
 
 
 class QuestionDetailView(views.APIView):
+
     def get_permissions(self):
         if self.request.method in 'GET':
             return (permissions.AllowAny(),)

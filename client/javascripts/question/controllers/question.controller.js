@@ -81,6 +81,7 @@
       
       vm.submitTopic = function(){
         var url = "api/v1/question/topic/?questionID=" + vm.questionID;
+        var createUrl = "api/v1/topic/"
         $http.post(url,  vm.topicName
         )
         .then(function addTopicSuccessFn(data, status, headers, config) {
@@ -88,6 +89,27 @@
           vm.toggleEditBox();
         }, 
         function createQuestionErrorFn(response) {
+          if (response.data.detail){
+            console.log("abc");
+            var obj = {
+              "name": vm.topicName,
+              "description": ""
+            }
+            $http.post(createUrl, obj).then(
+              function addTopicSuccess(data, status, headers, config){
+                obj.id = data.data.id;
+                $http.post(url,  obj).then(function succ(response){
+                  vm.topics.push(obj);
+                  vm.toggleEditBox();
+                }, function fail(response) {
+                  
+                });
+              },
+              function addTopicError(response) {
+                
+              }
+            );
+          }
         });
       }
 
