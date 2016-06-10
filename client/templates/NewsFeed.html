@@ -18,20 +18,20 @@
         <div class="col-md-2 nf-left-menu">
           <div class="list-group">
             <a href="#" class="list-group-item disabled">
-              Cras justo odio
+              News Feed
             </a>
             <a href="#" class="list-group-item">News Feed</a>
-            <a href="#" class="list-group-item">Trending</a>
+            <!-- <a href="#" class="list-group-item">Trending</a>
             <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-            <a href="#" class="list-group-item">Vestibulum at eros</a>
+            <a href="#" class="list-group-item">Vestibulum at eros</a> -->
           </div>
         </div>
-        <div class="col-md-8 nf-main">
+        <div class="col-md-10 nf-main">
           <div class="post-container" ng-repeat="question in vm.questions">
             <div class="post-title">
               <div class="post-topics">
-                <ul class="nav nav-pills" ng-repeat = "topic in question.topics">
-                  <li class="presentation">
+                <ul class="nav nav-pills">
+                  <li class="presentation"  ng-repeat = "topic in question.topics">
                     <a class="label label-default" href="">
                       {{topic.name}}
                     </a>
@@ -68,8 +68,8 @@
             </div>
             <hr>
           </div>
-        <div class="col-md-2 nf-right-menu">
-        </div>
+        <!-- <div class="col-md-2 nf-right-menu">
+        </div> -->
       </div>
     </div>
   </div>
