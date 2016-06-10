@@ -30,7 +30,7 @@ from A2A.views import IndexView
 
 urlpatterns = [
     # User views
-    url(r'^api/v1/accounts/avatar/(?P<username>.+)/$', AvatarView.as_view()),
+    url(r'^api/v1/account/avatar/$', AvatarView.as_view()),
     url(r'^api/v1/accounts/(?P<username>.+)/$', UserDetailView.as_view(),
         name='detail'),
     url(r'^api/v1/accounts/', UserListView.as_view(), name='list'),
