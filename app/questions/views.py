@@ -85,7 +85,7 @@ class QuestionDetailView(views.APIView):
             topic.num_questions += 1
             topic.save()
         question.save()
-        return Response(status=status.HTTP_200_OK)
+        return Response(question.id, status=status.HTTP_200_OK)
 
     def put(self, request, format=None):
         # Update a question
