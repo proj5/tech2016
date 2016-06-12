@@ -7,3 +7,5 @@ dj-database-url==0.4.1
 psycopg2==2.6.1
 django-compressor==1.6
 Pillow==3.2.0
+https://github.com/epetxepe/django-storages/archive/Issue%23137and%23138.zip
+dropbox==6.4.0
