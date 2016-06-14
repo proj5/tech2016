@@ -124,14 +124,14 @@
             var commentsURL = "/api/v1/comments/id=" + vm.question.post.id + "/"
             $http.get(commentsURL)
             .then(function successCallback(response){
-              vm.question.comments = response.data;
+              vm.question.post.comments = response.data;
               var voteStatusURL = "/api/v1/vote/?postID=" + vm.question.post.id;
               $http.get(voteStatusURL)
               .then(function successCallback(response) {
-                vm.question.myScore = response.data;
+                vm.question.post.myScore = response.data;
               },
               function errorCallback(response) {});
-              vm.totalComment += vm.question.comments.length;
+              vm.totalComment += vm.question.post.comments.length;
             }, function errorCallback(response) {
               console.log("Error get comments for question");
             });

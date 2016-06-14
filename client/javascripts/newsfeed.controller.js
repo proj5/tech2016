@@ -33,9 +33,9 @@
             promises.push(
               $http.get("api/v1/vote/?postID=" + question.answer.id)
                 .then(function successCallback(response) {
-                  question.answer.my_vote = response.data;
+                  question.answer.myScore = response.data;
                 }, function errorCallback(response) {
-                  question.answer.my_vote = 0;
+                  question.answer.myScore = 0;
                 })
             )
           })
@@ -43,36 +43,6 @@
           console.error("Failed to get questions");
         })
       );
-    }
-
-    vm.upvote = function(answer) {
-      var url = "api/v1/vote/?postID=" + answer.id;
-      $http({
-        method: 'POST',
-        url: url,
-        data: {
-          'score': 1
-        }
-      }).then(function successCallback(response) {
-        $state.reload();
-      }, function errorCallback(response) {
-        console.error("Failed to upvote answer");
-      })
-    }
-
-    vm.downvote = function(answer) {
-      var url = "api/v1/vote/?postID=" + answer.id;
-      $http({
-        method: 'POST',
-        url: url,
-        data: {
-          'score': -1
-        }
-      }).then(function successCallback(response) {
-        $state.reload();
-      }, function errorCallback(response) {
-        console.error("Failed to downvote answer");
-      })
     }
   }
 
