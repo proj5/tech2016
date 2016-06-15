@@ -21,6 +21,7 @@ try:
     webdriver_manager = subprocess.Popen('webdriver-manager start', shell=True)
     server = subprocess.Popen('python manage.py runserver', shell=True)
 
+    time.sleep(5)
     os.chdir('functional_test')
     exit_code = os.system('protractor conf.js')
     print exit_code
