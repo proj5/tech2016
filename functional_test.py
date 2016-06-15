@@ -30,5 +30,7 @@ try:
     kill(webdriver_manager.pid)
     kill(server.pid)
     os.rename('A2A/settings_local.py', 'A2A/settings_.py')
+    return exit_code
 except:
     os.rename('A2A/settings_local.py', 'A2A/settings_.py')
+    return -1
