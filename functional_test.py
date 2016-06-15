@@ -2,6 +2,7 @@ import subprocess
 import os
 import time
 import psutil
+import sys
 
 
 def kill(proc_pid):
@@ -10,27 +11,24 @@ def kill(proc_pid):
         proc.kill()
     process.kill()
 
-try:
-    os.rename('A2A/settings_.py', 'A2A/settings_local.py')
 
-    # Windows
-    if os.name == 'nt':
-        os.system('init abc')
-    else:
-        os.system('sh init.sh abc')
-    webdriver_manager = subprocess.Popen('webdriver-manager start', shell=True)
-    server = subprocess.Popen('python manage.py runserver', shell=True)
+os.rename('A2A/settings_.py', 'A2A/settings_local.py')
 
-    time.sleep(5)
-    os.chdir('functional_test')
-    exit_code = os.system('protractor conf.js')
-    print exit_code
-    os.chdir('..')
+# Windows
+if os.name == 'nt':
+    os.system('init abc')
+else:
+    os.system('sh init.sh abc')
+webdriver_manager = subprocess.Popen('webdriver-manager start', shell=True)
+server = subprocess.Popen('python manage.py runserver', shell=True)
 
-    kill(webdriver_manager.pid)
-    kill(server.pid)
-    os.rename('A2A/settings_local.py', 'A2A/settings_.py')
-    return exit_code
-except:
-    os.rename('A2A/settings_local.py', 'A2A/settings_.py')
-    return -1
+time.sleep(5)
+os.chdir('functional_test')
+exit_code = os.system('protractor conf.js')
+print exit_code
+os.chdir('..')
+
+kill(webdriver_manager.pid)
+kill(server.pid)
+os.rename('A2A/settings_local.py', 'A2A/settings_.py')
+sys.exit(exit_code)
