@@ -1,7 +1,13 @@
 #!/bin/sh
 
 # Clear old database
-rm db.sqlite3
+name=db.sqlite3
+if [ "$1" != "" ]; then
+	name=dbtest.sqlite3
+fi
+
+echo $name
+rm $name
 
 # Create new database
 python manage.py migrate
@@ -11,6 +17,7 @@ python manage.py migrate
 # username:password
 # admin:admin123
 # user:user1234
+# quang:admin123
 python manage.py loaddata auth.json
 python manage.py loaddata users.json
 python manage.py loaddata topics.json

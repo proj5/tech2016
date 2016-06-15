@@ -27,6 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SETTINGS_LOCAL_FILE = '/'.join([os.path.dirname(os.path.abspath(__file__)), 'settings_local.py'])
+SETTINGS_LOCAL = {}
+try:
+    execfile(SETTINGS_LOCAL_FILE, {}, SETTINGS_LOCAL)
+except IOError as e:
+    pass
+
 
 # Application definition
 
@@ -96,10 +103,13 @@ if os.environ.get('HEROKU') == '1':
     DATABASES = {}
     DATABASES['default'] = dj_database_url.config(conn_max_age=500)
 else:
+    name = 'db.sqlite3'
+    if (os.environ.get('TRAVIS_TEST_ENV')):
+        name = 'dbtest.sqlite3'    
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'NAME': os.path.join(BASE_DIR, name),
         }
     }
 

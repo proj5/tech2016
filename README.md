@@ -21,6 +21,11 @@ Rules
 Python code follows PEP8
 HTML and CSS code use 2 spcaes instead of 1 tab
 
+Running test
+----------------
+python manage.py test (for backend)
+python functional_test.py (for frontend, need to install protractor)
+
 Team members
 ----------------
 * Le Hong Quang
