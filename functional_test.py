@@ -31,4 +31,5 @@ os.chdir('..')
 kill(webdriver_manager.pid)
 kill(server.pid)
 os.rename('A2A/settings_local.py', 'A2A/settings_.py')
-sys.exit(exit_code)
+if exit_code != 0:
+    sys.exit(1)
