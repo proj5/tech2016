@@ -97,8 +97,12 @@ class VoteApiTest(APITestCase):
         data = {
             'score': 1
         }
-        pre_upvote_num = Vote.objects.filter(score=1).count()
-        pre_downvote_num = Vote.objects.filter(score=-1).count()
+        pre_upvote_num = Vote.objects.filter(
+            post__pk=post_id, score=1
+        ).count()
+        pre_downvote_num = Vote.objects.filter(
+            post__pk=post_id, score=-1
+        ).count()
 
         response = self.client.post(url, data, format='json')
         self.assertEqual(
@@ -110,18 +114,26 @@ class VoteApiTest(APITestCase):
             1
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(pre_upvote_num + 1,
-                         Vote.objects.filter(score=1).count())
-        self.assertEqual(pre_downvote_num,
-                         Vote.objects.filter(score=-1).count())
+        self.assertEqual(
+            pre_upvote_num + 1,
+            Vote.objects.filter(post__pk=post_id, score=1).count()
+        )
+        self.assertEqual(
+            pre_downvote_num,
+            Vote.objects.filter(post__pk=post_id, score=-1).count()
+        )
 
     def undo_upvote(self, post_id):
         url = '/api/v1/vote/?postID=' + str(post_id)
         data = {
             'score': 1
         }
-        pre_upvote_num = Vote.objects.filter(score=1).count()
-        pre_downvote_num = Vote.objects.filter(score=-1).count()
+        pre_upvote_num = Vote.objects.filter(
+            post__pk=post_id, score=1
+        ).count()
+        pre_downvote_num = Vote.objects.filter(
+            post__pk=post_id, score=-1
+        ).count()
 
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -133,10 +145,14 @@ class VoteApiTest(APITestCase):
             response.data['my_vote'],
             0
         )
-        self.assertEqual(pre_upvote_num - 1,
-                         Vote.objects.filter(score=1).count())
-        self.assertEqual(pre_downvote_num,
-                         Vote.objects.filter(score=-1).count())
+        self.assertEqual(
+            pre_upvote_num - 1,
+            Vote.objects.filter(post__pk=post_id, score=1).count()
+        )
+        self.assertEqual(
+            pre_downvote_num,
+            Vote.objects.filter(post__pk=post_id, score=-1).count()
+        )
 
     def get_vote_status(self, post_id):
         url = '/api/v1/vote/?postID=' + str(post_id)

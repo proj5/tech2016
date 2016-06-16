@@ -69,5 +69,463 @@
       2
     ]
   }
+},
+{
+  "model": "posts.post",
+  "pk": 5,
+  "fields": {
+    "type": "question",
+    "parent": null,
+    "content": "Em \u0111ang h\u1ecdc scala, c\u00f3 s\u00e1ch n\u00e0o h\u1ecdc functional programming kh\u00f4ng \u1ea1. Em c\u1ea3m \u01a1n.",
+    "created_date": "2016-06-10T09:54:48.971Z",
+    "last_updated": "2016-06-10T09:54:48.971Z",
+    "created_by": 4,
+    "total_vote": 0,
+    "num_comments": 0,
+    "followed_by": [
+      4
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 6,
+  "fields": {
+    "type": "answer",
+    "parent": 5,
+    "content": "M\u00ecnh th\u1ea5y quy\u1ec3n Functional programming in Scala, a.k.a scala the red book l\u00e0 m\u1ed9t quy\u1ec3n s\u00e1ch hay \u0111\u1ec3 h\u1ecdc FP \u0111\u00f3. Ch\u00fac b\u1ea1n may m\u1eafn :D",
+    "created_date": "2016-06-10T09:56:28.665Z",
+    "last_updated": "2016-06-10T09:56:56.730Z",
+    "created_by": 6,
+    "total_vote": 1,
+    "num_comments": 1,
+    "followed_by": [
+      6,
+      4
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 7,
+  "fields": {
+    "type": "question",
+    "parent": null,
+    "content": "Em m\u1edbi h\u1ecdc l\u1eadp tr\u00ecnh, n\u00ean mu\u1ed1n tham kh\u1ea3o xem ng\u00f4n ng\u1eef n\u00e0o \u0111ang ph\u1ed5 bi\u1ebfn hi\u1ec7n nay \u1ea1.",
+    "created_date": "2016-06-10T09:57:16.691Z",
+    "last_updated": "2016-06-10T09:58:50.696Z",
+    "created_by": 5,
+    "total_vote": 0,
+    "num_comments": 2,
+    "followed_by": [
+      5,
+      4,
+      7
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 8,
+  "fields": {
+    "type": "answer",
+    "parent": 7,
+    "content": "M\u00ecnh ngh\u0129 Python l\u00e0 ng\u00f4n ng\u1eef ph\u00f9 h\u1ee3p nh\u1ea5t cho nh\u1eefng ng\u01b0\u1eddi m\u1edbi b\u1eaft \u0111\u1ea7u \u0111\u00f3 b\u1ea1n. Ng\u00f4n ng\u1eef \u0111\u01a1n gi\u1ea3n d\u1ec5 hi\u1ec3u l\u1eafm.",
+    "created_date": "2016-06-10T09:58:51.655Z",
+    "last_updated": "2016-06-10T10:02:09.420Z",
+    "created_by": 6,
+    "total_vote": 3,
+    "num_comments": 2,
+    "followed_by": [
+      6,
+      4
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 9,
+  "fields": {
+    "type": "answer",
+    "parent": 7,
+    "content": "M\u00ecnh ngh\u0129 b\u1ea1n n\u00ean b\u1eaft \u0111\u1ea7u v\u1edbi C++, h\u1ea7u h\u1ebft c\u00e1c ng\u00f4n ng\u1eef \u0111\u1ec1u based theo syntax c\u1ee7a C/C++ \u0111\u00f3 b\u1ea1n.",
+    "created_date": "2016-06-10T10:01:09.625Z",
+    "last_updated": "2016-06-10T10:01:09.713Z",
+    "created_by": 6,
+    "total_vote": 0,
+    "num_comments": 0,
+    "followed_by": [
+      6
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 10,
+  "fields": {
+    "type": "question",
+    "parent": null,
+    "content": "",
+    "created_date": "2016-06-10T10:09:49.250Z",
+    "last_updated": "2016-06-10T10:09:49.250Z",
+    "created_by": 7,
+    "total_vote": 0,
+    "num_comments": 0,
+    "followed_by": [
+      7
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 11,
+  "fields": {
+    "type": "answer",
+    "parent": 10,
+    "content": "Ph\u1edf b\u00f2 b\u00e1t \u0111\u00e0n + b\u00e1nh t\u00f4m h\u1ed3 t\u00e2y + kem tr\u00e0ng ti\u1ec1n nha b\u1ea1n :D",
+    "created_date": "2016-06-10T10:14:03.701Z",
+    "last_updated": "2016-06-12T13:19:55.478Z",
+    "created_by": 4,
+    "total_vote": 2,
+    "num_comments": 0,
+    "followed_by": [
+      4
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 12,
+  "fields": {
+    "type": "question",
+    "parent": null,
+    "content": "",
+    "created_date": "2016-06-10T10:14:40.895Z",
+    "last_updated": "2016-06-10T10:20:57.415Z",
+    "created_by": 4,
+    "total_vote": 0,
+    "num_comments": 1,
+    "followed_by": [
+      4,
+      7
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 14,
+  "fields": {
+    "type": "answer",
+    "parent": 10,
+    "content": "KFC, Lotteria nh\u00e9 !",
+    "created_date": "2016-06-10T10:15:25.938Z",
+    "last_updated": "2016-06-10T10:16:33.123Z",
+    "created_by": 5,
+    "total_vote": 0,
+    "num_comments": 1,
+    "followed_by": [
+      5,
+      1
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 15,
+  "fields": {
+    "type": "answer",
+    "parent": 12,
+    "content": "\u0110\u00e0 N\u1eb5ng ch\u1ed7 \u0103n th\u00ec nhi\u1ec1u, ch\u1ed7 ch\u01a1i th\u00ec kh\u00f4ng c\u00f3 m\u1ea5y. B\u1ea1n c\u00f3 th\u1ec3 \u0111i B\u00e0 N\u00e0 (ch\u00e1n), ho\u1eb7c \u0111i bi\u1ec3n.",
+    "created_date": "2016-06-10T10:19:09.582Z",
+    "last_updated": "2016-06-10T10:19:09.608Z",
+    "created_by": 5,
+    "total_vote": 0,
+    "num_comments": 0,
+    "followed_by": [
+      5
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 16,
+  "fields": {
+    "type": "question",
+    "parent": null,
+    "content": "C\u00f3 ai h\u1ecdc \u1edf \u0110\u1ea1i h\u1ecdc C\u00f4ng ngh\u1ec7 cho m\u00ecnh bi\u1ebft l\u00e0 h\u1ecdc \u1edf \u0111\u00e2y ch\u1ea5t l\u01b0\u1ee3ng nh\u01b0 th\u1ebf n\u00e0o v\u1eady? Gi\u00e1o vi\u00ean, sinh vi\u00ean, ch\u01b0\u01a1ng tr\u00ecnh h\u1ecdc, ... c\u00f3 t\u1ed1t kh\u00f4ng mn?",
+    "created_date": "2016-06-10T14:35:21.153Z",
+    "last_updated": "2016-06-11T02:57:32.586Z",
+    "created_by": 8,
+    "total_vote": 1,
+    "num_comments": 0,
+    "followed_by": [
+      8
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 17,
+  "fields": {
+    "type": "question",
+    "parent": null,
+    "content": "",
+    "created_date": "2016-06-10T14:36:14.018Z",
+    "last_updated": "2016-06-10T14:36:14.018Z",
+    "created_by": 8,
+    "total_vote": 0,
+    "num_comments": 0,
+    "followed_by": [
+      8
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 18,
+  "fields": {
+    "type": "answer",
+    "parent": 17,
+    "content": "Who let the dogs out. It's epic !",
+    "created_date": "2016-06-10T14:39:32.318Z",
+    "last_updated": "2016-06-10T14:39:32.348Z",
+    "created_by": 7,
+    "total_vote": 0,
+    "num_comments": 0,
+    "followed_by": [
+      7
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 19,
+  "fields": {
+    "type": "answer",
+    "parent": 17,
+    "content": "M\u00ecnh th\u00edch nh\u1ea5t b\u00e0i Kissing on my Tatts c\u1ee7a Binz <3",
+    "created_date": "2016-06-10T14:41:13.245Z",
+    "last_updated": "2016-06-11T02:57:24.194Z",
+    "created_by": 4,
+    "total_vote": 2,
+    "num_comments": 0,
+    "followed_by": [
+      4
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 20,
+  "fields": {
+    "type": "question",
+    "parent": null,
+    "content": "",
+    "created_date": "2016-06-10T14:53:31.614Z",
+    "last_updated": "2016-06-10T14:53:31.614Z",
+    "created_by": 4,
+    "total_vote": 0,
+    "num_comments": 0,
+    "followed_by": [
+      4
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 21,
+  "fields": {
+    "type": "answer",
+    "parent": 20,
+    "content": "Theo nhi\u1ec1u ngu\u1ed3n tin th\u00ec Mac pro s\u1eafp ra r\u1ed3i, ch\u1eafc t\u1ea7m th\u00e1ng 8 t\u1edbi.",
+    "created_date": "2016-06-10T15:12:15.580Z",
+    "last_updated": "2016-06-12T13:20:00.857Z",
+    "created_by": 5,
+    "total_vote": 3,
+    "num_comments": 2,
+    "followed_by": [
+      5,
+      4,
+      8
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 22,
+  "fields": {
+    "type": "answer",
+    "parent": 12,
+    "content": "Ch\u01a1i th\u00ec \u0111i H\u1ed9i An h\u01a1i b\u1ecb n\u1ed5i ti\u1ebfng n\u00e0y, bi\u1ec3n th\u00ec c\u00f3 L\u0103ng C\u00f4 ho\u1eb7c M\u1ef9 Kh\u00ea, n\u00fai th\u00ec c\u00f3 Ng\u0169 H\u00e0nh S\u01a1n. N\u00f3i chung l\u00e0 nhi\u1ec1u.",
+    "created_date": "2016-06-10T15:47:23.877Z",
+    "last_updated": "2016-06-10T15:47:23.916Z",
+    "created_by": 8,
+    "total_vote": 0,
+    "num_comments": 0,
+    "followed_by": [
+      8
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 23,
+  "fields": {
+    "type": "question",
+    "parent": null,
+    "content": "",
+    "created_date": "2016-06-10T16:31:40.755Z",
+    "last_updated": "2016-06-10T16:31:40.755Z",
+    "created_by": 4,
+    "total_vote": 0,
+    "num_comments": 0,
+    "followed_by": [
+      4
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 24,
+  "fields": {
+    "type": "answer",
+    "parent": 23,
+    "content": "Theo m\u00ecnh th\u00ec macbook pro r\u1ea5t ph\u00f9 h\u1ee3p v\u1edbi coder. Ngo\u00e0i ra b\u1ea1n c\u00f3 th\u1ec3 tham kh\u1ea3o th\u00eam d\u00f2ng m\u00e1y thinkpad c\u1ee7a levono.",
+    "created_date": "2016-06-10T16:32:29.704Z",
+    "last_updated": "2016-06-11T02:57:19.630Z",
+    "created_by": 6,
+    "total_vote": 2,
+    "num_comments": 1,
+    "followed_by": [
+      6,
+      4
+    ]
+  }
+},
+{
+  "model": "posts.vote",
+  "pk": 1,
+  "fields": {
+    "post": 6,
+    "user": 4,
+    "score": 1
+  }
+},
+{
+  "model": "posts.vote",
+  "pk": 2,
+  "fields": {
+    "post": 8,
+    "user": 4,
+    "score": 1
+  }
+},
+{
+  "model": "posts.vote",
+  "pk": 3,
+  "fields": {
+    "post": 8,
+    "user": 7,
+    "score": 1
+  }
+},
+{
+  "model": "posts.vote",
+  "pk": 4,
+  "fields": {
+    "post": 8,
+    "user": 5,
+    "score": 1
+  }
+},
+{
+  "model": "posts.vote",
+  "pk": 5,
+  "fields": {
+    "post": 11,
+    "user": 1,
+    "score": 1
+  }
+},
+{
+  "model": "posts.vote",
+  "pk": 6,
+  "fields": {
+    "post": 19,
+    "user": 4,
+    "score": 1
+  }
+},
+{
+  "model": "posts.vote",
+  "pk": 7,
+  "fields": {
+    "post": 21,
+    "user": 8,
+    "score": 1
+  }
+},
+{
+  "model": "posts.vote",
+  "pk": 9,
+  "fields": {
+    "post": 24,
+    "user": 4,
+    "score": 1
+  }
+},
+{
+  "model": "posts.vote",
+  "pk": 10,
+  "fields": {
+    "post": 24,
+    "user": 9,
+    "score": 1
+  }
+},
+{
+  "model": "posts.vote",
+  "pk": 11,
+  "fields": {
+    "post": 21,
+    "user": 9,
+    "score": 1
+  }
+},
+{
+  "model": "posts.vote",
+  "pk": 12,
+  "fields": {
+    "post": 19,
+    "user": 9,
+    "score": 1
+  }
+},
+{
+  "model": "posts.vote",
+  "pk": 13,
+  "fields": {
+    "post": 16,
+    "user": 9,
+    "score": 1
+  }
+},
+{
+  "model": "posts.vote",
+  "pk": 14,
+  "fields": {
+    "post": 11,
+    "user": 10,
+    "score": 1
+  }
+},
+{
+  "model": "posts.vote",
+  "pk": 15,
+  "fields": {
+    "post": 21,
+    "user": 10,
+    "score": 1
+  }
 }
 ]

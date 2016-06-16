@@ -70,3 +70,6 @@ db.sqlite3
 # MacOS directory files
 *.DS_Store
 /.DS_Store
+
+# upload images
+client/static/img/*

@@ -6,6 +6,9 @@ from django.db.models.signals import post_save
 from a2ausers.models import A2AUser
 from posts.models import Post, Vote
 from comments.models import Comment
+from a2ausers.serializers import A2AUserSerializer
+
+from pusher import Pusher
 
 
 class Notification(models.Model):
@@ -115,6 +118,14 @@ def save_read(sender, instance, created, raw, **kwargs):
         if created:
             instance.user.num_unread_notis += 1
             instance.user.save()
+            user = instance.user
+            channel = "notification_" + user.user.username
+            pusher = Pusher("216867", "df818e2c5c3828256440",
+                            "5ff000997a9df3464eb5")
+
+            serializer = A2AUserSerializer(user)
+            event_data = serializer.data
+            pusher.trigger(channel, 'new_noti', event_data)
         else:
             instance.user.num_unread_notis -= 1
             instance.user.save()

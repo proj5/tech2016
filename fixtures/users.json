@@ -7,7 +7,7 @@
     "facebook_id": "",
     "num_questions": 0,
     "num_answers": 2,
-    "num_comments": 1,
+    "num_comments": 2,
     "num_upvotes": 0,
     "num_unread_notis": 2,
     "avatar": "client/static/img/default.jpg",
@@ -24,7 +24,7 @@
     "num_answers": 0,
     "num_comments": 2,
     "num_upvotes": 0,
-    "num_unread_notis": 3,
+    "num_unread_notis": 0,
     "avatar": "client/static/img/default.jpg",
     "followed_users": []
   }
@@ -40,6 +40,111 @@
     "num_comments": 0,
     "num_upvotes": 0,
     "num_unread_notis": 1,
+    "avatar": "client/static/img/default.jpg",
+    "followed_users": []
+  }
+},
+{
+  "model": "a2ausers.a2auser",
+  "pk": 4,
+  "fields": {
+    "user": 4,
+    "facebook_id": "",
+    "num_questions": 4,
+    "num_answers": 2,
+    "num_comments": 5,
+    "num_upvotes": 0,
+    "num_unread_notis": 10,
+    "avatar": "client/static/img/default.jpg",
+    "followed_users": []
+  }
+},
+{
+  "model": "a2ausers.a2auser",
+  "pk": 5,
+  "fields": {
+    "user": 5,
+    "facebook_id": "",
+    "num_questions": 1,
+    "num_answers": 3,
+    "num_comments": 0,
+    "num_upvotes": 0,
+    "num_unread_notis": 11,
+    "avatar": "client/static/img/default.jpg",
+    "followed_users": []
+  }
+},
+{
+  "model": "a2ausers.a2auser",
+  "pk": 6,
+  "fields": {
+    "user": 6,
+    "facebook_id": null,
+    "num_questions": 0,
+    "num_answers": 4,
+    "num_comments": 1,
+    "num_upvotes": 0,
+    "num_unread_notis": 9,
+    "avatar": "client/static/img/default.jpg",
+    "followed_users": []
+  }
+},
+{
+  "model": "a2ausers.a2auser",
+  "pk": 7,
+  "fields": {
+    "user": 7,
+    "facebook_id": "",
+    "num_questions": 1,
+    "num_answers": 1,
+    "num_comments": 2,
+    "num_upvotes": 0,
+    "num_unread_notis": 5,
+    "avatar": "client/static/img/default.jpg",
+    "followed_users": []
+  }
+},
+{
+  "model": "a2ausers.a2auser",
+  "pk": 8,
+  "fields": {
+    "user": 8,
+    "facebook_id": "",
+    "num_questions": 2,
+    "num_answers": 1,
+    "num_comments": 1,
+    "num_upvotes": 0,
+    "num_unread_notis": 2,
+    "avatar": "client/static/img/default.jpg",
+    "followed_users": []
+  }
+},
+{
+  "model": "a2ausers.a2auser",
+  "pk": 9,
+  "fields": {
+    "user": 9,
+    "facebook_id": null,
+    "num_questions": 0,
+    "num_answers": 0,
+    "num_comments": 0,
+    "num_upvotes": 0,
+    "num_unread_notis": 0,
+    "avatar": "client/static/img/default.jpg",
+    "followed_users": []
+  }
+},
+{
+  "model": "a2ausers.a2auser",
+  "pk": 10,
+  "fields": {
+    "user": 10,
+    "facebook_id": null,
+    "num_questions": 0,
+    "num_answers": 0,
+    "num_comments": 0,
+    "num_upvotes": 0,
+    "num_unread_notis": 0,
     "avatar": "client/static/img/default.jpg",
     "followed_users": []
   }
