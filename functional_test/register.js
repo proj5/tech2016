@@ -27,10 +27,7 @@ describe('Log in', function() {
   it('should log out', function() {            
     element(by.id('dropdownMenu1')).click();
     element(by.linkText('Log out')).click();
-    browser.driver.wait(function() {
-      return browser.driver.getCurrentUrl().then(function(url) {
-        return /newsfeed/.test(url);
-      });
-    }, 10000);
-  });   
+    
+    expect(element(by.buttonText('Login')).isPresent()).toBeTruthy();
+  });      
 });
