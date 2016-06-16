@@ -1,31 +1,46 @@
-<div>    
+<div>
   <div class="post-author row">
     <div class="col-md-2">
-      <img class = "post-avatar" height = "42" width = "42" margin = "center" src="{{vm.post.created_by.avatar}}">
+      <img class = "post-avatar" height = "120px" width = "120px" margin = "center" src="{{vm.post.created_by.avatar}}">
     </div>
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-6">
+          <b>{{vm.post.created_by.user.username}}</b>
+        </div>
+        <div class="col-md-6 post-datetime">
+          <i>{{vm.post.created_date | date:'medium'}}</i>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          {{vm.post.created_by.user.first_name}} {{vm.post.created_by.user.last_name}}
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12">
+            <div class="post-content">
+              {{vm.post.content}}
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <div class="col-md-6">
-      <div class="row">{{vm.post.created_by.user.username}}</div>
-      <div class="row">{{vm.post.created_by.user.first_name}} {{vm.post.created_by.user.last_name}}</div>
-    </div>
-    <div class = "col-md-4 post-datetime">
-    {{vm.post.created_date | date:'medium'}}
-  </div>
-  </div>
-  <div class="post-content">
-    {{vm.post.content}}
-  </div> 
   <div class="post-footer row">
-    <div class="col-md-12 post-buttons-container">
-      <button ng-if="vm.post.type=='question'" class="btn btn-primary btn-info" ng-click="vm.parentController.displayAnswerBox()">Answer</button>
-      <button class="btn btn-primary btn-success" ng-click="vm.upvotePost(vm.post)" ng-if="vm.post.myScore===0">Upvote | <b>{{vm.post.total_vote}}</b></button>
-      <button class="btn btn-faded" ng-click="vm.upvotePost(vm.post)" ng-if="vm.post.myScore>0">Upvoted | <b>{{vm.post.total_vote}}</b></button>
-      <!-- <a href="#" class = "post-other-buttons">Downvote</a> -->
-      <!-- <a href="#" class = "post-other-buttons">Follow</a> -->
-      <!-- <a href="#" class = "post-other-buttons">Comments</a> -->
+    <div class="col-md-12">
+      <div class="post-buttons-container">
+        <button ng-if="vm.post.type=='question'" class="btn btn-primary btn-info" ng-click="vm.parentController.displayAnswerBox()">Answer</button>
+        <button class="btn btn-primary btn-success" ng-click="vm.upvotePost(vm.post)" ng-if="vm.post.myScore===0">Upvote | <b>{{vm.post.total_vote}}</b></button>
+        <button class="btn btn-faded" ng-click="vm.upvotePost(vm.post)" ng-if="vm.post.myScore>0">Upvoted | <b>{{vm.post.total_vote}}</b></button>
+        <!-- <a href="#" class = "post-other-buttons">Downvote</a> -->
+        <!-- <a href="#" class = "post-other-buttons">Follow</a> -->
+        <!-- <a href="#" class = "post-other-buttons">Comments</a> -->
+      </div>
     </div>
   </div>
-  
+
   <div class = "well post-answer-box" ng-if="vm.post.type=='question' && vm.parentController.isDisplayAnswerBox">
     <form>
       Answer:<br>
