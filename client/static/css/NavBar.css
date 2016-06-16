@@ -39,7 +39,12 @@
 .nb-content-container {
     margin: 0 20% 0 20%;
 }
-
-.navbar-search-bar {
-    margin: 0 auto;
+.form-control .navbar-search {
+    width: 10px;
+    -webkit-transition: all .5s ease;
+   -moz-transition: all .5s ease;
+   transition: all .5s ease;
+}
+.navbar-search:focus {
+    width: 600px;
 }

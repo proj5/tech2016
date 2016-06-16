@@ -6,7 +6,12 @@
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
           </button>
         </div>
-        <div class="collapse navbar-collapse navbar-menubuilder">
+        <div class="collapse navbar-collapse navbar-menubuilder navbar-right">
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <input type="text" class="form-control navbar-search" ng-model="vm.search" placeholder="Search" uib-typeahead="question.question for question in vm.relatedQuestions" typeahead-show-hint="true" typeahead-min-length="0" ng-keyup="vm.getRelatedQuestions()"/>
+            </div>
+          </form>
           <ul class="nav navbar-nav navbar-right">
               <li id="navbar-ask-question"><a href="#" ng-click=vm.openQuestionForm()>
                 <i class="fa fa-question" aria-hidden="true"></i>

@@ -12,6 +12,7 @@
 
     vm.openQuestionForm = openQuestionForm;
     vm.submitQuestion = submitQuestion;
+    vm.search = "";
 
     init();
 
@@ -69,6 +70,17 @@
       },
       function createQuestionErrorFn(response) {
       });
+    }
+
+    vm.getRelatedQuestions = function(){
+        var url = "api/v1/questions/?keyword=" + vm.search;
+        $http.get(url)
+          .then(function successCallback(response){
+            vm.relatedQuestions = response.data;
+          }, function errorCallback(response) {
+            console.log(response.data)
+          }
+        );
     }
   }
 })();
