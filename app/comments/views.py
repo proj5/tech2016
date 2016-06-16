@@ -68,7 +68,7 @@ class CommentView(views.APIView):
             # post.num_comments += 1
             # post.save()
 
-            return Response(serializer.validated_data,
+            return Response(ExtraCommentSerializer(comment).data,
                             status=status.HTTP_201_CREATED)
 
         return Response({

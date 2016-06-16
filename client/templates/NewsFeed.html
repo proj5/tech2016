@@ -23,7 +23,7 @@
             <a href="#" class="list-group-item">Vestibulum at eros</a> -->
           </div>
         </div>
-        <div class="col-md-10 nf-main">
+        <div class="col-md-10 nf-main"  infinite-scroll="vm.loadMoreQuestions()" infinite-scroll-disabled="vm.noMore">
           <div class="post-container" ng-repeat="question in vm.questions">
             <div class="post-title">
               <div class="post-topics">
@@ -40,34 +40,7 @@
 
 
             <div ng-if = "question.answer.type !== null">
-              <div class="post-author row">
-                <div class="col-md-2">
-                <img class = "post-avatar" height = "42" width = "42" margin = "center" src="{{question.answer.created_by.avatar}}">
-                </div>
-                <div class="col-md-8">
-                  <div class="row">{{question.answer.created_by.user.first_name + " " + question.answer.created_by.user.last_name}} </div>
-                </div>
-                <div class = "col-md-2">
-                </div>
-              </div>
-              <div class="post-content">
-                {{question.answer.content}}
-              </div>
-              <div class="post-footer row">
-                <div class="col-md-8 post-buttons-container">
-                  <div class="wrapper">
-                    <button ng-show="question.answer.my_vote === 0" class="btn btn-success" ng-click="vm.upvote(question.answer)">Upvote | <b>{{question.answer.total_vote}}</b></button>
-                    <button ng-show="question.answer.my_vote > 0" class="btn btn-faded" ng-click="vm.upvote(question.answer)">Upvoted | <b>{{question.answer.total_vote}}</b></button>
-                    <!-- <a href="#" class = "post-other-buttons">Follow</a> -->
-                  </div>
-                  <!-- <a href="#" class = "post-other-buttons">Downvote</a> -->
-
-                  <!-- <a href="#" class = "post-other-buttons">Comments</a> -->
-                </div>
-                <div class="col-md-4 post-datetime">
-                  Created: {{question.post.created_date | date:'MMM dd, yyyy'}}
-                </div>
-              </div>
+              <a2a-post post=question.answer></a2a-post>
             </div>
 
             <div ng-if = "question.answer.type === null">
@@ -85,13 +58,13 @@
                 {{question.post.content}}
               </div>
               <button class="btn btn-primary" ui-sref="question({questionID: {{question.id}} })">Answer Now</button>
+              <hr>
             </div>
-
-
-            <hr>
+            
           </div>
         <!-- <div class="col-md-2 nf-right-menu">
         </div> -->
+          <div ng-hide="vm.noMore"><button ng-click="vm.loadMoreQuestions()">Loading more</button></div>
       </div>
     </div>
   </div>

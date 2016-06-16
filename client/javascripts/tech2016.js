@@ -40,6 +40,7 @@
     .module('tech2016.controllers', [
       'ngDialog',
       'ui.bootstrap',
+      'infinite-scroll',
       'pusher-angular'
     ]);
 })();

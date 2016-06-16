@@ -36,57 +36,7 @@
             </div>
             <h3><b>{{vm.question.question}}</b></h3>
           </div>
-          <div class="post-author row">
-            <div class="col-md-2">
-              <img class = "post-avatar" height = "42" width = "42" margin = "center" src="{{vm.question.post.created_by.avatar}}">
-            </div>
-            <div class="col-md-6">
-              <!-- Add link to user profile -->
-              <div class="row">{{vm.question.post.created_by.user.username}}</div>
-              <div class="row">{{vm.question.post.created_by.user.first_name}} {{vm.question.post.created_by.user.last_name}}</div>
-            </div>
-            <div class = "col-md-4 post-datetime">
-              {{vm.question.post.created_date | date:'medium'}}
-            </div>
-          </div>
-          <div class="post-content">
-            {{vm.question.post.content}}
-          </div>
-          <div class="post-footer row">
-            <div class="col-md-12 post-buttons-container">
-              <button class="btn btn-primary btn-info" ng-click="vm.displayAnswerBox()">Answer</button>
-              <button class="btn btn-primary btn-success" ng-click="vm.upvotePost(vm.question.post.id)" ng-if="vm.question.myScore===0">Upvote | <b>{{vm.question.post.total_vote}}</b></button>
-              <button class="btn btn-faded" ng-click="vm.upvotePost(vm.question.post.id)" ng-if="vm.question.myScore>0">Upvoted | <b>{{vm.question.post.total_vote}}</b></button>
-              <!-- <a href="#" class = "post-other-buttons">Downvote</a> -->
-              <!-- <a href="#" class = "post-other-buttons">Follow</a> -->
-              <!-- <a href="#" class = "post-other-buttons">Comments</a> -->
-            </div>
-          </div>
-
-          <div class = "well post-answer-box" ng-if="vm.isDisplayAnswerBox">
-            <form>
-              Answer:<br>
-              <input type="text" name="answerContent" ng-model="vm.answerContent">
-              <button type="submit" class="btn btn-primary" ng-click = "vm.submitAnswer()">Submit</button>
-            </form>
-
-          </div>
-
-          <div class = "well post-comments-container">
-            <div ng-repeat = "comment in vm.question.comments">
-              <div class = "row">
-                <i class="fa fa-circle icon-resize-small" aria-hidden="true"></i>
-                <b>{{comment.created_by.user.username}}</b> {{comment.content}} <br> <i>{{comment.created_date | date:'short'}}</i>
-              </div>
-            </div>
-            <div class = "row">
-              <form>
-                Add comment: <input type="text" name="commentContent" ng-model="vm.commentContent[vm.question.post.id]">
-                <button type="submit" class="" ng-click = "vm.submitComment(vm.question.post.id)">Submit</button>
-              </form>
-            </div>
-          </div>
-          <hr>
+          <a2a-post post="vm.question.post" parent-controller="vm" show-comment="true"></a2a-post>
         </div>
 
         <div class="row answer-container">
@@ -94,47 +44,7 @@
             <h4><b>{{vm.answers.length}} Answers</b></h4>
           </div>
           <div class="row" ng-repeat = "answer in vm.answers">
-            <div class="post-author row">
-              <div class="col-md-2">
-                <img class = "post-avatar" height = "42" width = "42" margin = "center" src="{{answer.created_by.avatar}}">
-              </div>
-
-              <div class="col-md-6">
-                <div class="row">{{answer.created_by.user.username}}</div>
-                <div class="row">{{answer.created_by.user.first_name}} {{answer.created_by.user.last_name}}</div>
-              </div>
-              <div class = "col-md-4 post-datetime">
-              {{answer.created_date | date:'medium'}}
-            </div>
-            </div>
-            <div class="post-content">
-              {{answer.content}}
-            </div>
-            <div class="post-footer row">
-              <div class="col-md-12 post-buttons-container">
-                <button class="btn btn-primary btn-success" ng-click="vm.upvotePost(answer.id)" ng-if="answer.myScore===0">Upvote | <b>{{answer.total_vote}}</b></button>
-              <button class="btn btn-faded" ng-click="vm.upvotePost(answer.id)" ng-if="answer.myScore>0">Upvoted | <b>{{answer.total_vote}}</b></button>
-                <!-- <a href="#" class = "post-other-buttons">Downvote</a> -->
-                <!-- <a href="#" class = "post-other-buttons">Comments</a> -->
-              </div>
-            </div>
-
-            <div class = "well post-comments-container">
-            <div ng-repeat = "comment in answer.comments">
-              <div class = "row">
-                <i class="fa fa-circle icon-resize-small" aria-hidden="true"></i>
-                <b>{{comment.created_by.user.username}}</b> {{comment.content}} <br> <i>{{comment.created_date | date:'short'}}</i>
-              </div>
-            </div>
-            <div class = "row">
-              <form>
-                Add comment: <input type="text" name="commentContent" ng-model="vm.commentContent[answer.id]">
-                <button type="submit" class="" ng-click = "vm.submitComment(answer.id)">Submit</button>
-              </form>
-            </div>
-          </div>
-
-            <hr>
+            <a2a-post post="answer" parent-controller="vm" show-comment="true"></a2a-post>
           </div>
         </div>
       </div>
@@ -145,9 +55,9 @@
             <h4>Related questions:</h4>
             <hr>
           </div>
-          <div ng-repeat = "realtedQuestion in vm.relatedQuestions">
+          <div ng-repeat = "relatedQuestion in vm.relatedQuestions">
             <div class="row question-related-question">
-              <a href="#">{{realtedQuestion.question}}</a>
+              <a ui-sref="question({questionID: {{relatedQuestion.id}} })">{{relatedQuestion.question}}</a>
             </div>
           </div>
 
