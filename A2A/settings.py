@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'compressor'
+    'compressor',
+    'storages'
 ]
 
 REST_FRAMEWORK = {
@@ -102,6 +103,9 @@ if os.environ.get('HEROKU') == '1':
 
     DATABASES = {}
     DATABASES['default'] = dj_database_url.config(conn_max_age=500)
+
+    DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+    DROPBOX_OAUTH2_TOKEN = os.environ.get('DROPBOX')
 else:
     name = 'db.sqlite3'
     if (os.environ.get('TRAVIS_TEST_ENV')):
