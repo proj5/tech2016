@@ -5,9 +5,9 @@
     .module('tech2016.question.controllers')
     .controller('ListQuestionController', ListQuestionController);
 
-    ListQuestionController.$inject = ['$http'];
+    ListQuestionController.$inject = ['$http', 'PostService'];
 
-  function ListQuestionController($http) {
+  function ListQuestionController($http, PostService) {
     var vm = this;
     vm.questions = [];
     
@@ -22,14 +22,8 @@
     }
     
     function getQuestionAnswerDetail(question){      
-      promises.push(
-        $http.get("api/v1/vote/?postID=" + question.answer.id)
-          .then(function successCallback(response) {
-            question.answer.myScore = response.data;
-          }, function errorCallback(response) {
-            question.answer.myScore = 0;
-          })
-      )
+      if (question.answer)
+        PostService.getMyVote(question.answer);
     }    
     
     function getNextQuestions(startID, count){
