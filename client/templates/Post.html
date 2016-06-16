@@ -40,15 +40,15 @@
       </div>
     </div>
   </div>
-
-  <div class = "well post-answer-box" ng-if="vm.post.type=='question' && vm.parentController.isDisplayAnswerBox">
-    <form>
-      Answer:<br>
-      <input type="text" name="answerContent" ng-model="vm.parentController.answerContent">
-      <button type="submit" class="btn btn-primary" ng-click = "vm.parentController.submitAnswer()">Submit</button>
-    </form>
+  <div class="row">
+    <div class = "col-md-12 well post-answer-box" ng-if="vm.post.type=='question' && vm.parentController.isDisplayAnswerBox">
+      <form>
+        Answer:<br>
+        <input type="text" name="answerContent" ng-model="vm.parentController.answerContent">
+        <button type="submit" class="btn btn-primary" ng-click = "vm.parentController.submitAnswer()">Submit</button>
+      </form>
+    </div>
   </div>
-
   <div ng-if="vm.showComment">
     <div class = "well post-comments-container">
       <div ng-repeat = "comment in vm.post.comments">
