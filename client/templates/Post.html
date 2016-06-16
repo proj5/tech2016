@@ -53,16 +53,24 @@
     <div class = "well post-comments-container">
       <div ng-repeat = "comment in vm.post.comments">
         <div class = "row">
-          <i class="fa fa-circle icon-resize-small" aria-hidden="true"></i>
-          <b>{{comment.created_by.user.username}}</b> {{comment.content}} <br> <i>{{comment.created_date | date:'short'}}</i>
+          <div class="col-md-9">
+            <i class="fa fa-circle icon-resize-small" aria-hidden="true"></i>
+            <b>{{comment.created_by.user.username}}</b>
+            {{comment.content}}
+          </div>
+          <div class="col-md-3">
+            <i>{{comment.created_date | date:'short'}}</i>
+          </div>
         </div>
     </div>
 
-    <div class = "row">
-        <form>
-          Add comment: <input type="text" ng-model="vm.commentContent">
-          <button type="submit" class="" ng-click = "vm.submitComment(vm.post)">Submit</button>
-        </form>
+      <div class = "row comment-add-comment">
+        <div class="col-md-12">
+          <form>
+            Add comment: <input type="text" ng-model="vm.commentContent">
+            <button type="submit" class="btn btn-primary btn-sm" ng-click = "vm.submitComment(vm.post)">Submit</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
