@@ -44,8 +44,14 @@
     <div class = "col-md-12 well post-answer-box" ng-if="vm.post.type=='question' && vm.parentController.isDisplayAnswerBox">
       <form>
         Answer:<br>
-        <input type="text" name="answerContent" ng-model="vm.parentController.answerContent">
-        <button type="submit" class="btn btn-primary" ng-click = "vm.parentController.submitAnswer()">Submit</button>
+        <div class="row">
+          <div class="col-md-10">
+            <input class="form-control" type="text" name="answerContent" ng-model="vm.parentController.answerContent">
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary" ng-click = "vm.parentController.submitAnswer()">Submit</button>
+          </div>
+        </div>
       </form>
     </div>
   </div>
@@ -67,8 +73,19 @@
       <div class = "row comment-add-comment">
         <div class="col-md-12">
           <form>
-            Add comment: <input type="text" ng-model="vm.commentContent">
-            <button type="submit" class="btn btn-primary btn-sm" ng-click = "vm.submitComment(vm.post)">Submit</button>
+            <!-- Add comment: <input type="text" ng-model="vm.commentContent">
+            <button type="submit" class="btn btn-primary btn-sm" ng-click = "vm.submitComment(vm.post)">Submit</button> -->
+            <div class="row">
+              <div class="col-md-2">
+                Add comment:
+              </div>
+              <div class="col-md-8">
+                <input class="form-control input-sm" type="text" ng-model="vm.commentContent">
+              </div>
+              <div class="col-md-2">
+                <button type="submit" class="btn btn-primary btn-sm" ng-click = "vm.submitComment(vm.post)">Submit</button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
