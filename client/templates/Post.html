@@ -1,0 +1,56 @@
+<div>    
+  <div class="post-author row">
+    <div class="col-md-2">
+      <img class = "post-avatar" height = "42" width = "42" margin = "center" src="{{vm.post.created_by.avatar}}">
+    </div>
+
+    <div class="col-md-6">
+      <div class="row">{{vm.post.created_by.user.username}}</div>
+      <div class="row">{{vm.post.created_by.user.first_name}} {{vm.post.created_by.user.last_name}}</div>
+    </div>
+    <div class = "col-md-4 post-datetime">
+    {{vm.post.created_date | date:'medium'}}
+  </div>
+  </div>
+  <div class="post-content">
+    {{vm.post.content}}
+  </div> 
+  <div class="post-footer row">
+    <div class="col-md-12 post-buttons-container">
+      <button ng-if="vm.post.type=='question'" class="btn btn-primary btn-info" ng-click="vm.parentController.displayAnswerBox()">Answer</button>
+      <button class="btn btn-primary btn-success" ng-click="vm.upvotePost(vm.post)" ng-if="vm.post.myScore===0">Upvote | <b>{{vm.post.total_vote}}</b></button>
+      <button class="btn btn-faded" ng-click="vm.upvotePost(vm.post)" ng-if="vm.post.myScore>0">Upvoted | <b>{{vm.post.total_vote}}</b></button>
+      <!-- <a href="#" class = "post-other-buttons">Downvote</a> -->
+      <!-- <a href="#" class = "post-other-buttons">Follow</a> -->
+      <!-- <a href="#" class = "post-other-buttons">Comments</a> -->
+    </div>
+  </div>
+  
+  <div class = "well post-answer-box" ng-if="vm.post.type=='question' && vm.parentController.isDisplayAnswerBox">
+    <form>
+      Answer:<br>
+      <input type="text" name="answerContent" ng-model="vm.parentController.answerContent">
+      <button type="submit" class="btn btn-primary" ng-click = "vm.parentController.submitAnswer()">Submit</button>
+    </form>
+  </div>
+
+  <div ng-if="vm.showComment">
+    <div class = "well post-comments-container">
+      <div ng-repeat = "comment in vm.post.comments">
+        <div class = "row">
+          <i class="fa fa-circle icon-resize-small" aria-hidden="true"></i>
+          <b>{{comment.created_by.user.username}}</b> {{comment.content}} <br> <i>{{comment.created_date | date:'short'}}</i>
+        </div>
+    </div>
+
+    <div class = "row">
+        <form>
+          Add comment: <input type="text" ng-model="vm.commentContent">
+          <button type="submit" class="" ng-click = "vm.submitComment(vm.post)">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+</div>

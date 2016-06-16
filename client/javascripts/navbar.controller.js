@@ -5,9 +5,9 @@
     .module('tech2016.controllers')
     .controller('NavBarController', NavBarController);
 
-  NavBarController.$inject = ['$scope', '$state', 'Authentication', '$window', '$http', 'ngDialog'];
+  NavBarController.$inject = ['$scope', '$state', 'Authentication', '$window', '$http', 'ngDialog', '$pusher'];
 
-  function NavBarController($scope, $state, Authentication, $window, $http, ngDialog) {
+  function NavBarController($scope, $state, Authentication, $window, $http, ngDialog, $pusher) {
     var vm = this;
 
     vm.openQuestionForm = openQuestionForm;
@@ -32,6 +32,15 @@
         function errorCallback(response) {
           console.log("Error when get User")
         });
+
+      var client = new Pusher('df818e2c5c3828256440');
+      var pusher = $pusher(client);
+
+      var channel = pusher.subscribe('notification_' + vm.username);
+      channel.bind('new_noti', function(data) {
+        vm.user = data
+      })
+
     }
 
     vm.logout = function() {
