@@ -18,8 +18,8 @@
   <div class="post-footer row">
     <div class="col-md-12 post-buttons-container">
       <button ng-if="vm.post.type=='question'" class="btn btn-primary btn-info" ng-click="vm.parentController.displayAnswerBox()">Answer</button>
-      <button class="btn btn-primary btn-success" ng-click="vm.upvotePost(vm.post.id)" ng-if="vm.post.myScore===0">Upvote | <b>{{vm.post.total_vote}}</b></button>
-      <button class="btn btn-faded" ng-click="vm.upvotePost(vm.post.id)" ng-if="vm.post.myScore>0">Upvoted | <b>{{vm.post.total_vote}}</b></button>
+      <button class="btn btn-primary btn-success" ng-click="vm.upvotePost(vm.post)" ng-if="vm.post.myScore===0">Upvote | <b>{{vm.post.total_vote}}</b></button>
+      <button class="btn btn-faded" ng-click="vm.upvotePost(vm.post)" ng-if="vm.post.myScore>0">Upvoted | <b>{{vm.post.total_vote}}</b></button>
       <!-- <a href="#" class = "post-other-buttons">Downvote</a> -->
       <!-- <a href="#" class = "post-other-buttons">Follow</a> -->
       <!-- <a href="#" class = "post-other-buttons">Comments</a> -->

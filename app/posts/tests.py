@@ -101,6 +101,14 @@ class VoteApiTest(APITestCase):
         pre_downvote_num = Vote.objects.filter(score=-1).count()
 
         response = self.client.post(url, data, format='json')
+        self.assertEqual(
+            response.data['total_vote'],
+            pre_upvote_num - pre_downvote_num + 1
+        )
+        self.assertEqual(
+            response.data['my_vote'],
+            1
+        )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(pre_upvote_num + 1,
                          Vote.objects.filter(score=1).count())
@@ -117,6 +125,14 @@ class VoteApiTest(APITestCase):
 
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            response.data['total_vote'],
+            pre_upvote_num - pre_downvote_num - 1
+        )
+        self.assertEqual(
+            response.data['my_vote'],
+            0
+        )
         self.assertEqual(pre_upvote_num - 1,
                          Vote.objects.filter(score=1).count())
         self.assertEqual(pre_downvote_num,
