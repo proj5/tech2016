@@ -2,9 +2,11 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
+import time
 
 
 class A2AUserManager(models.Manager):
+
     def create_user(self, username, first_name, last_name, email, password,
                     **kwargs):
         if not email:
@@ -27,6 +29,15 @@ class A2AUserManager(models.Manager):
         return account
 
 
+def img_path(instance, filename):
+    ext = ''
+    pos = filename.rfind('.')
+    if pos != -1:
+        ext = filename[pos:]
+    filename = str(int(time.time())) + ext
+    return 'client/static/img/user_{0}/{1}'.format(instance.user.id, filename)
+
+
 class A2AUser(models.Model):
     objects = A2AUserManager()
 
@@ -38,7 +49,7 @@ class A2AUser(models.Model):
     num_upvotes = models.IntegerField(default=0)
     num_unread_notis = models.IntegerField(default=0)
     avatar = models.ImageField(
-        upload_to='client/static/img/',
+        upload_to=img_path,
         default='client/static/img/default.jpg'
     )
     followed_users = models.ManyToManyField(
