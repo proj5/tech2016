@@ -15,7 +15,7 @@
   "fields": {
     "name": "Technology",
     "description": "",
-    "num_questions": 1,
+    "num_questions": 3,
     "followed_by": []
   }
 },
@@ -26,6 +26,86 @@
     "name": "Machine Learning",
     "description": "",
     "num_questions": 0,
+    "followed_by": []
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 4,
+  "fields": {
+    "name": "Macbook",
+    "description": "",
+    "num_questions": 1,
+    "followed_by": []
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 5,
+  "fields": {
+    "name": "Music",
+    "description": "",
+    "num_questions": 1,
+    "followed_by": []
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 6,
+  "fields": {
+    "name": "\u0110\u1ea1i h\u1ecdc",
+    "description": "",
+    "num_questions": 1,
+    "followed_by": []
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 7,
+  "fields": {
+    "name": "UET",
+    "description": "",
+    "num_questions": 1,
+    "followed_by": []
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 8,
+  "fields": {
+    "name": "\u0110\u00e0 N\u1eb5ng",
+    "description": "",
+    "num_questions": 1,
+    "followed_by": []
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 9,
+  "fields": {
+    "name": "Ch\u01a1i",
+    "description": "",
+    "num_questions": 1,
+    "followed_by": []
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 11,
+  "fields": {
+    "name": "Laptop",
+    "description": "",
+    "num_questions": 1,
+    "followed_by": []
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 12,
+  "fields": {
+    "name": "l\u1eadp tr\u00ecnh vi\u00ean",
+    "description": "",
+    "num_questions": 1,
     "followed_by": []
   }
 }
