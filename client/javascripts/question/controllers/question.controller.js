@@ -35,32 +35,6 @@
           console.log("Error when submit answer");
         });
       }
-
-      vm.submitComment = function(postID) {
-        var postAnswerURL = "api/v1/comment/id=" + postID + '/';
-        $http.post(postAnswerURL, {
-          "content": vm.commentContent[postID]
-        })
-        .then(function successCallback(response) {
-          $state.reload();
-        },
-        function errorCallback(response) {
-          console.log("Error when submit comment");
-        });
-      }
-
-      vm.upvotePost = function(postID) {
-        var upvoteURL = "api/v1/vote/?postID=" + postID;
-        $http.post(upvoteURL, {
-          "score" : 1
-        })
-        .then(function successCallback(response) {
-          $state.reload();
-        },
-        function errorCallback(response) {
-          console.log("Error when upvote a post");
-        });
-      }
 	  
       vm.toggleEditBox = function() {
         vm.showEditBox = !vm.showEditBox;

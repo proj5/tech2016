@@ -16,7 +16,8 @@
           "content": vm.commentContent
         })
         .then(function successCallback(response) {
-          $state.reload();
+          //$state.reload();
+          post.comments.push(response.data);
         },
         function errorCallback(response) {
           console.log("Error when submit comment");
