@@ -22,5 +22,102 @@
       2
     ]
   }
+},
+{
+  "model": "questions.question",
+  "pk": 3,
+  "fields": {
+    "question": "S\u00e1ch n\u00e0o t\u1ed1t nh\u1ea5t \u0111\u1ec3 h\u1ecdc functional programming ?",
+    "post": 5,
+    "num_answers": 1,
+    "topics": [
+      2
+    ]
+  }
+},
+{
+  "model": "questions.question",
+  "pk": 4,
+  "fields": {
+    "question": "B\u00e2y gi\u1edd n\u00ean h\u1ecdc ng\u00f4n ng\u1eef l\u1eadp tr\u00ecnh g\u00ec ?",
+    "post": 7,
+    "num_answers": 2,
+    "topics": [
+      2
+    ]
+  }
+},
+{
+  "model": "questions.question",
+  "pk": 5,
+  "fields": {
+    "question": "M\u00ecnh s\u1eafp v\u00e0o H\u00e0 N\u1ed9i ch\u01a1i, m\u1ecdi ng\u01b0\u1eddi \u0111\u1ec1 xu\u1ea5t m\u1ed9t s\u1ed1 \u0111\u1ecba \u0111i\u1ec3m \u0103n u\u1ed1ng cho m\u00ecnh v\u1edbi",
+    "post": 10,
+    "num_answers": 2,
+    "topics": []
+  }
+},
+{
+  "model": "questions.question",
+  "pk": 6,
+  "fields": {
+    "question": "\u0110\u00e0 N\u1eb5ng c\u00f3 g\u00ec ch\u01a1i kh\u00f4ng nh\u1ec9?",
+    "post": 12,
+    "num_answers": 2,
+    "topics": [
+      8,
+      9
+    ]
+  }
+},
+{
+  "model": "questions.question",
+  "pk": 8,
+  "fields": {
+    "question": "H\u1ecdc \u1edf \u0110\u1ea1i h\u1ecdc C\u00f4ng ngh\u1ec7 nh\u01b0 th\u1ebf n\u00e0o?",
+    "post": 16,
+    "num_answers": 0,
+    "topics": [
+      6,
+      7
+    ]
+  }
+},
+{
+  "model": "questions.question",
+  "pk": 9,
+  "fields": {
+    "question": "B\u1ea3n nh\u1ea1c n\u00e0o \u0111\u1ed1i v\u1edbi b\u1ea1n l\u00e0 hay nh\u1ea5t?",
+    "post": 17,
+    "num_answers": 2,
+    "topics": [
+      5
+    ]
+  }
+},
+{
+  "model": "questions.question",
+  "pk": 10,
+  "fields": {
+    "question": "Macbook pro b\u1ea3n 2016 khi n\u00e0o ra nh\u1ec9 ?",
+    "post": 20,
+    "num_answers": 1,
+    "topics": [
+      4
+    ]
+  }
+},
+{
+  "model": "questions.question",
+  "pk": 11,
+  "fields": {
+    "question": "Laptop n\u00e0o ph\u00f9 h\u1ee3p v\u1edbi l\u1eadp tr\u00ecnh vi\u00ean nh\u1ea5t?",
+    "post": 23,
+    "num_answers": 1,
+    "topics": [
+      11,
+      12
+    ]
+  }
 }
 ]

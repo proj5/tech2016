@@ -28,5 +28,105 @@
     "created_date": "2016-06-02T13:14:42.032Z",
     "created_by": 1
   }
+},
+{
+  "model": "comments.comment",
+  "pk": 4,
+  "fields": {
+    "parent": 6,
+    "content": "C\u1ea3m \u01a1n b\u1ea1n nhi\u1ec1u :D",
+    "created_date": "2016-06-10T09:56:56.720Z",
+    "created_by": 4
+  }
+},
+{
+  "model": "comments.comment",
+  "pk": 5,
+  "fields": {
+    "parent": 7,
+    "content": "B\u1ea1n mu\u1ed1n h\u1ecdc l\u1eadp tr\u00ecnh \u0111\u1ec3 l\u00e0m g\u00ec ?",
+    "created_date": "2016-06-10T09:57:48.904Z",
+    "created_by": 4
+  }
+},
+{
+  "model": "comments.comment",
+  "pk": 6,
+  "fields": {
+    "parent": 7,
+    "content": "H\u00f3ng. M\u00ecnh c\u0169ng mu\u1ed1n h\u1ecfi c\u00e2u t\u01b0\u01a1ng t\u1ef1.",
+    "created_date": "2016-06-10T09:58:50.678Z",
+    "created_by": 7
+  }
+},
+{
+  "model": "comments.comment",
+  "pk": 7,
+  "fields": {
+    "parent": 8,
+    "content": "M\u00ecnh ngh\u0129 Scala m\u1edbi l\u00e0 s\u1ed1 m\u1ed9t ch\u1ee9 !!!",
+    "created_date": "2016-06-10T09:59:26.393Z",
+    "created_by": 4
+  }
+},
+{
+  "model": "comments.comment",
+  "pk": 8,
+  "fields": {
+    "parent": 8,
+    "content": "Scala kh\u00f3 cho ng\u01b0\u1eddi m\u1edbi b\u1eaft \u0111\u1ea7u. Scala m\u1ea1nh nh\u01b0ng kh\u00f3 h\u1ecdc l\u1eafm b\u1ea1n.",
+    "created_date": "2016-06-10T09:59:54.642Z",
+    "created_by": 6
+  }
+},
+{
+  "model": "comments.comment",
+  "pk": 9,
+  "fields": {
+    "parent": 14,
+    "content": "Kh\u00f4ng troll nh\u00e9, troll m\u00ecnh ban nick \u0111\u00f3 :D",
+    "created_date": "2016-06-10T10:16:33.116Z",
+    "created_by": 1
+  }
+},
+{
+  "model": "comments.comment",
+  "pk": 10,
+  "fields": {
+    "parent": 12,
+    "content": "\u0110\u00e0 N\u1eb5ng ch\u00e1n l\u1eafm, \u0111i ch\u01a1i ch\u1ed7 kh\u00e1c \u0111i b\u1ea1n. Khuy\u00ean ch\u00e2n th\u00e0nh",
+    "created_date": "2016-06-10T10:20:57.408Z",
+    "created_by": 7
+  }
+},
+{
+  "model": "comments.comment",
+  "pk": 11,
+  "fields": {
+    "parent": 21,
+    "content": "Kh\u00f4ng bi\u1ebft macbook m\u1edbi c\u00f3 thay \u0111\u1ed5i g\u00ec nhi\u1ec1u v\u1ec1 h\u00ecnh d\u00e1ng v\u00e0 ch\u1ee9c n\u0103ng kh\u00f4ng nh\u1ec9?",
+    "created_date": "2016-06-10T15:22:35.507Z",
+    "created_by": 4
+  }
+},
+{
+  "model": "comments.comment",
+  "pk": 12,
+  "fields": {
+    "parent": 21,
+    "content": "Theo th\u00f4ng tin kh\u00f4ng ch\u00ednh th\u1ee9c th\u00ec th\u00e1ng 8 macbook pro m\u1edbi s\u1ebd \u0111\u01b0\u1ee3c ra m\u1eaft v\u1edbi 4 c\u00f4ng USB type C, c\u00f9ng n\u00fat \u0111i\u1ec1u khi\u1ec3n c\u1ea3m \u1ee9ng",
+    "created_date": "2016-06-10T15:43:20.613Z",
+    "created_by": 8
+  }
+},
+{
+  "model": "comments.comment",
+  "pk": 13,
+  "fields": {
+    "parent": 24,
+    "content": "C\u1ea3m \u01a1n b\u1ea1n :D",
+    "created_date": "2016-06-10T16:33:20.088Z",
+    "created_by": 4
+  }
 }
 ]
