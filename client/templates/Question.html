@@ -55,9 +55,9 @@
             <h4>Related questions:</h4>
             <hr>
           </div>
-          <div ng-repeat = "realtedQuestion in vm.relatedQuestions">
+          <div ng-repeat = "relatedQuestion in vm.relatedQuestions">
             <div class="row question-related-question">
-              <a href="#">{{realtedQuestion.question}}</a>
+              <a ui-sref="question({questionID: {{relatedQuestion.id}} })">{{relatedQuestion.question}}</a>
             </div>
           </div>
 
