@@ -14,7 +14,8 @@
         bindToController: {
           name: '@',
           post: '=',
-          parentController: '='
+          parentController: '=',
+          showComment: '@'
         },
         controller: 'PostController',
         controllerAs: 'vm',

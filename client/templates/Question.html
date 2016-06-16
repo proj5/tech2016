@@ -36,7 +36,7 @@
             </div>
             <h3><b>{{vm.question.question}}</b></h3>
           </div>
-          <a2a-post post="vm.question.post" parent-controller="vm"></a2a-post>
+          <a2a-post post="vm.question.post" parent-controller="vm" show-comment="true"></a2a-post>
         </div>
 
         <div class="row answer-container">
@@ -44,7 +44,7 @@
             <h4><b>{{vm.answers.length}} Answers</b></h4>
           </div>
           <div class="row" ng-repeat = "answer in vm.answers">
-            <a2a-post post="answer" parent-controller="vm"></a2a-post>
+            <a2a-post post="answer" parent-controller="vm" show-comment="true"></a2a-post>
           </div>
         </div>
       </div>
