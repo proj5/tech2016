@@ -23,7 +23,7 @@
             <a href="#" class="list-group-item">Vestibulum at eros</a> -->
           </div>
         </div>
-        <div class="col-md-10 nf-main">
+        <div class="col-md-10 nf-main"  infinite-scroll="vm.loadMoreQuestions()" infinite-scroll-disabled="vm.noMore">
           <div class="post-container" ng-repeat="question in vm.questions">
             <div class="post-title">
               <div class="post-topics">
@@ -64,6 +64,7 @@
           </div>
         <!-- <div class="col-md-2 nf-right-menu">
         </div> -->
+          <div ng-hide="vm.noMore"><button ng-click="vm.loadMoreQuestions()">Loading more</button></div>
       </div>
     </div>
   </div>
