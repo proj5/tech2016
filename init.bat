@@ -1,6 +1,13 @@
 @echo off
 :: !Clear old database
-del db.sqlite3
+set name=db.sqlite3
+
+set argc=0
+for %%x in (%*) do Set /A argc+=1
+if %argc% GEQ 1 set name=dbtest.sqlite3
+
+echo %name%
+del %name%
 
 :: !Create new database
 python manage.py migrate
