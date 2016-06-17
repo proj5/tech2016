@@ -19,7 +19,7 @@ from django.contrib import admin
 from topics.views import TopicView, TopicDetailView
 from questions.views import QuestionView, QuestionDetailView
 from questions.views import QuestionTopicView, TopicQuestionView
-from questions.views import AnswerView, AnswerDetailView
+from questions.views import AnswerView, AnswerDetailView, ProfileView
 from a2ausers.views import UserListView, LoginView, LogoutView, UserDetailView
 from a2ausers.views import AvatarView
 from comments.views import CommentView, CommentsForPostView
@@ -49,7 +49,11 @@ urlpatterns = [
     # Follow views
     url(r'^api/v1/follow/$', FollowPostView.as_view(), name='follow_post'),
 
+    # Admin
     url(r'^admin/', admin.site.urls),
+
+    # Question views
+    url(r'^api/v1/profile/(?P<username>.+)/$', ProfileView.as_view()),
     url(r'^api/v1/topic/question/$', TopicQuestionView.as_view()),
     url(r'^api/v1/topic/(?P<topic_id>.+)/$', TopicDetailView.as_view()),
     url(r'^api/v1/topics/$', TopicView.as_view()),

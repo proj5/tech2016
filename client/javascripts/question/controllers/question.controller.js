@@ -35,24 +35,24 @@
           console.log("Error when submit answer");
         });
       }
-	  
+
       vm.toggleEditBox = function() {
         vm.showEditBox = !vm.showEditBox;
       }
-      
+
       vm.getRelatedTopic = function(){
         var url = "api/v1/topics/?keyword=" + vm.topicName;
         $http.get(url).
           then(
             function successCallback(response){
               vm.relatedTopics = response.data;
-            }, 
+            },
             function errorCallback(response) {
               console.log(response.data)
             }
           );
       }
-      
+
       vm.submitTopic = function(){
         var url = "api/v1/question/topic/?questionID=" + vm.questionID;
         var createUrl = "api/v1/topic/"
@@ -61,7 +61,7 @@
         .then(function addTopicSuccessFn(data, status, headers, config) {
           vm.topics.push(vm.topicName);
           vm.toggleEditBox();
-        }, 
+        },
         function createQuestionErrorFn(response) {
           if (response.data.detail){
             console.log("abc");
@@ -76,17 +76,17 @@
                   vm.topics.push(obj);
                   vm.toggleEditBox();
                 }, function fail(response) {
-                  
+
                 });
               },
               function addTopicError(response) {
-                
+
               }
             );
           }
         });
       }
-      
+
       function updateTotalComment(post){
         vm.totalComment += post.comments.length;
       }
@@ -98,8 +98,8 @@
         .then(function successCallback(response){
             vm.question = response.data;
             getRelatedQuestions();
-            vm.totalUpvote += vm.question.post.total_vote;            
-                        
+            vm.totalUpvote += vm.question.post.total_vote;
+
             PostService.getMyVote(vm.question.post);
             PostService.getComments(vm.question.post, updateTotalComment);
         }, function errorCallback(response) {
@@ -127,7 +127,7 @@
             vm.answers.forEach(function(answer) {
               vm.totalUpvote += answer.total_vote;
               PostService.getComments(answer, updateTotalComment);
-              PostService.getMyVote(answer);              
+              PostService.getMyVote(answer);
             });
         }, function errorCallback(response) {
             console.log("Error get Answers");
