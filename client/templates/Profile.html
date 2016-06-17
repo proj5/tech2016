@@ -15,7 +15,7 @@
             <img class="profile-avatar" src="{{vm.avatar.avatar}}"/>
           </div>
           <div class="row">
-            <button class="btn btn-primary" id="profile-change-button" ng-click="vm.changeAvatar = !vm.changeAvatar">Change avatar</button>
+            <button class="btn btn-primary" id="profile-change-button" ng-if="vm.username === vm.currentUser.username" ng-click="vm.changeAvatar = !vm.changeAvatar">Change avatar</button>
           </div>
           <div ng-if="vm.changeAvatar">
             <input type="file" file-model="vm.newAvatar" id="profile-choose-file"/>
@@ -35,7 +35,51 @@
         </div>
         <div class="col-md-9">
           <div ng-if="vm.view === 'question'">
-            <h3>{{vm.user.num_questions}} Questions</h3>
+            <h3 style="margin-top: 10px">{{vm.user.num_questions}} Questions</h3>
+            <div infinite-scroll="vm.loadMoreQuestions()" infinite-scroll-disabled="vm.noMoreQuestion">
+              <div class="post-container" ng-repeat="question in vm.questions">
+                <div class="post-title">
+                  <a ui-sref="question({questionID: {{question.id}} })"><h3><b>{{question.question}}</b></h3></a>
+                </div>
+                <button class="btn btn-primary" ui-sref="question({questionID: {{question.id}} })">Answer</button>
+                <hr>
+              </div>
+            </div>
+          </div>
+          <div ng-if="vm.view === 'answer'">
+            <h3 style="margin-top: 10px">{{vm.user.num_answers}} Answers</h3>
+
+
+            <div infinite-scroll="vm.loadMoreAnswers()" infinite-scroll-disabled="vm.noMoreAnswer">
+              <div class="post-container" ng-repeat="answer in vm.answers">
+                <div class="post-title">
+                  <a ui-sref="question({questionID: {{answer.question.id}} })"><h3><b>{{answer.question.question}}</b></h3></a>
+                </div>
+
+                <div class="post-author row">
+                  <div class="col-md-2">
+                    <img class = "post-avatar" height = "42" width = "42" margin = "center" src="{{answer.created_by.avatar}}">
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="row">{{answer.created_by.user.first_name}} {{answer.created_by.user.last_name}}</div>
+                  </div>
+                </div>
+
+                <div class="post-content">
+                  {{answer.content}}
+                </div>
+
+                <div class="post-footer row">
+                  <div class="col-md-12 post-buttons-container">
+                    <button class="btn btn-primary btn-success" ng-click="vm.upvotePost(answer)" ng-if="answer.my_vote === 0">Upvote | <b>{{answer.total_vote}}</b></button>
+                    <button class="btn btn-faded" ng-click="vm.upvotePost(answer)" ng-if="answer.my_vote > 0">Upvoted | <b>{{answer.total_vote}}</b></button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

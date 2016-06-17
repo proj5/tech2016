@@ -10,16 +10,20 @@
     var vm = this;
     vm.changeAvatar = false;
     vm.questions = [];
+    vm.answers = [];
 
     init();
     getAvatar();
-    getNextQuestions(0 , 5);
+    getNextQuestions(0, 5);
+    getNextAnswers(0, 5);
 
     function init() {
       vm.username = $stateParams.username;
+      vm.currentUser = Authentication.getAuthenticatedAccount();
       getUserProfile();
       vm.view = 'question';
-      vm.noMore = false;
+      vm.noMoreQuestion = false;
+      vm.noMoreAnswer = false;
     }
 
     function getUserProfile() {
@@ -53,18 +57,58 @@
         getNextQuestions(vm.questions[ vm.questions.length - 1].id, 5);
     }
 
+    vm.loadMoreAnswers = function(){
+      if (vm.answers.length > 0)
+        getNextAnswers(vm.answers[ vm.answers.length - 1].id, 5);
+    }
+
     function getNextQuestions(startID, count){
       var url = "api/v1/profile/" + vm.username + "/?type=question&startID=" + startID + "&count=" + count;
-      console.log(url);
       $http.get(url)
         .then(function successCallback(response) {
           if (response.data.length == 0)
-            vm.noMore = true;
+            vm.noMoreQuestion = true;
           for(var i = 0; i < response.data.length; ++i)
             vm.questions.push(response.data[i]);
         }, function errorCallback(response) {
           console.error("Failed to get questions");
         });
+    }
+
+    function getMyVote(answer) {
+      var url = "/api/v1/vote/?postID=" + answer.id;
+      $http.get(url).then(function successCallback(response) {
+        answer.my_vote = response.data;
+      }, function errorCallback(response) {});
+    }
+
+    function getNextAnswers(startID, count){
+      var url = "api/v1/profile/" + vm.username + "/?type=answer&startID=" + startID + "&count=" + count;
+      $http.get(url)
+        .then(function successCallback(response) {
+          if (response.data.length == 0)
+            vm.noMoreAnswer = true;
+          for(var i = 0; i < response.data.length; ++i) {
+            vm.answers.push(response.data[i]);
+          }
+          response.data.forEach(getMyVote);
+        }, function errorCallback(response) {
+          console.error("Failed to get questions");
+        });
+    }
+
+    vm.upvotePost = function(answer) {
+      var upvoteURL = "api/v1/vote/?postID=" + answer.id;
+      $http.post(upvoteURL, {
+        "score" : 1
+      })
+      .then(function successCallback(response) {
+        answer.total_vote = response.data.total_vote;
+        answer.my_vote = response.data.my_vote;
+      },
+      function errorCallback(response) {
+        console.log("Error when upvote a post");
+      });
     }
   }
 
