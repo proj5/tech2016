@@ -20,6 +20,10 @@
     color: blue;
 }
 
+.not_read {
+    background: #F0F0F0;
+}
+
 .dropdown-toggle .badge {
     background: #e66454;
 }
