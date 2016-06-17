@@ -5,9 +5,9 @@
     .module('tech2016.question.controllers')
     .controller('QuestionController', QuestionController);
 
-    QuestionController.$inject = ['$scope', '$state', '$http', '$stateParams', 'ngDialog', 'PostService'];
+    QuestionController.$inject = ['$scope', '$state', '$http', '$stateParams', 'ngDialog', 'PostService', 'TopicService'];
 
-    function QuestionController($scope, $state, $http, $stateParams, ngDialog, PostService) {
+    function QuestionController($scope, $state, $http, $stateParams, ngDialog, PostService, TopicService) {
       var vm = this;
       vm.questionID = $stateParams.questionID;
       vm.totalUpvote = 0;
@@ -41,16 +41,9 @@
       }
       
       vm.getRelatedTopic = function(){
-        var url = "api/v1/topics/?keyword=" + vm.topicName;
-        $http.get(url).
-          then(
-            function successCallback(response){
-              vm.relatedTopics = response.data;
-            }, 
-            function errorCallback(response) {
-              console.log(response.data)
-            }
-          );
+        TopicService.getRelatedTopic(vm.topicName, function callback(data){
+            vm.relatedTopics = data;
+        });       
       }
       
       vm.submitTopic = function(){
@@ -63,8 +56,7 @@
           vm.toggleEditBox();
         }, 
         function createQuestionErrorFn(response) {
-          if (response.data.detail){
-            console.log("abc");
+          if (response.data.detail){            
             var obj = {
               "name": vm.topicName,
               "description": ""
