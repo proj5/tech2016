@@ -31,8 +31,16 @@
   background-color: #f6f6f6;
 }
 .post-avatar {
-  max-width: 120px;
-  max-height: 120px;
+  zoom: 2;  //increase if you have very small images
+
+    display: block;
+    margin: auto;
+
+    height: auto;
+    max-height: 100%;
+
+    width: auto;
+    max-width: 100%;
 }
 .post-content {
   margin-top: 1em;
