@@ -126,6 +126,3 @@ def save_read(sender, instance, created, raw, **kwargs):
             serializer = A2AUserSerializer(user)
             event_data = serializer.data
             pusher.trigger(channel, 'new_noti', event_data)
-        else:
-            instance.user.num_unread_notis -= 1
-            instance.user.save()
