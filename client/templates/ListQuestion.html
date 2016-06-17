@@ -29,13 +29,23 @@
         <did class = "col-md-2">
         </did>
       </div>
-      <div class="post-content">
-        {{question.post.content}}
+      <div class="row post-content">
+        <div class="col-md-12">
+          {{question.post.content}}
+        </div>
       </div>
-      <button class="btn btn-primary" ui-sref="question({questionID: {{question.id}} })">Answer Now</button>
+      <div class="row post-footer">
+        <div class="col-md-12">
+          <div class="post-buttons-container">
+            <button class="btn btn-primary" ui-sref="question({questionID: {{question.id}} })">
+              Answer Now
+            </button>
+          </div>
+        </div>
+      </div>
       <hr>
     </div>
-    
+
   </div>
 
   <div ng-hide="vm.noMore"><button ng-click="vm.loadMoreQuestions()">Loading more</button></div>

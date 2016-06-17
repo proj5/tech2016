@@ -3,9 +3,10 @@ from rest_framework.response import Response
 
 from notifications.models import Read
 from notifications.serializers import ReadSerializer
-
+from a2ausers.models import A2AUser
 
 # Create your views here.
+
 
 class ReadView(views.APIView):
 
@@ -22,6 +23,9 @@ class ReadView(views.APIView):
             count = int(request.GET.get('count'))
         # Get 'count' answers of question from startID
 
+        user = A2AUser.objects.get(user__username=request.user.username)
+        user.num_unread_notis = 0
+        user.save()
         reads = Read.objects.filter(
             user__user=request.user,
             id__lt=startID
