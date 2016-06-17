@@ -23,11 +23,11 @@ User logout
 Get all user info from server
 
 ---
-#### *GET api/v1/auth/accounts/:username/*
+#### *GET api/v1/accounts/:username/*
 Get specific user info from server
 
 ---
-#### *PUT api/v1/auth/accounts/:username/*
+#### *PUT api/v1/accounts/:username/*
 Update user profile
 
 Parameters: user, password, email
@@ -68,6 +68,14 @@ JSON format
   "facebook_id": "987654321"
 }
 ```
+
+---
+#### *GET api/v1/profile/:username/?type=question&startID=2&count=1*
+Get 'count' questions of a user
+
+---
+#### *GET api/v1/profile/:username/?type=answer&startID=2&count=1*
+Get 'count' answers of a user
 
 ---
 ## Topic
