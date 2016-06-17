@@ -47,15 +47,22 @@ class VoteView(views.APIView):
                     post.total_vote += 1
                     # post.votes.add(voter)
                     post.save()
-                    return Response('Upvote sucessfully.',
-                                    status=status.HTTP_201_CREATED)
+                    return Response({
+                        'message': 'Upvote sucessfully.',
+                        'total_vote': post.total_vote,
+                        'my_vote': 1
+                    }, status=status.HTTP_201_CREATED)
+
                 else:  # Upvoted => undo upvote
                     # post.votes.remove(voter)
                     post.total_vote -= 1
                     post.save()
                     vote.delete()
-                    return Response('Undo upvote sucessfully.',
-                                    status=status.HTTP_200_OK)
+                    return Response({
+                        'message': 'Undo upvote sucessfully.',
+                        'total_vote': post.total_vote,
+                        'my_vote': 0
+                    }, status=status.HTTP_200_OK)
             else:  # downvote / undo downvote
                 upvote = Vote.objects.filter(
                     post__id=id, score=1,

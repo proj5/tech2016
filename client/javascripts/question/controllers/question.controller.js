@@ -5,9 +5,9 @@
     .module('tech2016.question.controllers')
     .controller('QuestionController', QuestionController);
 
-    QuestionController.$inject = ['$scope', '$state', '$http', '$stateParams', 'ngDialog'];
+    QuestionController.$inject = ['$scope', '$state', '$http', '$stateParams', 'ngDialog', 'PostService'];
 
-    function QuestionController($scope, $state, $http, $stateParams, ngDialog) {
+    function QuestionController($scope, $state, $http, $stateParams, ngDialog, PostService) {
       var vm = this;
       vm.questionID = $stateParams.questionID;
       vm.totalUpvote = 0;
@@ -33,32 +33,6 @@
         },
         function errorCallback(response) {
           console.log("Error when submit answer");
-        });
-      }
-
-      vm.submitComment = function(postID) {
-        var postAnswerURL = "api/v1/comment/id=" + postID + '/';
-        $http.post(postAnswerURL, {
-          "content": vm.commentContent[postID]
-        })
-        .then(function successCallback(response) {
-          $state.reload();
-        },
-        function errorCallback(response) {
-          console.log("Error when submit comment");
-        });
-      }
-
-      vm.upvotePost = function(postID) {
-        var upvoteURL = "api/v1/vote/?postID=" + postID;
-        $http.post(upvoteURL, {
-          "score" : 1
-        })
-        .then(function successCallback(response) {
-          $state.reload();
-        },
-        function errorCallback(response) {
-          console.log("Error when upvote a post");
         });
       }
 	  
@@ -112,6 +86,10 @@
           }
         });
       }
+      
+      function updateTotalComment(post){
+        vm.totalComment += post.comments.length;
+      }
 
       function getQuestion() {
         //http://localhost:8000/api/v1/question/?questionID=1
@@ -120,22 +98,10 @@
         .then(function successCallback(response){
             vm.question = response.data;
             getRelatedQuestions();
-            vm.totalUpvote += vm.question.post.total_vote;
-            var commentsURL = "/api/v1/comments/id=" + vm.question.post.id + "/"
-            $http.get(commentsURL)
-            .then(function successCallback(response){
-              vm.question.comments = response.data;
-              var voteStatusURL = "/api/v1/vote/?postID=" + vm.question.post.id;
-              $http.get(voteStatusURL)
-              .then(function successCallback(response) {
-                vm.question.myScore = response.data;
-              },
-              function errorCallback(response) {});
-              vm.totalComment += vm.question.comments.length;
-            }, function errorCallback(response) {
-              console.log("Error get comments for question");
-            });
-
+            vm.totalUpvote += vm.question.post.total_vote;            
+                        
+            PostService.getMyVote(vm.question.post);
+            PostService.getComments(vm.question.post, updateTotalComment);
         }, function errorCallback(response) {
             console.log("Error get question");
         });
@@ -160,20 +126,8 @@
             vm.answers = response.data;
             vm.answers.forEach(function(answer) {
               vm.totalUpvote += answer.total_vote;
-              var commentsURL = "/api/v1/comments/id=" + answer.id + "/"
-              $http.get(commentsURL)
-              .then(function successCallback(commentResponse){
-                answer.comments = commentResponse.data;
-                var voteStatusURL = "/api/v1/vote/?postID=" + answer.id;
-                $http.get(voteStatusURL)
-                .then(function successCallback(response) {
-                  answer.myScore = response.data;
-                },
-                function errorCallback(response) {});
-                vm.totalComment += answer.comments.length;
-              }, function errorCallback(response) {
-                console.log("Error get comments for answer");
-              });
+              PostService.getComments(answer, updateTotalComment);
+              PostService.getMyVote(answer);              
             });
         }, function errorCallback(response) {
             console.log("Error get Answers");

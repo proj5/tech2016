@@ -1,0 +1,52 @@
+<div infinite-scroll="vm.loadMoreQuestions()" infinite-scroll-disabled="vm.noMore">
+  <div class="post-container" ng-repeat="question in vm.questions">
+    <div class="post-title">
+      <div class="post-topics">
+        <ul class="nav nav-pills">
+          <li class="presentation"  ng-repeat = "topic in question.topics">
+            <a class="label label-default" href="">
+              {{topic.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <a ui-sref="question({questionID: {{question.id}} })"><h3><b>{{question.question}}</b></h3></a>
+    </div>
+
+
+    <div ng-if = "question.answer.type !== null">
+      <a2a-post post=question.answer></a2a-post>
+    </div>
+
+    <div ng-if = "question.answer.type === null">
+      <div class = "row">
+        <div class="col-md-2">
+          Asked by:
+        </div>
+        <div class="col-md-8">
+          <div class="row">{{question.post.created_by.user.first_name + " " + question.post.created_by.user.last_name}} </div>
+        </div>
+        <did class = "col-md-2">
+        </did>
+      </div>
+      <div class="row post-content">
+        <div class="col-md-12">
+          {{question.post.content}}
+        </div>
+      </div>
+      <div class="row post-footer">
+        <div class="col-md-12">
+          <div class="post-buttons-container">
+            <button class="btn btn-primary" ui-sref="question({questionID: {{question.id}} })">
+              Answer Now
+            </button>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+
+  </div>
+
+  <div ng-hide="vm.noMore"><button ng-click="vm.loadMoreQuestions()">Loading more</button></div>
+</div>
