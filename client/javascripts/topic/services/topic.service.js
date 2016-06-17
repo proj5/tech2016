@@ -10,7 +10,8 @@
   function TopicService($cookies, $http) {
 
     var TopicService = {
-      getRelatedTopic: getRelatedTopic
+      getRelatedTopic: getRelatedTopic,
+      getTopic: getTopic
     };
 
     return TopicService;
@@ -26,6 +27,20 @@
             callback([]);
           }
         );
+    }
+    
+      
+    function getTopic(id, callback){
+      var url = "api/v1/topic/" + id + "/";
+       $http.get(url).
+        then(
+          function successCallback(response){
+            callback(response.data);
+          }, 
+          function errorCallback(response) {
+            callback(null);
+          }
+        );    
     }
  
   }
