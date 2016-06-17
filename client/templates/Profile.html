@@ -8,11 +8,15 @@
   <div ui-view='nav-bar'></div>
   <div class="col-md-2"></div>
   <div class="col-md-8 profile-main">
-    <div class="col-md-8">
+    <!-- <div class="col-md-8"> -->
       <div class="container">
         <div class="col-md-3 profile-avatar-area">
-          <img class="profile-avatar" src="{{vm.avatar.avatar}}"/>
-          <button class="btn btn-primary" id="profile-change-button" ng-click="vm.changeAvatar = !vm.changeAvatar">Change avatar</button>
+          <div class="row">
+            <img class="profile-avatar" src="{{vm.avatar.avatar}}"/>
+          </div>
+          <div class="row">
+            <button class="btn btn-primary" id="profile-change-button" ng-click="vm.changeAvatar = !vm.changeAvatar">Change avatar</button>
+          </div>
           <div ng-if="vm.changeAvatar">
             <input type="file" file-model="vm.newAvatar" id="profile-choose-file"/>
             <button class="btn btn-default" id="profile-upload-button" ng-click="vm.changeAvatar = !vm.changeAvatar; vm.uploadAvatar()">Upload</button>
@@ -24,21 +28,22 @@
       </div>
       <br>
       <div class="container">
-        <div class="list-group col-md-4">
+        <div class="list-group col-md-3">
           <a href="#" class="profile-item list-group-item disabled">Feeds</a>
-          <a href='#' class="profile-item list-group-item">Questions: {{vm.user.num_questions}}</a>
-          <a href="#" class="profile-item list-group-item">Answers: {{vm.user.num_answers}}</a>
-          <a href="#" class="profile-item list-group-item">Comments: {{vm.user.num_comments}}</a>
+          <a href='#' class="profile-item list-group-item" ng-click="vm.view='question'">Questions: {{vm.user.num_questions}}</a>
+          <a href="#" class="profile-item list-group-item" ng-click="vm.view='answer'">Answers: {{vm.user.num_answers}}</a>
         </div>
-        <div class="col-md-8">
-          <br>
+        <div class="col-md-9">
+          <div ng-if="vm.view === 'question'">
+            <h3>{{vm.user.num_questions}} Questions</h3>
+          </div>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
 
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
       <h>About {{vm.user.user.last_name}}</h>
-    </div>
+    </div> -->
   </div>
   <div class="col-md-2"></div>
 </body>

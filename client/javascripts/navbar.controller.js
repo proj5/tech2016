@@ -82,5 +82,9 @@
           }
         );
     }
+
+    vm.goToQuestion = function(item, model, label, event) {
+      $state.go('question', {questionID: item.id});
+    }
   }
 })();
