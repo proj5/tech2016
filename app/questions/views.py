@@ -29,7 +29,10 @@ class QuestionView(views.APIView):
                 10,
                 0.1
             )
-            result = Question.objects.all().filter(question__in=question_list)
+            result = list(Question.objects.all().filter(
+                question__in=question_list)
+            )
+            result.sort(key=lambda t: question_list.index(t.question))
             serializer = SimpleQuestionSerializer(result, many=True)
             return Response(serializer.data)
         else:

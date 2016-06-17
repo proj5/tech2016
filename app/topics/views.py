@@ -27,7 +27,8 @@ class TopicView(views.APIView):
                 10,
                 0.2
             )
-            result = Topic.objects.all().filter(name__in=related_topics)
+            result = list(Topic.objects.all().filter(name__in=related_topics))
+            result.sort(key=lambda t: related_topics.index(t.name))
             serializer = TopicSerializer(result, many=True)
             return Response(serializer.data)
 

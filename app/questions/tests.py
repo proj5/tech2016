@@ -135,8 +135,8 @@ class QuestionApiTest(APITestCase):
         self.assertEqual(len(response.data), 3)
         self.assertEqual(response.data[0].get('id'), 1)
         self.assertEqual(response.data[0].get('question'), 'What is A2A?')
-        self.assertEqual(response.data[1].get('id'), 2)
-        self.assertEqual(response.data[1].get('question'),
+        self.assertEqual(response.data[2].get('id'), 2)
+        self.assertEqual(response.data[2].get('question'),
                          'What is the Selected Topics on Technology course?')
 
     def test_get_all_topics_of_question(self):
