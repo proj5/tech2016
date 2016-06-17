@@ -1,7 +1,9 @@
 from questions.models import Question
 from rest_framework import serializers
+from posts.models import Post
 from posts.serializers import PostSerializer
 from topics.serializers import TopicSerializer
+from a2ausers.serializers import A2AUserSerializer
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -39,3 +41,27 @@ class SimpleQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ('id', 'question')
+
+
+class AnswerWithQuestionSerializer(serializers.ModelSerializer):
+
+    question = serializers.SerializerMethodField('get_question_of_answer')
+
+    created_by = A2AUserSerializer()
+
+    class Meta:
+        model = Post
+        fields = (
+            'id',
+            'question',
+            'type',
+            'content',
+            'created_date',
+            'created_by',
+            'total_vote'
+        )
+
+    def get_question_of_answer(self, obj):
+        question = obj.parent.question
+        serializer = QuestionSerializer(question)
+        return serializer.data

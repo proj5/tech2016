@@ -12,6 +12,7 @@
       // vm.numofNoti = $stateParams.numberOfNoti;
       vm.numofNoti = 20;
       vm.getNotifications = getNotifications;
+      getNotifications()
 
       vm.username = Authentication.getAuthenticatedAccount().username;
       console.log('Username:', vm.username);
@@ -43,9 +44,13 @@
         $state.go('question', {'questionID': questionID});
       }
 
+      vm.redirectToNotificationPage = function() {
+        $state.go('notification');
+      }
+
       function getNotifications() {
         // http://localhost:8000/api/v1/notifications/?count=2
-
+        console.log("ok");
         var url = "api/v1/notifications/?count=" + vm.numofNoti;
         $http.get(url)
         .then(function successCallback(response) {

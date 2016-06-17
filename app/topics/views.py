@@ -1,7 +1,7 @@
 from rest_framework import permissions, status, views
 from rest_framework.response import Response
 from topics.models import Topic
-from topics.serializers import TopicSerializer, SimpleTopicSerializer
+from topics.serializers import TopicSerializer
 import difflib
 
 
@@ -27,8 +27,9 @@ class TopicView(views.APIView):
                 10,
                 0.2
             )
-            result = Topic.objects.all().filter(name__in=related_topics)
-            serializer = SimpleTopicSerializer(result, many=True)
+            result = list(Topic.objects.all().filter(name__in=related_topics))
+            result.sort(key=lambda t: related_topics.index(t.name))
+            serializer = TopicSerializer(result, many=True)
             return Response(serializer.data)
 
 

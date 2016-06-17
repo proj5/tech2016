@@ -2,63 +2,80 @@
   <div id="nav-bar" class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
       <div class="nb-content-container">
-        <div class="navbar-header"><a class="navbar-brand" ui-sref="newsfeed">A2A</a>
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+        <div class="navbar-header">
+          <a class="navbar-brand" ui-sref="newsfeed">A2A</a>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
+            <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
           </button>
         </div>
-        <div class="collapse navbar-collapse navbar-menubuilder">
-          <ul class="nav navbar-nav navbar-right">
-              <li id="navbar-ask-question"><a href="#" ng-click=vm.openQuestionForm()>
-                <i class="fa fa-question" aria-hidden="true"></i>
-                Ask a Question
-              </a>
-              </li>
-              <li id="navbar-homepage">
-                <a ui-sref="newsfeed">
-                  <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-                  Homepage
+        <div class="navbar-collapse collapse navbar-menubuilder ">
+          <div class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li id="navbar-ask-question"><a href="#" ng-click=vm.openQuestionForm()>
+                  <i class="fa fa-question" aria-hidden="true"></i>
+                  Ask a Question
                 </a>
-              </li>
-              <li class="nav-icon-btn nav-icon-btn-success dropdown" id="navbar-notification" ng-controller="NotificationController as vm" ng-click="vm.getNotifications()">
-                <a href="#" class="dropdown-toggle"  id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  <i class="fa fa-bell-o" aria-hidden="true"></i>
-                  Notification
-                  <span ng-if = "vm.user.num_unread_notis > 0" class="badge">{{vm.user.num_unread_notis}}</span>
-                </a>
-                <div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px; max-height: 350px; overflow-y: auto;">
-                  <div class="messages-list" id="main-navbar-messages" ng-repeat="noti in vm.notis">
-                    <div class="message" ng-class="{not_read: noti.read === false}">
-                      <img height = "92" width = "42" src="{{noti.notification.created_by.avatar}}" alt="" class="message-avatar">
-                      <a class = "message-subject" href="#LinkToUserProfile">
-                        <b>{{noti.notification.created_by.user.username}}</b>
+                </li>
+                <li id="navbar-homepage">
+                  <a ui-sref="newsfeed">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    Homepage
+                  </a>
+                </li>
+                <li class="nav-icon-btn nav-icon-btn-success dropdown" id="navbar-notification" ng-controller="NotificationController as vm" ng-click="vm.getNotifications()">
+                  <a href="#" class="dropdown-toggle"  id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <i class="fa fa-bell-o" aria-hidden="true"></i>
+                    Notification
+                    <span ng-if = "vm.user.num_unread_notis > 0" class="badge">{{vm.user.num_unread_notis}}</span>
+                  </a>
+                  <div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px; max-height: 350px; overflow-y: auto;">
+                    <div class="messages-list" id="main-navbar-messages" ng-repeat="noti in vm.notis">
+                      <div class="message" ng-class="{not_read: noti.read === false}">
+                        <img height = "92" width = "42" src="{{noti.notification.created_by.avatar}}" alt="" class="message-avatar">
+                        <a class = "message-subject" href="#LinkToUserProfile">
+                          <b>{{noti.notification.created_by.user.username}}</b>
+                        </a>
+                        <a class = "message-subject no-underline">
+                          {{noti.content}}
+                        </a>
+                        <a class = "message-subject" ng-click = "vm.redirectToQuestion(noti.notification.question.id, noti.id)">
+                          <b>{{noti.notification.question.question}}</b>
+                        </a>
+                        <!-- <div class="message-description">
+                          from <a href="#">Robert Jang</a>
+                          &nbsp;&nbsp;·&nbsp;&nbsp;
+                          2h ago
+                        </div> -->
+                      </div> <!-- / .message -->
+                    </div>
+                    <div class="messages-list nav-noti-seemore">
+                      <a ng-click = "vm.redirectToNotificationPage()">
+                        see more
                       </a>
-                      <a class = "message-subject no-underline">
-                        {{noti.content}}
-                      </a>
-                      <a class = "message-subject" ng-click = "vm.redirectToQuestion(noti.notification.question.id, noti.id)">
-                        <b>{{noti.notification.question.question}}</b>
-                      </a>
-                      <!-- <div class="message-description">
-                        from <a href="#">Robert Jang</a>
-                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                        2h ago
-                      </div> -->
-                    </div> <!-- / .message -->
+                    </div>
                   </div>
-                </div>
-              </li>
-              <li>
-                <a href="#" class="dropdown-toggle"  id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  {{vm.username}}
-                  <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li><a ui-sref="profile">Profile</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a ng-click="vm.logout()">Log out</a></li>
-                </ul>
-              </li>
-          </ul>
+                </li>
+                <li>
+                  <a href="#" class="dropdown-toggle"  id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{vm.username}}
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a ui-sref="profile({username: vm.username})">Profile</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a ng-click="vm.logout()">Log out</a></li>
+                  </ul>
+                </li>
+            </ul>
+          </div>
+          <form class="navbar-form">
+            <div class="form-group" style="display:inline">
+              <div class="input-group" style="display:table">
+                <span class="input-group-addon" style="width:1%;"><span class="glyphicon glyphicon-search"></span></span>
+                <input type="text" style="width:100%" class="form-control navbar-search" ng-model="vm.search" placeholder="Search" uib-typeahead="question.question for question in vm.relatedQuestions" typeahead-show-hint="true" typeahead-min-length="0" typeahead-on-select="vm.goToQuestion($item, $model, $label, $event)" ng-keyup="vm.getRelatedQuestions()"/>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
