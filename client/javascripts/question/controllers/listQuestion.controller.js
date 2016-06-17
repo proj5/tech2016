@@ -26,12 +26,11 @@
         PostService.getMyVote(question.answer);
     }    
     
-    function getNextQuestions(startID, count){
-      var url = "api/v1/questions/newest/?startID=" + startID + "&count=" + count;
-      console.log(url);
+    function getNextQuestions(startID, count){      
+      var url =  vm.urlNextQuestion + "&startID=" +  startID + "&count=" + count;      
       ajax.push($http.get(url)
         .then(function successCallback(response) {
-          if (response.data.length == 0)
+          if (response.data.length < count)
             vm.noMore = true;
           for(var i = 0; i < response.data.length; ++i)
             vm.questions.push(response.data[i]);

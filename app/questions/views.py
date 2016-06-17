@@ -182,7 +182,7 @@ class TopicQuestionView(views.APIView):
             if (startID != 0 and question.id < startID) or startID == 0:
                 result.append(question)
                 count -= 1
-        serializer = SimpleQuestionSerializer(result, many=True)
+        serializer = QuestionWithTopAnswerSerializer(result, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
