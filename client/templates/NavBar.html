@@ -19,14 +19,14 @@
                   Homepage
                 </a>
               </li>
-              <li class="nav-icon-btn nav-icon-btn-success dropdown" id="navbar-notification" ng-controller="NotificationController as vm2" ng-click="vm2.getNotifications()">
+              <li class="nav-icon-btn nav-icon-btn-success dropdown" id="navbar-notification" ng-controller="NotificationController as vm" ng-click="vm.getNotifications()">
                 <a href="#" class="dropdown-toggle"  id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                   <i class="fa fa-bell-o" aria-hidden="true"></i>
                   Notification
                   <span class="badge">{{vm.user.num_unread_notis}}</span>
                 </a>
                 <div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px; max-height: 350px; overflow-y: auto;">
-                  <div class="messages-list" id="main-navbar-messages" ng-repeat="noti in vm2.notis">
+                  <div class="messages-list" id="main-navbar-messages" ng-repeat="noti in vm.notis">
                     <div class="message" ng-class="{not_read: noti.read === false}">
                       <img height = "92" width = "42" src="{{noti.notification.created_by.avatar}}" alt="" class="message-avatar">
                       <a class = "message-subject" href="#LinkToUserProfile">
@@ -35,7 +35,7 @@
                       <a class = "message-subject no-underline">
                         {{noti.content}}
                       </a>
-                      <a class = "message-subject" ng-click = "vm2.redirectToQuestion(noti.notification.question.id, noti.id)">
+                      <a class = "message-subject" ng-click = "vm.redirectToQuestion(noti.notification.question.id, noti.id)">
                         <b>{{noti.notification.question.question}}</b>
                       </a>
                       <!-- <div class="message-description">

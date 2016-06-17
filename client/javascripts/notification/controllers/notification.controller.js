@@ -5,13 +5,33 @@
     .module('tech2016.notification.controllers')
     .controller('NotificationController', NotificationController);
 
-    NotificationController.$inject = ['$scope', '$state', '$http', '$stateParams'];
+    NotificationController.$inject = ['$scope', '$state', '$http', '$stateParams', 'Authentication', '$pusher'];
 
-    function NotificationController($scope, $state, $http, $stateParams) {
+    function NotificationController($scope, $state, $http, $stateParams, Authentication, $pusher) {
       var vm = this;
       // vm.numofNoti = $stateParams.numberOfNoti;
       vm.numofNoti = 20;
       vm.getNotifications = getNotifications;
+
+      vm.username = Authentication.getAuthenticatedAccount().username;
+      console.log('Username:', vm.username);
+      // http://localhost:8000/api/v1/accounts/admin/
+      var userURL = "api/v1/accounts/" + vm.username + "/";
+      $http.get(userURL)
+      .then(function successCallback(response) {
+          vm.user = response.data;
+        },
+        function errorCallback(response) {
+          console.log("Error when get User")
+        });
+
+      var client = new Pusher('df818e2c5c3828256440');
+      var pusher = $pusher(client);
+
+      var channel = pusher.subscribe('notification_' + vm.username);
+      channel.bind('new_noti', function(data) {
+        vm.user = data
+      })
 
       vm.redirectToQuestion = function(questionID, readID) {
         // Seen notification
@@ -32,8 +52,8 @@
           vm.notis = response.data;
           vm.notis.forEach(function(noti) {
             noti.content = getContent(noti.notification);
-            console.log(noti.content);
           });
+          vm.user.num_unread_notis = 0;
         },
         function errorCallback(response) {
           console.log("Error when get notification")
