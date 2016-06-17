@@ -23,7 +23,7 @@
                 <a href="#" class="dropdown-toggle"  id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                   <i class="fa fa-bell-o" aria-hidden="true"></i>
                   Notification
-                  <span class="badge">{{vm.user.num_unread_notis}}</span>
+                  <span ng-if = "vm.user.num_unread_notis > 0" class="badge">{{vm.user.num_unread_notis}}</span>
                 </a>
                 <div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px; max-height: 350px; overflow-y: auto;">
                   <div class="messages-list" id="main-navbar-messages" ng-repeat="noti in vm.notis">
