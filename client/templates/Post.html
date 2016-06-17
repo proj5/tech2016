@@ -6,7 +6,7 @@
     <div class="col-md-10">
       <div class="row">
         <div class="col-md-6">
-          <b>{{vm.post.created_by.user.username}}</b>
+          <a ui-sref="profile({username: vm.post.created_by.user.username})"><b>{{vm.post.created_by.user.username}}</b></a>
         </div>
         <div class="col-md-6 post-datetime">
           <i>{{vm.post.created_date | date:'medium'}}</i>
@@ -14,7 +14,9 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          {{vm.post.created_by.user.first_name}} {{vm.post.created_by.user.last_name}}
+          <a ui-sref="profile({username: vm.post.created_by.user.username})">
+            {{vm.post.created_by.user.first_name}} {{vm.post.created_by.user.last_name}}
+          </a>
         </div>
       </div>
       <hr>
@@ -46,7 +48,8 @@
         Answer:<br>
         <div class="row">
           <div class="col-md-10">
-            <input class="form-control" type="text" name="answerContent" ng-model="vm.parentController.answerContent">
+            <textarea class="form-control" type="text" name="answerContent" ng-model="vm.parentController.answerContent">
+            </textarea>
           </div>
           <div class="col-md-2">
             <button type="submit" class="btn btn-primary" ng-click = "vm.parentController.submitAnswer()">Submit</button>
@@ -61,7 +64,7 @@
         <div class = "row">
           <div class="col-md-9">
             <i class="fa fa-circle icon-resize-small" aria-hidden="true"></i>
-            <b>{{comment.created_by.user.username}}</b>
+            <a ui-sref="profile({username: comment.created_by.user.username})"><b>{{comment.created_by.user.username}}</b></a>
             {{comment.content}}
           </div>
           <div class="col-md-3">

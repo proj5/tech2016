@@ -74,7 +74,7 @@
       }
     })
     .state('profile', {
-      url: '/profile',
+      url: '/profile/:username',
       views: {
         '': {
           templateUrl: 'client/templates/Profile.html',
@@ -87,6 +87,7 @@
           controllerAs: 'vm'
         }
       }
-    });
+    })
+    ;
   }
 })();

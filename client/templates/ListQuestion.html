@@ -24,7 +24,9 @@
           Asked by:
         </div>
         <div class="col-md-8">
-          <div class="row">{{question.post.created_by.user.first_name + " " + question.post.created_by.user.last_name}} </div>
+          <div class="row">
+            <a ui-sref="profile({username: question.post.created_by.user.username})">{{question.post.created_by.user.first_name + " " + question.post.created_by.user.last_name}}</a>
+          </div>
         </div>
         <did class = "col-md-2">
         </did>

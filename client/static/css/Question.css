@@ -50,6 +50,7 @@
 }
 .post-answer-box {
   margin-top: 1em;
+  min-height: 15em;
 }
 .comment-add-comment {
   margin-top: 0.5em;

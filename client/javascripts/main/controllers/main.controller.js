@@ -15,7 +15,7 @@
       function redirect() {
         if (Authentication.isAuthenticated()) {
           //event.preventDefault();
-          $state.go('newsfeed');
+          window.location = '/newsfeed';
         } else {
           $state.go('home.login');
         }

@@ -5,8 +5,10 @@ from topics.serializers import SimpleTopicSerializer
 from questions.models import Question
 from questions.serializers import QuestionSerializer, SimpleQuestionSerializer
 from questions.serializers import QuestionWithTopAnswerSerializer
+from questions.serializers import AnswerWithQuestionSerializer
 from posts.models import Post
-from posts.serializers import SimplePostSerializer, PostSerializer
+from posts.serializers import PostSerializer
+from a2ausers.models import A2AUser
 import difflib
 
 
@@ -27,7 +29,10 @@ class QuestionView(views.APIView):
                 10,
                 0.1
             )
-            result = Question.objects.all().filter(question__in=question_list)
+            result = list(Question.objects.all().filter(
+                question__in=question_list)
+            )
+            result.sort(key=lambda t: question_list.index(t.question))
             serializer = SimpleQuestionSerializer(result, many=True)
             return Response(serializer.data)
         else:
@@ -255,3 +260,59 @@ class AnswerDetailView(views.APIView):
         post = Post.objects.get(pk=answerID)
         post.content = request.data.get('content')
         return Response(status=status.HTTP_200_OK)
+
+
+class ProfileView(views.APIView):
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return (permissions.AllowAny(),)
+
+        return (permissions.IsAuthenticated(),)
+
+    def getKey(self, question):
+        return question.id
+
+    def get(self, request, username, format=None):
+        # Get user's asked questions
+        if request.GET.get('type') == 'question':
+            startID = int(request.GET.get('startID'))
+            count = int(request.GET.get('count'))
+            user = A2AUser.objects.get(user__username=username)
+            posts = user.post_created.all().filter(type='question')
+            questions = [post.question for post in posts]
+            sorted(questions, key=self.getKey)
+            result = []
+            for index in range(len(questions) - 1, -1, -1):
+                question = questions[index]
+                if count <= 0:
+                    break
+                if (question.id < startID) or (startID == 0):
+                    result.append(question)
+                    count -= 1
+            serializer = QuestionSerializer(result, many=True)
+            return Response(serializer.data)
+        elif request.GET.get('type') == 'answer':
+            user = A2AUser.objects.get(user__username=username)
+            startID = int(request.GET.get('startID'))
+            count = int(request.GET.get('count'))
+            user = A2AUser.objects.get(user__username=username)
+            if startID != 0:
+                posts = user.post_created.all().filter(
+                    id__lt=startID,
+                    type='answer'
+                ).order_by(
+                    '-id'
+                )
+            else:
+                posts = user.post_created.all().filter(
+                    type='answer'
+                ).order_by('-id')
+            result = []
+            for post in posts:
+                if count <= 0:
+                    break
+                result.append(post)
+                count -= 1
+            serializer = AnswerWithQuestionSerializer(result, many=True)
+            return Response(serializer.data)

@@ -12,10 +12,8 @@
       // vm.numofNoti = $stateParams.numberOfNoti;
       vm.numofNoti = 20;
       vm.getNotifications = getNotifications;
-      getNotifications()
-
+      
       vm.username = Authentication.getAuthenticatedAccount().username;
-      console.log('Username:', vm.username);
       // http://localhost:8000/api/v1/accounts/admin/
       var userURL = "api/v1/accounts/" + vm.username + "/";
       $http.get(userURL)
@@ -25,6 +23,8 @@
         function errorCallback(response) {
           console.log("Error when get User")
         });
+      GetNotificationsWithoutReset();
+
 
       var client = new Pusher('df818e2c5c3828256440');
       var pusher = $pusher(client);
@@ -46,6 +46,23 @@
 
       vm.redirectToNotificationPage = function() {
         $state.go('notification');
+      }
+
+      function GetNotificationsWithoutReset() {
+        console.log("F5");
+        var url = "api/v1/notifications/?countnoupdate=" + vm.numofNoti;
+        $http.get(url)
+        .then(function successCallback(response) {
+          vm.notis = response.data;
+          vm.notis.forEach(function(noti) {
+            noti.content = getContent(noti.notification);
+          });
+          console.log(vm.user);
+        },
+        function errorCallback(response) {
+          console.log("Error when get notification")
+        });
+        // console.log('Unreaded noti: ', vm.user.num_unread_notis);
       }
 
       function getNotifications() {

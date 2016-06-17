@@ -22,10 +22,15 @@ class ReadView(views.APIView):
         if request.GET.get('count') is not None:
             count = int(request.GET.get('count'))
         # Get 'count' answers of question from startID
+        count2 = -1
+        if request.GET.get('countnoupdate') is not None:
+            count2 = int(request.GET.get('countnoupdate'))
+            count = count2
 
-        user = A2AUser.objects.get(user__username=request.user.username)
-        user.num_unread_notis = 0
-        user.save()
+        if count2 == -1:
+            user = A2AUser.objects.get(user__username=request.user.username)
+            user.num_unread_notis = 0
+            user.save()
         reads = Read.objects.filter(
             user__user=request.user,
             id__lt=startID

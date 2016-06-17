@@ -12,4 +12,7 @@
   angular
     .module('tech2016.profile.services', []);
 
+  angular
+    .module('tech2016.profile.directives', []);
+
 })();
