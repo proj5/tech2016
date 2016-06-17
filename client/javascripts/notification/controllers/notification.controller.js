@@ -11,7 +11,7 @@
       var vm = this;
       // vm.numofNoti = $stateParams.numberOfNoti;
       vm.numofNoti = 20;
-      getNotifications();
+      vm.getNotifications = getNotifications;
 
       vm.redirectToQuestion = function(questionID, readID) {
         // Seen notification
@@ -25,12 +25,14 @@
 
       function getNotifications() {
         // http://localhost:8000/api/v1/notifications/?count=2
+
         var url = "api/v1/notifications/?count=" + vm.numofNoti;
         $http.get(url)
         .then(function successCallback(response) {
           vm.notis = response.data;
           vm.notis.forEach(function(noti) {
             noti.content = getContent(noti.notification);
+            console.log(noti.content);
           });
         },
         function errorCallback(response) {
