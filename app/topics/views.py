@@ -16,7 +16,7 @@ class TopicView(views.APIView):
         # Get all topics
         if request.GET.get('keyword') is None:
             topics = Topic.objects.all()
-            serializer = SimpleTopicSerializer(topics, many=True)
+            serializer = TopicSerializer(topics, many=True)
             return Response(serializer.data)
         # Get all topics related to a keyword
         else:
@@ -28,7 +28,7 @@ class TopicView(views.APIView):
                 0.2
             )
             result = Topic.objects.all().filter(name__in=related_topics)
-            serializer = TopicSerializer(result, many=True)
+            serializer = SimpleTopicSerializer(result, many=True)
             return Response(serializer.data)
 
 

@@ -58,6 +58,21 @@
         }
       }
     })
+    .state('topics', {
+      url: '/topics',
+      views: {
+        '': {
+          templateUrl: 'client/templates/ListTopic.html',
+          controller: 'ListTopicController',
+          controllerAs: 'vm'
+        },
+        'nav-bar@topics': {
+          templateUrl: 'client/templates/NavBar.html',
+          controller: 'NavBarController',
+          controllerAs: 'vm'
+        }
+      }
+    })
     .state('topic', {
       url: '/topic/:topicID',
       views: {

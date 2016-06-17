@@ -11,7 +11,8 @@
 
     var TopicService = {
       getRelatedTopic: getRelatedTopic,
-      getTopic: getTopic
+      getTopic: getTopic,
+      getListTopic: getListTopic
     };
 
     return TopicService;
@@ -32,6 +33,19 @@
       
     function getTopic(id, callback){
       var url = "api/v1/topic/" + id + "/";
+       $http.get(url).
+        then(
+          function successCallback(response){
+            callback(response.data);
+          }, 
+          function errorCallback(response) {
+            callback(null);
+          }
+        );    
+    }
+    
+    function getListTopic(callback){
+      var url = "api/v1/topics/"
        $http.get(url).
         then(
           function successCallback(response){
