@@ -10,7 +10,8 @@
       'tech2016.question',
       'tech2016.controllers',
       'tech2016.notification',
-      'tech2016.profile'
+      'tech2016.profile',
+      'tech2016.topic'
   ]);
 
   angular

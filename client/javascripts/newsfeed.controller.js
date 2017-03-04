@@ -10,7 +10,7 @@
   function NewsFeedController($scope, $state, $q, $http, Authentication) {
     var vm = this;
     vm.questions = [];
-
+    vm.urlNextQuestion = "api/v1/questions/newest/?";
     function init() {
       window.onload = function() {
         document.getElementById("navbar-homepage").setClass('active');

@@ -1,7 +1,7 @@
 from rest_framework import permissions, status, views
 from rest_framework.response import Response
 from topics.models import Topic
-from topics.serializers import TopicSerializer, SimpleTopicSerializer
+from topics.serializers import TopicSerializer
 import difflib
 
 
@@ -16,7 +16,7 @@ class TopicView(views.APIView):
         # Get all topics
         if request.GET.get('keyword') is None:
             topics = Topic.objects.all()
-            serializer = SimpleTopicSerializer(topics, many=True)
+            serializer = TopicSerializer(topics, many=True)
             return Response(serializer.data)
         # Get all topics related to a keyword
         else:

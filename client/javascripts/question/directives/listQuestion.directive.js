@@ -12,10 +12,7 @@
         restrict: 'E',
         scope: {},
         bindToController: {
-          name: '@',
-          post: '=',
-          parentController: '=',
-          showComment: '@'
+          urlNextQuestion: '='
         },
         controller: 'ListQuestionController',
         controllerAs: 'vm',
